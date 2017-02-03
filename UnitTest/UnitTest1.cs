@@ -10,8 +10,7 @@ namespace UnitTest
     {
         [TestMethod]
         public void TestMethod1()
-        {
-            Book b = new Book("Boker Tov", DateTime.Now);
+        { 
         }
     }
 }

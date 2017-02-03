@@ -40,11 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbstractItem.cs" />
-    <Compile Include="Book.cs" />
-    <Compile Include="Categories.cs" />
-    <Compile Include="Journal.cs" />
-    <Compile Include="ItemsCollection.cs" />
+    <Compile Include="Modules\AbstractItem.cs" />
+    <Compile Include="Modules\Book.cs" />
+    <Compile Include="Modules\Categories.cs" />
+    <Compile Include="Modules\Journal.cs" />
+    <Compile Include="Modules\ItemsCollection.cs" />
+    <Compile Include="Modules\LibUsers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -52,9 +53,6 @@
       <Project>{2245fa60-f2b3-4968-a32a-fe4c719c7bea}</Project>
       <Name>Data</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

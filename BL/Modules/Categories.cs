@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    public class Categories
+    public static class Categories
     {
-        public Dictionary<eBaseCategory, List<eInnerCategory>> CategoriesDictionary =
+        public static Dictionary<eBaseCategory, List<eInnerCategory>> CategoriesDictionary =
             new Dictionary<eBaseCategory, List<eInnerCategory>>
             {
                 {eBaseCategory.Kids,
-                    new List<eInnerCategory>
+                    new List<eInnerCategory >
                     {
                         eInnerCategory.Jewish,
                         eInnerCategory.Comics
