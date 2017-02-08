@@ -21,5 +21,14 @@ namespace BookLib
         {
             IssueNumber = issueNumber;
         }
+
+        public override bool Equal(AbstractItem item)
+        {
+            Journal tmpJournal = item as Journal;
+            if (base.Equal(item) && IssueNumber == tmpJournal.IssueNumber)
+                return true;
+            else
+                return false;
+        }
     }
 }

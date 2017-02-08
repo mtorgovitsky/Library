@@ -1,4 +1,5 @@
 ﻿using BL;
+using BL.Modules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using static BL.Categories;
 
 namespace BookLib
 {
-    public abstract class AbstractItem
+    public abstract class AbstractItem : IEqual
     {
         public readonly Guid ISBN;
         public bool IsBorrowed { get; set; }
@@ -19,7 +20,7 @@ namespace BookLib
                 DateTime printDate,
                 eBaseCategory baseCategory,
                 eInnerCategory innerCategory
-                //int copyCount = 1
+            //int copyCount = 1
             )
         {
             ISBN = Guid.NewGuid();
@@ -30,15 +31,16 @@ namespace BookLib
             //if (copyCount > 1)
             //    _copyCount = copyCount;
             BaseCategory = baseCategory;
-
+            InnerCategory = innerCategory;
+            PrintDate = printDate;
         }
 
         private DateTime _printDate;
         private string _name;
-        private int _copyCount;
-        private eInnerCategory _innerCategory;
-
+        //private int _copyCount;
         public eBaseCategory BaseCategory { get; set; }
+        public eInnerCategory _innerCategory;
+
 
         public eInnerCategory InnerCategory
         {
@@ -53,17 +55,17 @@ namespace BookLib
             }
         }
 
-        public int CopyCount
-        {
-            get
-            {
-                return _copyCount;
-            }
-            set
-            {
-                _copyCount = value;
-            }
-        }
+        //public int CopyCount
+        //{
+        //    get
+        //    {
+        //        return _copyCount;
+        //    }
+        //    set
+        //    {
+        //        _copyCount = value;
+        //    }
+        //}
 
         public string Name
         {
@@ -87,6 +89,16 @@ namespace BookLib
             {
                 _printDate = new DateTime(value.Year, value.Month, value.Day);
             }
+        }
+
+        public virtual bool Equal(AbstractItem item)
+        {
+            if (Name == item.Name && BaseCategory == item.BaseCategory
+                && InnerCategory == item.InnerCategory &&
+                PrintDate == item.PrintDate)
+                return true;
+            else
+                return false;
         }
     }
 }

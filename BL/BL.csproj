@@ -43,6 +43,7 @@
     <Compile Include="Modules\AbstractItem.cs" />
     <Compile Include="Modules\Book.cs" />
     <Compile Include="Modules\Categories.cs" />
+    <Compile Include="Modules\IEqual.cs" />
     <Compile Include="Modules\Journal.cs" />
     <Compile Include="Modules\ItemsCollection.cs" />
     <Compile Include="Modules\LibUsers.cs" />

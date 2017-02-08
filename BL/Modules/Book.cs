@@ -20,5 +20,14 @@ namespace BookLib
         }
 
         public string Author { get; set; }
+
+        public override bool Equal(AbstractItem item)
+        {
+            Book tmpBook = item as Book;
+            if (base.Equal(item) && Author == tmpBook.Author)
+                return true;
+            else
+                return false;
+        }
     }
 }

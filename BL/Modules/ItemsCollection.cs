@@ -58,10 +58,10 @@ namespace BL
             return _items.Where(i => i.InnerCategory == innerCategory).ToList();
         }
 
-        public List<AbstractItem> FindByMinCopies(int minCopies)
-        {
-            return _items.Where(i => i.CopyCount >= minCopies).ToList();
-        }
+        //public List<AbstractItem> FindByMinCopies(int minCopies)
+        //{
+        //    return _items.Where(i => i.CopyCount >= minCopies).ToList();
+        //}
 
         public List<AbstractItem> FindByPrintDate(DateTime printDate)
         {
