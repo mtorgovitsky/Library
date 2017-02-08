@@ -26,9 +26,10 @@ namespace Library
         public static ItemsCollection mainLibrary = new ItemsCollection();
         public LoginWindow()
         {
-            CheckDataSaving();
             InitializeComponent();
-            if (mainLibrary.GetBLData().SuperAdmin == null)
+            //var iii = CheckDataSaving();
+            //mainLibrary = null;
+            if (mainLibrary.SuperAdmin == null)
                 MessageBox.Show("You Entering The Program for the first Time.\n Please Make first Login");
             btnLogin.IsEnabled = false;
         }
@@ -57,7 +58,7 @@ namespace Library
             }
         }
 
-        private static void CheckDataSaving()
+        private static ItemsCollection CheckDataSaving()
         {
             mainLibrary.Items.Add(new Book
                                 ("Book of Treasures",
@@ -74,6 +75,7 @@ namespace Library
             mainLibrary.SuperAdmin = new User("dfdfd", "sdsasf");
             mainLibrary.SaveData(mainLibrary);
             var tmp = mainLibrary.GetBLData();
+            return tmp;
         }
     }
 }
