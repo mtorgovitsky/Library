@@ -18,6 +18,7 @@ namespace BookLib
             string author)
                 : base(name, printDate, baseCategory, innerCategory)
         {
+            Author = author;
         }
 
         public string Author { get; set; }

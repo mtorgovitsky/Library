@@ -32,7 +32,7 @@ namespace BookLib
             //if (copyCount > 1)
             //    _copyCount = copyCount;
 
-            /////////////   TO DO:  CHECK THE CATEGORIES FUNCTIONALITY  //////////////
+            /////////////   CHECK THE CATEGORIES FUNCTIONALITY  //////////////
             if (Categories.CategoriesDictionary.ContainsKey(baseCategory))
             {
                 var catList = Categories.CategoriesDictionary.FirstOrDefault(p => p.Key == baseCategory);
@@ -42,7 +42,7 @@ namespace BookLib
                     InnerCategory = innerCategory;
                 }
             }
-            /////////////   TO DO:  CHECK THE CATEGORIES FUNCTIONALITY  //////////////
+            /////////////   CHECK THE CATEGORIES FUNCTIONALITY  //////////////
 
             PrintDate = printDate;
         }

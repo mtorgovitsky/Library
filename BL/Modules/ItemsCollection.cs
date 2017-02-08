@@ -1,4 +1,6 @@
-﻿using BookLib;
+﻿using BL.Modules;
+using BookLib;
+using Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,19 +13,43 @@ namespace BL
     /// <summary>
     /// Class Responsable for managing Collections of Library Items
     /// </summary>
+    [Serializable]
     public class ItemsCollection
     {
-        private List<AbstractItem> _items { get; set; } = new List<AbstractItem>();
+        public List<AbstractItem> Items { get; set; }
+        public User SuperAdmin { get; set; }
+        public List<User> Users { get; set; }
+
+        public ItemsCollection()
+        {
+            Items = new List<AbstractItem>();
+            Users = new List<User>();
+        }
+
+
+
+        public void SaveData(ItemsCollection data)
+        {
+            Data.DBData.Serialize(data);
+        }
+
+        public ItemsCollection GetBLData()
+        {
+            var data = Data.DBData.DeSerialize<ItemsCollection>();
+            return data;
+        }
+
+
 
         public void Add(AbstractItem abstItem)
         {
             if (abstItem != null)
-                _items.Add(abstItem);
+                Items.Add(abstItem);
         }
 
         public List<AbstractItem> ItemsToList(Func<AbstractItem, bool> p)
         {
-            return _items.Where(p).ToList();
+            return Items.Where(p).ToList();
         }
 
         //public int HowManyItems(AbstractItem item)
@@ -43,19 +69,19 @@ namespace BL
         public List<AbstractItem> FindByName(string name)
         {
             name = name.ToLower();
-            return _items.Where(i => i.Name == name).ToList();
+            return Items.Where(i => i.Name == name).ToList();
             //return ItemsToList(p => p.Name == name).ToList();
         }
 
         public List<AbstractItem> FindByBaseCategory(eBaseCategory baseCategory)
         {
-            return _items.Where(i => i.BaseCategory == baseCategory).ToList();
+            return Items.Where(i => i.BaseCategory == baseCategory).ToList();
             //return ItemsToList.
         }
 
         public List<AbstractItem> FindByInnerCategory(eInnerCategory innerCategory)
         {
-            return _items.Where(i => i.InnerCategory == innerCategory).ToList();
+            return Items.Where(i => i.InnerCategory == innerCategory).ToList();
         }
 
         //public List<AbstractItem> FindByMinCopies(int minCopies)
@@ -65,7 +91,7 @@ namespace BL
 
         public List<AbstractItem> FindByPrintDate(DateTime printDate)
         {
-            return _items.
+            return Items.
                 Where(i => i.PrintDate == printDate)
                 .OrderBy(i => i.Name)
                 .ToList();
@@ -75,7 +101,7 @@ namespace BL
         {
             name = name.ToLower();
 
-            return _items
+            return Items
                 .OfType<Journal>()
                 .Where(i => i.Name == name)
                 .Where(i => i.IssueNumber == issueNumber)
@@ -94,7 +120,7 @@ namespace BL
         {
             author = author.ToLower();
 
-            return _items
+            return Items
                  .OfType<Book>()
                  .Where(i => i.Author == author)
                  .ToList();
@@ -103,19 +129,19 @@ namespace BL
 
         public List<Book> FindBook(Func<Book, bool> p)
         {
-            var lst = _items.OfType<Book>();
+            var lst = Items.OfType<Book>();
             return lst.Where(p).ToList();
         }
 
         public List<Journal> FindJournal(Func<Journal, bool> p)
         {
-            var lst = _items.OfType<Journal>();
+            var lst = Items.OfType<Journal>();
             return lst.Where(p).ToList();
         }
 
         public List<AbstractItem> FindAbstractItem(Func<AbstractItem, bool> p)
         {
-            return _items.Where(p).ToList();
+            return Items.Where(p).ToList();
         }
 
         public bool Lending(AbstractItem item)
