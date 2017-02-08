@@ -8,6 +8,9 @@ using static BL.Categories;
 
 namespace BL
 {
+    /// <summary>
+    /// Class Responsable for managing Collections of Library Items
+    /// </summary>
     public class ItemsCollection
     {
         private List<AbstractItem> _items { get; set; } = new List<AbstractItem>();
