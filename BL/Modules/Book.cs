@@ -7,6 +7,7 @@ using BL;
 
 namespace BookLib
 {
+    [Serializable]
     public class Book : AbstractItem
     {
         public Book(

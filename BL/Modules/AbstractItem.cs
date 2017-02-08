@@ -9,6 +9,7 @@ using static BL.Categories;
 
 namespace BookLib
 {
+    [Serializable]
     public abstract class AbstractItem : IEqual
     {
         public readonly Guid ISBN;
@@ -30,8 +31,19 @@ namespace BookLib
                 _printDate = printDate;
             //if (copyCount > 1)
             //    _copyCount = copyCount;
-            BaseCategory = baseCategory;
-            InnerCategory = innerCategory;
+
+            /////////////   TO DO:  CHECK THE CATEGORIES FUNCTIONALITY  //////////////
+            if (Categories.CategoriesDictionary.ContainsKey(baseCategory))
+            {
+                var catList = Categories.CategoriesDictionary.FirstOrDefault(p => p.Key == baseCategory);
+                if (catList.Value.Contains(innerCategory))
+                {
+                    BaseCategory = baseCategory;
+                    InnerCategory = innerCategory;
+                }
+            }
+            /////////////   TO DO:  CHECK THE CATEGORIES FUNCTIONALITY  //////////////
+
             PrintDate = printDate;
         }
 

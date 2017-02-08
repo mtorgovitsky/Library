@@ -99,5 +99,52 @@ namespace BL
                  .Where(i => i.Author == author)
                  .ToList();
         }
+
+
+        public List<Book> FindBook(Func<Book, bool> p)
+        {
+            var lst = _items.OfType<Book>();
+            return lst.Where(p).ToList();
+        }
+
+        public List<Journal> FindJournal(Func<Journal, bool> p)
+        {
+            var lst = _items.OfType<Journal>();
+            return lst.Where(p).ToList();
+        }
+
+        public List<AbstractItem> FindAbstractItem(Func<AbstractItem, bool> p)
+        {
+            return _items.Where(p).ToList();
+        }
+
+        public bool Lending(AbstractItem item)
+        {
+            if (item.IsBorrowed)
+            {
+                return false;
+            }
+            else
+            {
+                item.IsBorrowed = !item.IsBorrowed;
+                return true;
+            }
+        }
+
+        public int ItemQuantity(AbstractItem item)
+        {
+            int result = 0;
+            if (item is Book)
+            {
+                var lst = FindBook(i => i.Equal(item));
+                result = lst.Count;
+            }
+            else
+            {
+                var lst = FindJournal(i => i.Equal(item));
+                result = lst.Count;
+            }
+            return result;
+        }
     }
 }

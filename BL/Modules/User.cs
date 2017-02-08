@@ -9,15 +9,16 @@ namespace BL.Modules
     /// <summary>
     /// Users of the Library
     /// </summary>
-    public class LibUsers
+    [Serializable]
+    public class User
     {
         public readonly int UserID;
         public eUserType UserType { get; set; }
         public string Name { get; set; }
         public string Password { get; set; }
-        public List<LibUsers> Users { get; set; }
+        public List<User> Users { get; set; }
 
-        public LibUsers(string name, string password)
+        public User(string name, string password)
         {
             Name = name;
             Password = password;
@@ -33,7 +34,7 @@ namespace BL.Modules
             LibraryManager
         }
 
-        public LibUsers GetCurrentUser(string name, string password)
+        public User GetCurrentUser(string name, string password)
         {
             name = name.ToLower();
             return Users

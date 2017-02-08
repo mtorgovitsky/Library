@@ -7,6 +7,7 @@ using BL;
 
 namespace BookLib
 {
+    [Serializable]
     public class Journal : AbstractItem
     {
         public int IssueNumber { get; set; }
