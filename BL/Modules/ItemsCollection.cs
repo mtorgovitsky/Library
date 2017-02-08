@@ -24,6 +24,7 @@ namespace BL
         {
             Items = new List<AbstractItem>();
             Users = new List<User>();
+            SaveData(this);
         }
 
 

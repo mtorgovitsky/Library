@@ -1,0 +1,18 @@
+﻿<Window x:Name="Login" x:Class="Library.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Library"
+        mc:Ignorable="d"
+        Title="Please Login First!" Height="340.414" Width="217.931" ResizeMode="NoResize" HorizontalAlignment="Center" FontFamily="Tahoma">
+    <Grid>
+        <TextBox x:Name="txtUserName" HorizontalAlignment="Left" Height="20" Margin="49,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextAlignment="Center" TextChanged="txtUserName_TextChanged"/>
+        <TextBox x:Name="txtPassword" HorizontalAlignment="Left" Height="20" Margin="49,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextAlignment="Center"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="15" Margin="78,74,0,0" TextWrapping="Wrap" Text="User Name" VerticalAlignment="Top" Width="59" TextAlignment="Center"/>
+        <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" Height="15" Margin="78,124,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="59" TextAlignment="Center"/>
+        <Button x:Name="btnLogin" Content="LET ME IN!" HorizontalAlignment="Left" Height="25" Margin="49,179,0,0" VerticalAlignment="Top" Width="120" Click="btnLogin_Click"/>
+        <Button x:Name="btnNewUser" Content="New User" HorizontalAlignment="Left" Height="23" Margin="49,222,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btnExit" Content="Maybe Next Time :(" HorizontalAlignment="Left" Height="20" Margin="49,264,0,0" VerticalAlignment="Top" Width="120" Click="btnExit_Click"/>
+    </Grid>
+</Window>
