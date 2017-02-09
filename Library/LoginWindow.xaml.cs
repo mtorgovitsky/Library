@@ -3,6 +3,7 @@ using BL.Modules;
 using BookLib;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,14 +22,15 @@ namespace Library
     /// <summary>
     /// Interaction logic for LoginWindow.xaml
     /// </summary>
+    [Serializable]
     public partial class LoginWindow : Window
     {
         public static ItemsCollection mainLibrary = new ItemsCollection();
         public LoginWindow()
         {
             InitializeComponent();
-            //var iii = CheckDataSaving();
-            //mainLibrary = null;
+            if (File.Exists("DBData.osl"))
+                mainLibrary = mainLibrary.GetBLData();
             if (mainLibrary.SuperAdmin == null)
                 MessageBox.Show("You Entering The Program for the first Time.\n Please Make first Login");
             btnLogin.IsEnabled = false;
@@ -37,6 +39,7 @@ namespace Library
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+            mainLibrary.SaveData(mainLibrary);
         }
 
         private void txtUserName_TextChanged(object sender, TextChangedEventArgs e)

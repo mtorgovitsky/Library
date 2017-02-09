@@ -24,19 +24,19 @@ namespace BL
         {
             Items = new List<AbstractItem>();
             Users = new List<User>();
-            SaveData(this);
+            //SaveData(this);
         }
 
 
 
         public void SaveData(ItemsCollection data)
         {
-            Data.DBData.Serialize(data);
+            DBData.Serialize(data);
         }
 
         public ItemsCollection GetBLData()
         {
-            var data = Data.DBData.DeSerialize<ItemsCollection>();
+            var data = DBData.DeSerialize<ItemsCollection>();
             return data;
         }
 
