@@ -62,7 +62,10 @@ namespace Library
         private void btnCheckData_Click(object sender, RoutedEventArgs e)
         {
             var ic = new ItemsCollection();
-            dataLib.ItemsSource = ic.GetBLData().Items;
+            if (ic != null)
+            {
+                dataLib.ItemsSource = ic.GetBLData().Items;
+            }
         }
     }
 }
