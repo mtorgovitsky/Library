@@ -10,6 +10,7 @@
         <Button x:Name="btnExit" Content="Exit" HorizontalAlignment="Left" Height="36" Margin="409,18,0,0" VerticalAlignment="Top" Width="89" Click="btnExit_Click"/>
         <DataGrid x:Name="dataLib" HorizontalAlignment="Left" Height="275" Margin="22,18,0,0" VerticalAlignment="Top" Width="363"/>
         <Button x:Name="btnCheckData" Content="CheckSave-DEBUG" HorizontalAlignment="Left" Height="22" Margin="400,288,0,0" VerticalAlignment="Top" Width="107" Click="btnCheckData_Click"/>
+        <Button x:Name="btnAdd" Content="Add Item" HorizontalAlignment="Left" Height="28" Margin="409,75,0,0" VerticalAlignment="Top" Width="89" Click="btnAdd_Click"/>
 
     </Grid>
 </Window>

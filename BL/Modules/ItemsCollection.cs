@@ -17,7 +17,7 @@ namespace BL
     public class ItemsCollection
     {
         public List<AbstractItem> Items { get; set; }
-        public User SuperAdmin { get; set; }
+        //public User SuperAdmin { get; set; }
 
         public ItemsCollection()
         {

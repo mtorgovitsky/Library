@@ -1,6 +1,7 @@
 ﻿using BL;
 using BookLib;
 using Data;
+using Library.GUI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,6 +67,12 @@ namespace Library
             {
                 dataLib.ItemsSource = ic.GetBLData().Items;
             }
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            var addItem = new AddNewItem();
+            addItem.ShowDialog();
         }
     }
 }
