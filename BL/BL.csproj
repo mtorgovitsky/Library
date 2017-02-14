@@ -46,7 +46,7 @@
     <Compile Include="Modules\IEqual.cs" />
     <Compile Include="Modules\Journal.cs" />
     <Compile Include="Modules\ItemsCollection.cs" />
-    <Compile Include="Modules\User.cs" />
+    <Compile Include="Modules\UsersManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

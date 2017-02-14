@@ -1,6 +1,7 @@
 ﻿using BL;
 using BL.Modules;
 using BookLib;
+using Library.Modules;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,6 +17,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using static BL.Categories;
+using System.ComponentModel;
+using Data;
 
 namespace Library
 {
@@ -25,40 +28,53 @@ namespace Library
     [Serializable]
     public partial class LoginWindow : Window
     {
+        public static bool ShowMain = false;
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            if (!ShowMain)
+                e.Cancel = true;
+        }
+
         public static ItemsCollection mainLibrary = new ItemsCollection();
         public LoginWindow()
         {
             InitializeComponent();
-            if (File.Exists("DBData.osl"))
+            if (File.Exists(DBData.FilePath))
                 mainLibrary = mainLibrary.GetBLData();
-            if (mainLibrary.SuperAdmin == null)
-                MessageBox.Show("You Entering The Program for the first Time.\n Please Make first Login");
+            else
+            {
+                GuiMsgs.FirstLogin();
+            }
             btnLogin.IsEnabled = false;
+            txtUserName.Focus();
         }
 
-        private void btnExit_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-            mainLibrary.SaveData(mainLibrary);
-        }
+        //private void btnExit_Click(object sender, RoutedEventArgs e)
+        //{
+        //    this.Close();
+        //    mainLibrary.SaveData(mainLibrary);
+        //}
 
         private void txtUserName_TextChanged(object sender, TextChangedEventArgs e)
         {
-            btnLogin.IsEnabled = true;
+            CanLogin();
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            if (txtPassword.Text == string.Empty)
-                MessageBox.Show("Password is required");
+            if (!UsersManager.CheckUser(txtUserName.Text, txtPassword.Text))
+            {
+                GuiMsgs.LoginFailed();
+                txtUserName.Text = txtPassword.Text = string.Empty;
+                txtUserName.Focus();
+            }
             else
             {
-                mainLibrary.SuperAdmin = new User(txtUserName.Text, txtPassword.Text);
-
-                //CheckDataSaving();
-
-                mainLibrary.SaveData(mainLibrary);
+                ShowMain = true;
+                this.Close();
             }
+            //CheckDataSaving();
+            //mainLibrary.SaveData(mainLibrary);
         }
 
         private static ItemsCollection CheckDataSaving()
@@ -75,10 +91,22 @@ namespace Library
                                 eBaseCategory.Kids,
                                 eInnerCategory.Comics,
                                 6));
-            mainLibrary.SuperAdmin = new User("dfdfd", "sdsasf");
             mainLibrary.SaveData(mainLibrary);
             var tmp = mainLibrary.GetBLData();
             return tmp;
+        }
+
+        private void txtPassword_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CanLogin();
+        }
+
+        private void CanLogin()
+        {
+            if (txtPassword.Text == string.Empty || txtUserName.Text == string.Empty)
+                btnLogin.IsEnabled = false;
+            else
+                btnLogin.IsEnabled = true;
         }
     }
 }

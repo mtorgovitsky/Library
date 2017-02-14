@@ -10,7 +10,7 @@ namespace Data
 {
     public static class DBData
     {
-        public const string FilePath = "DBData.osl";
+        public const string FilePath = "Library.bin";
 
         /// <summary>
         ///  Serializes the object to "DBData.osl" File.

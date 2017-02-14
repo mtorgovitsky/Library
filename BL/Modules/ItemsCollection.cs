@@ -18,12 +18,10 @@ namespace BL
     {
         public List<AbstractItem> Items { get; set; }
         public User SuperAdmin { get; set; }
-        public List<User> Users { get; set; }
 
         public ItemsCollection()
         {
             Items = new List<AbstractItem>();
-            Users = new List<User>();
             //SaveData(this);
         }
 

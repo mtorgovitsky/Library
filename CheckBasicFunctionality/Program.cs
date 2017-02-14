@@ -14,31 +14,44 @@ namespace CheckBasicFunctionality
     {
         static void Main(string[] args)
         {
-            ItemsCollection itemsC = new ItemsCollection();
-            itemsC.Items.Add
-                (new Book
-                        ("Book of Treasures",
-                        DateTime.Now.AddYears(-8),
-                        eBaseCategory.Cooking,
-                        eInnerCategory.Soups,
-                        "Ann Geronulasoftred"));
-            itemsC.Items.Add
-                (new Journal
-                        ("Some Journal",
-                        DateTime.Now.AddYears(-1),
-                        eBaseCategory.Kids,
-                        eInnerCategory.Comics,
-                        6));
+            SaveData();
+            var tmp = GetData();
+            //if(itemsC.SuperAdmin == null)
+            //{
+            //    Console.WriteLine("No Super User");
+            //}
+        }
 
-            itemsC.SuperAdmin = new User("Admin", "12345678910");
-            itemsC.SuperAdmin.UserType = User.eUserType.SuperAdmin;
+        private static void CheckDataSaving()
+        {
+            throw new NotImplementedException();
+        }
 
-            itemsC.SaveData(itemsC);
-            ItemsCollection getData = itemsC.GetBLData();
-            if(itemsC.SuperAdmin == null)
-            {
-                Console.WriteLine("No Super User");
-            }
+        private static void SaveData()
+        {
+            ItemsCollection ic = new ItemsCollection();
+            //itemsC.SuperAdmin = new User("Admin", "12345678910");
+            //itemsC.SuperAdmin.UserType = User.eUserType.SuperAdmin;
+            ic.Items.Add(new Book
+                ("Book of Treasures",
+                DateTime.Now.AddYears(-8),
+                eBaseCategory.Cooking,
+                eInnerCategory.Soups,
+                "Ann Geronulasoftred"));
+            ic.Items.Add(new Journal
+                ("Some Journal",
+                DateTime.Now.AddYears(-1),
+                eBaseCategory.Kids,
+                eInnerCategory.Comics,
+                6));
+
+            ic.SaveData(ic);
+        }
+
+        private static ItemsCollection GetData()
+        {
+            ItemsCollection retIc = new ItemsCollection();
+            return retIc.GetBLData();
         }
     }
 }
