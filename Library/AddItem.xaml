@@ -1,0 +1,32 @@
+﻿<Window x:Class="Library.GUI.AddNewItem"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Library.GUI"
+        mc:Ignorable="d"
+        Title="AddNewItem" Height="316.14" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="37*"/>
+            <ColumnDefinition Width="12*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="lblType" HorizontalAlignment="Left" Height="21" Margin="20,54,0,0" TextWrapping="Wrap" Text="Type of Item" VerticalAlignment="Top" Width="83"/>
+        <ComboBox x:Name="cmbBaseCat" HorizontalAlignment="Left" Height="21" Margin="127,93,0,0" VerticalAlignment="Top" Width="149" Grid.ColumnSpan="2" SelectionChanged="FillInnerCombo"/>
+        <TextBlock x:Name="lblBaseCategory" HorizontalAlignment="Left" Height="21" Margin="20,93,0,0" TextWrapping="Wrap" Text="Base Category" VerticalAlignment="Top" Width="83"/>
+        <ComboBox x:Name="cmbInnerCat" HorizontalAlignment="Left" Height="21" Margin="127,133,0,0" VerticalAlignment="Top" Width="149" Grid.ColumnSpan="2"/>
+        <TextBlock x:Name="lblBaseCategory_Copy" HorizontalAlignment="Left" Height="21" Margin="20,133,0,0" TextWrapping="Wrap" Text="Inner Category" VerticalAlignment="Top" Width="83"/>
+        <RadioButton x:Name="rdBook" Content="Book" HorizontalAlignment="Left" Height="21" Margin="144,55,0,0" VerticalAlignment="Top" Width="47" Checked="rdChecked"/>
+        <RadioButton x:Name="rdJournal" Content="Journal" HorizontalAlignment="Left" Height="21" Margin="214,55,0,0" VerticalAlignment="Top" Width="62" Grid.ColumnSpan="2" Checked="rdChecked"/>
+        <TextBlock x:Name="lblName" HorizontalAlignment="Left" Height="21" Margin="20,172,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="83"/>
+        <TextBox x:Name="txtName" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="21" Margin="127,172,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="149"/>
+        <TextBlock x:Name="lblPrintDate" HorizontalAlignment="Left" Height="21" Margin="20,213,0,0" TextWrapping="Wrap" Text="Publishied In" VerticalAlignment="Top" Width="83" RenderTransformOrigin="0.489,-0.174"/>
+        <DatePicker x:Name="dtPick" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="21" Margin="127,213,0,0" VerticalAlignment="Top" Width="149"/>
+        <TextBlock x:Name="lblAuthor" Height="21" Margin="20,251,119,0" TextWrapping="Wrap" Text="Author" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtAuthor" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="21" Margin="127,251,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="149"/>
+        <TextBlock x:Name="lblIssue" Height="21" Margin="20,251,119,0" TextWrapping="Wrap" Text="Issue Number" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtIssue" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="21" Margin="127,251,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="149"/>
+        <TextBlock x:Name="lblType_Copy" HorizontalAlignment="Left" Height="21" Margin="45,19,0,0" TextWrapping="Wrap" Text="Add New Item" VerticalAlignment="Top" Width="208" Grid.ColumnSpan="2" TextAlignment="Center" FontSize="16" FontWeight="Bold"/>
+
+    </Grid>
+</Window>

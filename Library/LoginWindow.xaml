@@ -16,5 +16,6 @@
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="15" Margin="78,74,0,0" TextWrapping="Wrap" Text="User Name" VerticalAlignment="Top" Width="59" TextAlignment="Center" Grid.ColumnSpan="2"/>
         <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" Height="15" Margin="78,124,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="59" TextAlignment="Center" Grid.ColumnSpan="2"/>
         <Button x:Name="btnLogin" Content="LET ME IN!" HorizontalAlignment="Left" Height="25" Margin="49,198,0,0" VerticalAlignment="Top" Width="120" Click="btnLogin_Click" Grid.ColumnSpan="2"/>
+        <TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Left" Height="15" Margin="49,46,0,0" TextWrapping="Wrap" Text="PLEASE LOGIN!" VerticalAlignment="Top" Width="120" TextAlignment="Center" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>

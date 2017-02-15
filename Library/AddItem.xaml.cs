@@ -1,5 +1,6 @@
 ﻿using BL;
 using BookLib;
+using Library.Modules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,23 +27,29 @@ namespace Library.GUI
             InitializeComponent();
             //cmbItemType.ItemsSource = new List<string>() { "Book", "Journal" };
             //cmbItemType.SelectedIndex = 0;
+            GuiChanges.Hide(lblIssue, lblAuthor, txtIssue, txtAuthor);
             cmbBaseCat.ItemsSource = Enum.GetValues(typeof(Categories.eBaseCategory));
+            GuiChanges.Disable(cmbInnerCat);
         }
 
         private void FillInnerCombo(object sender, SelectionChangedEventArgs e)
         {
+            GuiChanges.Enable(cmbInnerCat);
             cmbInnerCat.ItemsSource = Categories.CategoriesDictionary[(Categories.eBaseCategory)cmbBaseCat.SelectedItem];
         }
 
         private void rdChecked(object sender, RoutedEventArgs e)
         {
             var rdValue = sender as RadioButton;
-            switch (rdBook.Name)
+            switch (rdValue.Name)
             {
                 case "rdBook":
-
+                    GuiChanges.Hide(lblIssue, txtIssue);
+                    GuiChanges.Show(lblAuthor, txtAuthor);
                     break;
                 case "rdJournal":
+                    GuiChanges.Hide(lblAuthor, txtAuthor);
+                    GuiChanges.Show(lblIssue, txtIssue);
                     break;
             }
         }
