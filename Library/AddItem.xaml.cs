@@ -68,6 +68,7 @@ namespace Library.GUI
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
+            /////////////////////////   VALIDATION OF THE USER INPUT   //////////////////
             if (CurrentItem == ItemType.Default)
             {
                 GuiMsgs.Warning
@@ -87,17 +88,38 @@ namespace Library.GUI
             {
                 GuiMsgs.Warning("Please Select a Publishing Date!");
             }
+            else
             {
                 switch (CurrentItem)
                 {
-                    case ItemType.Default:
-                        break;
                     case ItemType.Book:
+                        if (txtAuthor.Text == string.Empty)
+                        {
+                            GuiMsgs.Warning("Please Enter The Author Name");
+                        }
                         break;
                     case ItemType.Journal:
+                        if (txtIssue.Text == string.Empty)
+                        {
+                            GuiMsgs.Warning("Please Enter The Issue Number");
+                        }
+                        else if (!Validity.PositiveInteger(txtIssue.Text))
+                        {
+                            GuiMsgs.Warning("Please Enter the valid Issue Number");
+                        }
+                        else
+                        {
+                            Journal tmpJ = new Journal
+                                (txtName.Text,
+                                dtPick.SelectedDate.GetValueOrDefault(),
+                                (Categories.eBaseCategory)cmbBaseCat.SelectedItem,
+                                (Categories.eInnerCategory)cmbInnerCat.SelectedItem,
+                                int.Parse(txtIssue.Text));
+                        }
                         break;
                 }
             }
+            /////////////////////////   VALIDATION OF THE USER INPUT   //////////////////
         }
     }
 }
