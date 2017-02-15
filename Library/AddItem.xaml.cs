@@ -97,6 +97,10 @@ namespace Library.GUI
                         {
                             GuiMsgs.Warning("Please Enter The Author Name");
                         }
+                        else
+                        {
+                            CreateItem();
+                        }
                         break;
                     case ItemType.Journal:
                         if (txtIssue.Text == string.Empty)
@@ -109,17 +113,35 @@ namespace Library.GUI
                         }
                         else
                         {
-                            Journal tmpJ = new Journal
-                                (txtName.Text,
-                                dtPick.SelectedDate.GetValueOrDefault(),
-                                (Categories.eBaseCategory)cmbBaseCat.SelectedItem,
-                                (Categories.eInnerCategory)cmbInnerCat.SelectedItem,
-                                int.Parse(txtIssue.Text));
+                            CreateItem();
                         }
                         break;
                 }
             }
             /////////////////////////   VALIDATION OF THE USER INPUT   //////////////////
+        }
+
+        public void CreateItem()
+        {
+            switch (CurrentItem)
+            {
+                case ItemType.Book:
+                    MainWindow.mainLibrary.Items.Add(new Book(
+                        txtName.Text,
+                        dtPick.SelectedDate.GetValueOrDefault(),
+                        (Categories.eBaseCategory)cmbBaseCat.SelectedItem,
+                        (Categories.eInnerCategory)cmbInnerCat.SelectedItem,
+                        txtAuthor.Text));
+                    break;
+                case ItemType.Journal:
+                    MainWindow.mainLibrary.Items.Add(new Journal
+                        (txtName.Text,
+                        dtPick.SelectedDate.GetValueOrDefault(),
+                        (Categories.eBaseCategory)cmbBaseCat.SelectedItem,
+                        (Categories.eInnerCategory)cmbInnerCat.SelectedItem,
+                        int.Parse(txtIssue.Text)));
+                    break;
+            }
         }
     }
 }
