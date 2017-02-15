@@ -30,6 +30,7 @@ namespace Library
         public MainWindow()
         {
             InitializeComponent();
+            //mainLibrary = mainLibrary.GetBLData();
             var login = new LoginWindow();
             login.ShowDialog();
 
@@ -73,6 +74,11 @@ namespace Library
         {
             var addItem = new AddNewItem();
             addItem.ShowDialog();
+        }
+
+        private void SaveData(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            mainLibrary.SaveData(mainLibrary);
         }
     }
 }

@@ -35,12 +35,12 @@ namespace Library
                 e.Cancel = true;
         }
 
-        public static ItemsCollection mainLibrary = new ItemsCollection();
+        //public static ItemsCollection mainLibrary = new ItemsCollection();
         public LoginWindow()
         {
             InitializeComponent();
             if (File.Exists(DBData.FilePath))
-                mainLibrary = mainLibrary.GetBLData();
+                MainWindow.mainLibrary = MainWindow.mainLibrary.GetBLData();
             else
             {
                 GuiMsgs.FirstLogin();
@@ -77,24 +77,24 @@ namespace Library
             //mainLibrary.SaveData(mainLibrary);
         }
 
-        private static ItemsCollection CheckDataSaving()
-        {
-            mainLibrary.Items.Add(new Book
-                                ("Book of Treasures",
-                                DateTime.Now.AddYears(-8),
-                                eBaseCategory.Cooking,
-                                eInnerCategory.Soups,
-                                "Ann Geronulasoftred"));
-            mainLibrary.Items.Add(new Journal
-                                ("Some Journal",
-                                DateTime.Now.AddYears(-1),
-                                eBaseCategory.Kids,
-                                eInnerCategory.Comics,
-                                6));
-            mainLibrary.SaveData(mainLibrary);
-            var tmp = mainLibrary.GetBLData();
-            return tmp;
-        }
+        //private static ItemsCollection CheckDataSaving()
+        //{
+        //    MainWindow.mainLibrary.Items.Add(new Book
+        //                        ("Book of Treasures",
+        //                        DateTime.Now.AddYears(-8),
+        //                        eBaseCategory.Cooking,
+        //                        eInnerCategory.Soups,
+        //                        "Ann Geronulasoftred"));
+        //    MainWindow.mainLibrary.Items.Add(new Journal
+        //                        ("Some Journal",
+        //                        DateTime.Now.AddYears(-1),
+        //                        eBaseCategory.Kids,
+        //                        eInnerCategory.Comics,
+        //                        6));
+        //    MainWindow.mainLibrary.SaveData(mainLibrary);
+        //    var tmp = MainWindow.mainLibrary.GetBLData();
+        //    return tmp;
+        //}
 
         private void txtPassword_TextChanged(object sender, TextChangedEventArgs e)
         {
