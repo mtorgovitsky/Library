@@ -41,24 +41,24 @@ namespace Library
             this.Close();
         }
 
-        private static ItemsCollection CheckDataSaving()
-        {
-            mainLibrary.Items.Add(new Book
-                                ("Book of Treasures",
-                                DateTime.Now.AddYears(-8),
-                                eBaseCategory.Cooking,
-                                eInnerCategory.Soups,
-                                "Ann Geronulasoftred"));
-            mainLibrary.Items.Add(new Journal
-                                ("Some Journal",
-                                DateTime.Now.AddYears(-1),
-                                eBaseCategory.Kids,
-                                eInnerCategory.Comics,
-                                6));
-            mainLibrary.SaveData(mainLibrary);
-            var tmp = mainLibrary.GetBLData();
-            return tmp;
-        }
+        //private static ItemsCollection CheckDataSaving()
+        //{
+        //    mainLibrary.Items.Add(new Book
+        //                        ("Book of Treasures",
+        //                        DateTime.Now.AddYears(-8),
+        //                        eBaseCategory.Cooking,
+        //                        eInnerCategory.Soups,
+        //                        "Ann Geronulasoftred"));
+        //    mainLibrary.Items.Add(new Journal
+        //                        ("Some Journal",
+        //                        DateTime.Now.AddYears(-1),
+        //                        eBaseCategory.Kids,
+        //                        eInnerCategory.Comics,
+        //                        6));
+        //    mainLibrary.SaveData(mainLibrary);
+        //    var tmp = mainLibrary.GetBLData();
+        //    return tmp;
+        //}
 
         private void btnCheckData_Click(object sender, RoutedEventArgs e)
         {

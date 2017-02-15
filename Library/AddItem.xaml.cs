@@ -33,8 +33,6 @@ namespace Library.GUI
         public AddNewItem()
         {
             InitializeComponent();
-            //cmbItemType.ItemsSource = new List<string>() { "Book", "Journal" };
-            //cmbItemType.SelectedIndex = 0;
             GuiChanges.Hide(lblIssue, lblAuthor, txtIssue, txtAuthor);
             cmbBaseCat.ItemsSource = Enum.GetValues(typeof(Categories.eBaseCategory));
             GuiChanges.Disable(cmbInnerCat);
@@ -100,6 +98,7 @@ namespace Library.GUI
                         else
                         {
                             CreateItem();
+                            this.Close();
                         }
                         break;
                     case ItemType.Journal:
@@ -114,6 +113,7 @@ namespace Library.GUI
                         else
                         {
                             CreateItem();
+                            this.Close();
                         }
                         break;
                 }
@@ -126,13 +126,15 @@ namespace Library.GUI
             switch (CurrentItem)
             {
                 case ItemType.Book:
-                    MainWindow.mainLibrary.Items.Add(new Book(
-                        txtName.Text,
-                        dtPick.SelectedDate.GetValueOrDefault(),
-                        (Categories.eBaseCategory)cmbBaseCat.SelectedItem,
-                        (Categories.eInnerCategory)cmbInnerCat.SelectedItem,
-                        txtAuthor.Text));
-                    break;
+                    {
+                        MainWindow.mainLibrary.Items.Add(new Book(
+                            txtName.Text,
+                            dtPick.SelectedDate.GetValueOrDefault(),
+                            (Categories.eBaseCategory)cmbBaseCat.SelectedItem,
+                            (Categories.eInnerCategory)cmbInnerCat.SelectedItem,
+                            txtAuthor.Text));
+                        break;
+                    }
                 case ItemType.Journal:
                     MainWindow.mainLibrary.Items.Add(new Journal
                         (txtName.Text,
