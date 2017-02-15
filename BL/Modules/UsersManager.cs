@@ -34,7 +34,7 @@ namespace BL.Modules
             new User { Name = "superuser", Password = "123", UserType = User.eUserType.SuperAdmin },
             new User { Name = "employee", Password = "123", UserType = User.eUserType.Employee },
             new User { Name = "manager", Password = "123", UserType = User.eUserType.LibraryManager },
-            new User { Name = "admin", Password = "123", UserType = User.eUserType.Admin }
+            new User { Name = "admin", Password = "1", UserType = User.eUserType.Admin }
         };
 
         public static bool CheckUser(string name, string pass)

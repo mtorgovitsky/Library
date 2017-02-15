@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Library.GUI"
         mc:Ignorable="d"
-        Title="AddNewItem" Height="316.14" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="AddNewItem" Height="369.006" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="37*"/>
@@ -27,6 +27,7 @@
         <TextBlock x:Name="lblIssue" Height="21" Margin="20,251,119,0" TextWrapping="Wrap" Text="Issue Number" VerticalAlignment="Top"/>
         <TextBox x:Name="txtIssue" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="21" Margin="127,251,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="149"/>
         <TextBlock x:Name="lblType_Copy" HorizontalAlignment="Left" Height="21" Margin="45,19,0,0" TextWrapping="Wrap" Text="Add New Item" VerticalAlignment="Top" Width="208" Grid.ColumnSpan="2" TextAlignment="Center" FontSize="16" FontWeight="Bold"/>
+        <Button x:Name="btnAdd" Grid.ColumnSpan="2" Content="Add" HorizontalAlignment="Left" Height="28" Margin="20,290,0,0" VerticalAlignment="Top" Width="256" Click="btnAdd_Click"/>
 
     </Grid>
 </Window>

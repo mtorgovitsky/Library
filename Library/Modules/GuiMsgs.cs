@@ -29,5 +29,10 @@ namespace Library.Modules
                 MessageBoxButton.OK,
                 MessageBoxImage.Error);
         }
+
+        internal static void Warning(string message)
+        {
+            MessageBox.Show(message, "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
     }
 }
