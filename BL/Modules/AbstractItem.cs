@@ -18,6 +18,7 @@ namespace BookLib
             {
                 //Return the string with the name of the object
                 return this.GetType().Name;
+               
                 //string[] tmpStr = this.GetType().ToString().Split('.');
                 //return tmpStr[tmpStr.Length - 1];
             }
