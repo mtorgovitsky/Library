@@ -93,9 +93,9 @@ namespace Library
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            var tmp = (AbstractItem)dataLib.SelectedItem;
-            EditItem.Item = mainLibrary.FindAbstractItem(ai => ai.ISBN == tmp.ISBN).FirstOrDefault();
-            EditItem.Item = tmp;
+            EditItem.Item = (AbstractItem)dataLib.SelectedItem;
+            //EditItem.Item = mainLibrary.FindAbstractItem(ai => ai.ISBN == tmp.ISBN).FirstOrDefault();
+            //EditItem.Item = tmp;
             var editW = new EditItem();
             editW.ShowDialog();
         }

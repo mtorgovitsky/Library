@@ -1,5 +1,6 @@
 ﻿using BL;
 using BookLib;
+using Library.Modules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,6 +45,23 @@ namespace Library
             lblTypeOf.Text = Item.GetType().Name;
             cmbBaseCat.ItemsSource = Enum.GetValues(typeof(Categories.eBaseCategory));
             cmbBaseCat.SelectedItem = Item.BaseCategory;
+            txtName.Text = Item.Name;
+            dtPick.SelectedDate = Item.PrintDate;
+            switch (Item.ItemType)
+            {
+                case "Book":
+                    GuiChanges.Hide(lblIssue, txtIssue);
+                    GuiChanges.Show(lblAuthor, txtAuthor);
+                    Book tmpB = (Book)Item;
+                    txtAuthor.Text = tmpB.Author;
+                    break;
+                case "Journal":
+                    GuiChanges.Hide(lblAuthor, txtAuthor);
+                    GuiChanges.Show(lblIssue, txtIssue);
+                    Journal tmpJ = (Journal)Item;
+                    txtIssue.Text = tmpJ.IssueNumber.ToString();
+                    break;
+            }
         }
 
         private void FillInner()
