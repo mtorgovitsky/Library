@@ -5,16 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Library"
         mc:Ignorable="d"
-        Title="Library by Michael Torgovitsky" Height="350" Width="525" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Closing="SaveData">
+        Title="Library by Michael Torgovitsky" Height="556.012" Width="799.684" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Closing="ClosingMainWindow">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="298*"/>
             <ColumnDefinition Width="221*"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="btnExit" Content="Exit" HorizontalAlignment="Left" Height="36" Margin="110.734,18,0,0" VerticalAlignment="Top" Width="89" Click="btnExit_Click" Grid.Column="1"/>
-        <DataGrid x:Name="dataLib" HorizontalAlignment="Left" Height="275" Margin="22,18,0,0" VerticalAlignment="Top" Width="363" Grid.ColumnSpan="2"/>
-        <Button x:Name="btnCheckData" Content="CheckSave-DEBUG" HorizontalAlignment="Left" Height="22" Margin="101.734,288,0,0" VerticalAlignment="Top" Width="107" Click="btnCheckData_Click" Grid.Column="1"/>
-        <Button x:Name="btnAdd" Content="Add Item" HorizontalAlignment="Left" Height="28" Margin="110.734,75,0,0" VerticalAlignment="Top" Width="89" Click="btnAdd_Click" Grid.Column="1"/>
+        <Button x:Name="btnExit" Content="Exit" HorizontalAlignment="Left" Height="36" Margin="227,18,0,0" VerticalAlignment="Top" Width="89" Click="btnExit_Click" Grid.Column="1"/>
+        <DataGrid x:Name="dataLib" HorizontalAlignment="Left" Height="490" Margin="20,18,0,0" VerticalAlignment="Top" Width="609" Grid.ColumnSpan="2"/>
+        <Button x:Name="btnCheckData" Content="CheckSave-DEBUG" HorizontalAlignment="Left" Height="22" Margin="199,475,0,0" VerticalAlignment="Top" Width="107" Click="btnCheckData_Click" Grid.Column="1"/>
+        <Button x:Name="btnAdd" Content="Add Item" HorizontalAlignment="Left" Height="28" Margin="227,71,0,0" VerticalAlignment="Top" Width="89" Click="btnAdd_Click" Grid.Column="1"/>
 
     </Grid>
 </Window>

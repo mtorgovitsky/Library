@@ -12,7 +12,19 @@ namespace BookLib
     [Serializable]
     public abstract class AbstractItem : IEqual
     {
+        public string ItemType
+        {
+            get
+            {
+                //Return the string with the name of the object
+                return this.GetType().Name;
+                //string[] tmpStr = this.GetType().ToString().Split('.');
+                //return tmpStr[tmpStr.Length - 1];
+            }
+        }
+
         public readonly Guid ISBN;
+
         public bool IsBorrowed { get; set; }
 
         public AbstractItem
@@ -52,7 +64,6 @@ namespace BookLib
         //private int _copyCount;
         public eBaseCategory BaseCategory { get; set; }
         public eInnerCategory _innerCategory;
-
 
         public eInnerCategory InnerCategory
         {

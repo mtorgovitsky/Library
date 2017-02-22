@@ -33,7 +33,7 @@ namespace Library
             //mainLibrary = mainLibrary.GetBLData();
             var login = new LoginWindow();
             login.ShowDialog();
-
+            RefreshDataGrid();
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
@@ -66,7 +66,7 @@ namespace Library
             var ic = new ItemsCollection();
             if (ic != null)
             {
-                dataLib.ItemsSource = ic.GetBLData().Items;
+                RefreshDataGrid();
             }
         }
 
@@ -74,11 +74,18 @@ namespace Library
         {
             var addItem = new AddNewItem();
             addItem.ShowDialog();
+            RefreshDataGrid();
         }
 
-        private void SaveData(object sender, System.ComponentModel.CancelEventArgs e)
+        private void ClosingMainWindow(object sender, System.ComponentModel.CancelEventArgs e)
         {
             mainLibrary.SaveData(mainLibrary);
+        }
+
+        public void RefreshDataGrid()
+        {
+            dataLib.ItemsSource = mainLibrary.Items;
+            dataLib.Items.Refresh();
         }
     }
 }
