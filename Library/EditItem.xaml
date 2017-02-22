@@ -1,0 +1,31 @@
+﻿<Window x:Class="Library.EditItem"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Library"
+        mc:Ignorable="d"
+        Title="EditItem" Height="319.511" Width="368.712">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="97*"/>
+            <ColumnDefinition Width="195*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="lblType" HorizontalAlignment="Left" Height="21" Margin="20,54,0,0" TextWrapping="Wrap" Text="Item Type" VerticalAlignment="Top" Width="82"/>
+        <ComboBox x:Name="cmbBaseCat" HorizontalAlignment="Left" Height="21" Margin="6,93,0,0" VerticalAlignment="Top" Width="213" Grid.Column="1" SelectionChanged="cmbBaseCat_SelectionChanged"/>
+        <TextBlock x:Name="lblBaseCategory" HorizontalAlignment="Left" Height="21" Margin="20,93,0,0" TextWrapping="Wrap" Text="Base Category" VerticalAlignment="Top" Width="83"/>
+        <ComboBox x:Name="cmbInnerCat" HorizontalAlignment="Left" Height="21" Margin="6,133,0,0" VerticalAlignment="Top" Width="213" Grid.Column="1"/>
+        <TextBlock x:Name="lblBaseCategory_Copy" HorizontalAlignment="Left" Height="21" Margin="20,133,0,0" TextWrapping="Wrap" Text="Inner Category" VerticalAlignment="Top" Width="83"/>
+        <TextBlock x:Name="lblName" HorizontalAlignment="Left" Height="21" Margin="20,172,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="83"/>
+        <TextBox x:Name="txtName" HorizontalAlignment="Left" Height="21" Margin="6,172,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="213" Grid.Column="1"/>
+        <TextBlock x:Name="lblPrintDate" HorizontalAlignment="Left" Height="21" Margin="20,213,0,0" TextWrapping="Wrap" Text="Publishied In" VerticalAlignment="Top" Width="83" RenderTransformOrigin="0.489,-0.174"/>
+        <DatePicker x:Name="dtPick" HorizontalAlignment="Left" Height="21" Margin="6,213,0,0" VerticalAlignment="Top" Width="213" Grid.Column="1"/>
+        <TextBlock x:Name="lblAuthor" Height="21" Margin="20,251,18,0" TextWrapping="Wrap" Text="Author" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtAuthor" HorizontalAlignment="Left" Height="21" Margin="6,251,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="149" Grid.Column="1"/>
+        <TextBlock x:Name="lblIssue" Height="21" Margin="20,251,18,0" TextWrapping="Wrap" Text="Issue Number" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtIssue" HorizontalAlignment="Left" Height="21" Margin="6,251,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="213" Grid.Column="1"/>
+        <TextBlock x:Name="lblISBN" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="21" Margin="20,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="319" Text="ISBN"/>
+        <TextBlock x:Name="lblTypeOf" HorizontalAlignment="Left" Height="21" Margin="10,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="209" Text="Type Of" Grid.Column="1"/>
+
+    </Grid>
+</Window>

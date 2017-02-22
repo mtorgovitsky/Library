@@ -23,8 +23,6 @@ namespace BookLib
             }
         }
 
-        public readonly Guid ISBN;
-
         public bool IsBorrowed { get; set; }
 
         public AbstractItem
@@ -123,5 +121,6 @@ namespace BookLib
             else
                 return false;
         }
+        public Guid ISBN { get; }
     }
 }

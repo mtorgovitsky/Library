@@ -2,6 +2,7 @@
 using BookLib;
 using Data;
 using Library.GUI;
+using Library.Modules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,7 @@ namespace Library
             var login = new LoginWindow();
             login.ShowDialog();
             RefreshDataGrid();
+            dataLib.IsReadOnly = true;
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
@@ -86,6 +88,35 @@ namespace Library
         {
             dataLib.ItemsSource = mainLibrary.Items;
             dataLib.Items.Refresh();
+            GridSelected();
+        }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            var tmp = (AbstractItem)dataLib.SelectedItem;
+            EditItem.Item = mainLibrary.FindAbstractItem(ai => ai.ISBN == tmp.ISBN).FirstOrDefault();
+            EditItem.Item = tmp;
+            var editW = new EditItem();
+            editW.ShowDialog();
+        }
+
+        public int GridSelected()
+        {
+            if (dataLib.SelectedIndex >= 0 && dataLib.SelectedIndex < mainLibrary.Items.Count)
+            {
+                GuiChanges.Enable(btnEdit);
+                return dataLib.SelectedIndex;
+            }
+            else
+            {
+                GuiChanges.Disable(btnEdit);
+                return dataLib.SelectedIndex;
+            }
+        }
+
+        private void dataLib_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            GridSelected();
         }
     }
 }
