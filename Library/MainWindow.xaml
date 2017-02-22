@@ -16,6 +16,7 @@
         <Button x:Name="btnCheckData" Content="CheckSave-DEBUG" HorizontalAlignment="Left" Height="22" Margin="443,513,0,-7" VerticalAlignment="Top" Width="107" Click="btnCheckData_Click" Grid.ColumnSpan="2"/>
         <Button x:Name="btnAdd" Content="Add Item" HorizontalAlignment="Left" Height="28" Margin="227,18,0,0" VerticalAlignment="Top" Width="89" Click="btnAdd_Click" Grid.Column="1"/>
         <Button x:Name="btnEdit" Content="Edit Item" HorizontalAlignment="Left" Height="28" Margin="227,56,0,0" VerticalAlignment="Top" Width="89" Grid.Column="1" Click="btnEdit_Click"/>
+        <Button x:Name="btnDetails" Content="Item Details" HorizontalAlignment="Left" Height="28" Margin="227,96,0,0" VerticalAlignment="Top" Width="89" Grid.Column="1" Click="btnDetails_Click"/>
 
     </Grid>
 </Window>

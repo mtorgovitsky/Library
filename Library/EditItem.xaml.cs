@@ -23,6 +23,7 @@ namespace Library
     public partial class EditItem : Window
     {
         public static AbstractItem Item;
+        public static bool EditMode { get; set; }
 
         public EditItem()
         {
@@ -61,6 +62,14 @@ namespace Library
                     Journal tmpJ = (Journal)Item;
                     txtIssue.Text = tmpJ.IssueNumber.ToString();
                     break;
+            }
+            if (!EditMode)
+            {
+                this.Title = "Item Details";
+                foreach (UIElement item in this.grdWindowGrid.Children)
+                {
+                    GuiChanges.Disable(item);
+                }
             }
         }
 

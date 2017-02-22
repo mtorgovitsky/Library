@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Library"
         mc:Ignorable="d"
         Title="EditItem" Height="319.511" Width="368.712">
-    <Grid>
+    <Grid x:Name="grdWindowGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="97*"/>
             <ColumnDefinition Width="195*"/>

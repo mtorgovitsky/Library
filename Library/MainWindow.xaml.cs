@@ -93,6 +93,7 @@ namespace Library
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
+            EditItem.EditMode = true;
             EditItem.Item = (AbstractItem)dataLib.SelectedItem;
             //EditItem.Item = mainLibrary.FindAbstractItem(ai => ai.ISBN == tmp.ISBN).FirstOrDefault();
             //EditItem.Item = tmp;
@@ -104,12 +105,12 @@ namespace Library
         {
             if (dataLib.SelectedIndex >= 0 && dataLib.SelectedIndex < mainLibrary.Items.Count)
             {
-                GuiChanges.Enable(btnEdit);
+                GuiChanges.Enable(btnEdit, btnDetails);
                 return dataLib.SelectedIndex;
             }
             else
             {
-                GuiChanges.Disable(btnEdit);
+                GuiChanges.Disable(btnEdit, btnDetails);
                 return dataLib.SelectedIndex;
             }
         }
@@ -117,6 +118,14 @@ namespace Library
         private void dataLib_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             GridSelected();
+        }
+
+        private void btnDetails_Click(object sender, RoutedEventArgs e)
+        {
+            EditItem.EditMode = false;
+            EditItem.Item = (AbstractItem)dataLib.SelectedItem;
+            var tmpW = new EditItem();
+            tmpW.ShowDialog();
         }
     }
 }
