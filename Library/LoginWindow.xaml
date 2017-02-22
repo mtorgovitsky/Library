@@ -7,15 +7,19 @@
         mc:Ignorable="d"
         Title="Please Login First!" Height="293.46" Width="217.931" ResizeMode="NoResize" HorizontalAlignment="Center" FontFamily="Tahoma" WindowStartupLocation="CenterScreen">
     <Grid Margin="0,0,0,16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="157*"/>
+            <RowDefinition Height="91*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBox x:Name="txtUserName" HorizontalAlignment="Left" Height="20" Margin="49,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextAlignment="Center" TextChanged="txtUserName_TextChanged" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="txtPassword" HorizontalAlignment="Left" Height="20" Margin="49,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextAlignment="Center" Grid.ColumnSpan="2" TextChanged="txtPassword_TextChanged"/>
+        <TextBox x:Name="txtUserName" HorizontalAlignment="Left" Height="20" Margin="49,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextAlignment="Center" TextChanged="txtUserName_TextChanged" Grid.ColumnSpan="2" TabIndex="1"/>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Height="15" Margin="78,74,0,0" TextWrapping="Wrap" Text="User Name" VerticalAlignment="Top" Width="59" TextAlignment="Center" Grid.ColumnSpan="2"/>
         <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" Height="15" Margin="78,124,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="59" TextAlignment="Center" Grid.ColumnSpan="2"/>
-        <Button x:Name="btnLogin" Content="LET ME IN!" HorizontalAlignment="Left" Height="25" Margin="49,198,0,0" VerticalAlignment="Top" Width="120" Click="btnLogin_Click" Grid.ColumnSpan="2"/>
+        <Button x:Name="btnLogin" Content="LET ME IN!" HorizontalAlignment="Left" Height="25" Margin="49,41.209,0,0" VerticalAlignment="Top" Width="120" Click="btnLogin_Click" Grid.ColumnSpan="2" Grid.Row="1" TabIndex="3"/>
         <TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Left" Height="15" Margin="49,46,0,0" TextWrapping="Wrap" Text="PLEASE LOGIN!" VerticalAlignment="Top" Width="120" TextAlignment="Center" Grid.ColumnSpan="2"/>
+        <PasswordBox x:Name="pswPassword" HorizontalAlignment="Left" Height="20" Margin="49,142,0,0" VerticalAlignment="Top" Width="120" PasswordChanged="pswPassword_PasswordChanged" Grid.ColumnSpan="2" Grid.RowSpan="2" TabIndex="2"/>
     </Grid>
 </Window>

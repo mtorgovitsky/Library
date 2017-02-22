@@ -46,6 +46,9 @@ namespace Library
                 GuiMsgs.FirstLogin();
             }
             btnLogin.IsEnabled = false;
+            txtUserName.HorizontalContentAlignment =
+                pswPassword.HorizontalContentAlignment = HorizontalAlignment.Center;
+            pswPassword.PasswordChar = '*';
             txtUserName.Focus();
         }
 
@@ -55,17 +58,12 @@ namespace Library
         //    mainLibrary.SaveData(mainLibrary);
         //}
 
-        private void txtUserName_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            CanLogin();
-        }
-
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            if (!UsersManager.CheckUser(txtUserName.Text, txtPassword.Text))
+            if (!UsersManager.CheckUser(txtUserName.Text, pswPassword.Password))
             {
                 GuiMsgs.LoginFailed();
-                txtUserName.Text = txtPassword.Text = string.Empty;
+                txtUserName.Text = pswPassword.Password = string.Empty;
                 txtUserName.Focus();
             }
             else
@@ -103,10 +101,20 @@ namespace Library
 
         private void CanLogin()
         {
-            if (txtPassword.Text == string.Empty || txtUserName.Text == string.Empty)
+            if (pswPassword.Password == string.Empty || txtUserName.Text == string.Empty)
                 btnLogin.IsEnabled = false;
             else
                 btnLogin.IsEnabled = true;
+        }
+
+        private void pswPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            CanLogin();
+        }
+
+        private void txtUserName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CanLogin();
         }
     }
 }
