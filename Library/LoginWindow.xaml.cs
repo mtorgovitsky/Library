@@ -29,6 +29,7 @@ namespace Library
     public partial class LoginWindow : Window
     {
         public static bool ShowMain = false;
+
         protected override void OnClosing(CancelEventArgs e)
         {
             if (!ShowMain)
@@ -60,7 +61,7 @@ namespace Library
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            if (!UsersManager.CheckUser(txtUserName.Text, pswPassword.Password))
+            if (!MainWindow.mainLibrary.LibraryUsers.CheckUser(txtUserName.Text, pswPassword.Password))
             {
                 GuiMsgs.LoginFailed();
                 txtUserName.Text = pswPassword.Password = string.Empty;
@@ -68,7 +69,7 @@ namespace Library
             }
             else
             {
-                MainWindow.CurrentUser = UsersManager.GetCurrentUser(txtUserName.Text, pswPassword.Password);
+                MainWindow.mainLibrary.LibraryUsers.CurrentUser = MainWindow.mainLibrary.LibraryUsers.GetCurrentUser(txtUserName.Text, pswPassword.Password);
                 ShowMain = true;
                 this.Close();
             }

@@ -1,0 +1,16 @@
+﻿<Window x:Name="EditUsers1" x:Class="Library.EditUsers"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Library"
+        mc:Ignorable="d"
+        Title="EditUsers" Height="252.331" Width="325.424" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <DataGrid x:Name="dataUsers" HorizontalAlignment="Left" Height="180" Margin="23,17,0,0" VerticalAlignment="Top" Width="153" Loaded="HidePass" SelectionChanged="EnableCommands"/>
+        <Button x:Name="btnDelete" Content="Delete User" HorizontalAlignment="Left" Height="28" Margin="200,56,0,0" VerticalAlignment="Top" Width="89" Click="btnDelete_Click"/>
+        <Button x:Name="btnEdit" Content="Edit User" HorizontalAlignment="Left" Height="28" Margin="200,17,0,0" VerticalAlignment="Top" Width="89" Click="btnEdit_Click"/>
+        <Button x:Name="btnAdd" Content="Add User" HorizontalAlignment="Left" Height="28" Margin="200,96,0,0" VerticalAlignment="Top" Width="89" Click="btnAdd_Click"/>
+
+    </Grid>
+</Window>

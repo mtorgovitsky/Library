@@ -28,7 +28,6 @@ namespace Library
     public partial class MainWindow : Window
     {
         public static ItemsCollection mainLibrary = new ItemsCollection();
-        public static User CurrentUser { get; set; }
 
         public MainWindow()
         {
@@ -99,11 +98,13 @@ namespace Library
             if (dataLib.SelectedIndex >= 0 && dataLib.SelectedIndex < mainLibrary.Items.Count)
             {
                 GuiChanges.Enable(btnEdit, btnDetails);
+                ButtonsAvailable();
                 return dataLib.SelectedIndex;
             }
             else
             {
                 GuiChanges.Disable(btnEdit, btnDetails);
+                ButtonsAvailable();
                 return dataLib.SelectedIndex;
             }
         }
@@ -123,7 +124,22 @@ namespace Library
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
+            mainLibrary.Items.Remove((AbstractItem)dataLib.SelectedItem);
+            dataLib.Items.Refresh();
+        }
 
+        private void EditUsers(object sender, RoutedEventArgs e)
+        {
+            var editUsers = new EditUsers();
+            editUsers.ShowDialog();
+        }
+
+        private void ButtonsAvailable()
+        {
+            if (mainLibrary.LibraryUsers.CurrentUser.Type == User.eUserType.Client)
+            {
+                GuiChanges.Disable(btnDelete, btnUsers, btnEdit, btnAdd);
+            }
         }
     }
 }

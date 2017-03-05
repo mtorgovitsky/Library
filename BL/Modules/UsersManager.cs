@@ -12,18 +12,16 @@ namespace BL.Modules
     [Serializable]
     public class User
     {
-        public readonly int ID;
+        public static int ID;
         public string Name { get; set; }
         public string Password { get; set; }
         public eUserType Type { get; set; }
 
         public enum eUserType
         {
-            Nan,
             Admin,
             Employee,
-            SuperAdmin,
-            LibraryManager
+            Client
         }
 
         public User(string name, string password, eUserType type)
@@ -35,23 +33,24 @@ namespace BL.Modules
         }
     }
 
-    public static class UsersManager
+    [Serializable]
+    public class UsersManager
     {
-        public static List<User> Users = new List<User>()
+        public List<User> Users = new List<User>()
         {
             new User( "admin", "1", User.eUserType.Admin ),
-            new User( "superuser", "123", User.eUserType.SuperAdmin ),
-            new User( "employee", "123", User.eUserType.Employee ),
-            new User( "manager", "123",  User.eUserType.LibraryManager ),
+            new User( "client", "1", User.eUserType.Client ),
+            new User( "employee", "1", User.eUserType.Employee )
         };
 
+        public User CurrentUser { get; set; }
 
-        public static User GetCurrentUser(string name, string password)
+        public User GetCurrentUser(string name, string password)
         {
             return Users.FirstOrDefault(u => u.Name == name && u.Password == password);
         }
 
-        public static bool CheckUser(string name, string pass)
+        public bool CheckUser(string name, string pass)
         {
             //var currUser = Users.First(u => u.Name == name && u.Password == pass);
             if (Users.Any(u => u.Name == name && u.Password == pass))
@@ -59,5 +58,15 @@ namespace BL.Modules
             else
                 return false;
         }
+
+        //public User GetUser(Func<User, bool> p)
+        //{
+        //    return Users.Where(p).FirstOrDefault();
+        //}
+
+        //public List<User> UsersList(Func<User, bool> p)
+        //{
+        //    return Users.Where(p).ToList();
+        //}
     }
 }
