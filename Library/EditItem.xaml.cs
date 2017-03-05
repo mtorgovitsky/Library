@@ -109,6 +109,7 @@ namespace Library
 
         private void UpdateCurrentItem()
         {
+            //var s = new Book(txtName.Text, DateTime.Now, Categories.eBaseCategory.Cooking, Categories.eInnerCategory.Comics, txtAuthor.Text);
             CurrentItem.Name = txtName.Text;
             CurrentItem.BaseCategory = (Categories.eBaseCategory)cmbBaseCat.SelectedItem;
             CurrentItem.InnerCategory = (Categories.eInnerCategory)cmbInnerCat.SelectedItem;

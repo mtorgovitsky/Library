@@ -18,6 +18,7 @@
         <Button x:Name="btnDetails" Content="Item Details" HorizontalAlignment="Left" Height="28" Margin="229,96,0,0" VerticalAlignment="Top" Width="89" Grid.Column="1" Click="btnDetails_Click"/>
         <Button x:Name="btnDelete" Content="Delete Item" HorizontalAlignment="Left" Height="28" Margin="229,136,0,0" VerticalAlignment="Top" Width="89" Grid.Column="1" Click="btnDelete_Click"/>
         <Button x:Name="btnUsers" Content="Edit Users" HorizontalAlignment="Left" Height="28" Margin="229,260,0,0" VerticalAlignment="Top" Width="89" Grid.Column="1" Click="EditUsers"/>
+        <Button x:Name="btnBorrow" Content="Borrow Item" HorizontalAlignment="Left" Height="28" Margin="229,177,0,0" VerticalAlignment="Top" Width="89" Grid.Column="1"/>
 
     </Grid>
 </Window>

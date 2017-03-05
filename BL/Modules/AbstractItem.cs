@@ -98,6 +98,7 @@ namespace BookLib
 
             set
             {
+                _name = value;
             }
         }
 
