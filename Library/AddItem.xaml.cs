@@ -78,7 +78,7 @@ namespace Library.GUI
             {
                 GuiMsgs.Warning("Please choose the Base Category!");
             }
-            else if (txtName.Text == string.Empty)
+            else if (!Validity.StringValid(txtName.Text))
             {
                 GuiMsgs.Warning("Please Enter The Name of The Item!");
             }
@@ -91,7 +91,7 @@ namespace Library.GUI
                 switch (CurrentItem)
                 {
                     case ItemType.Book:
-                        if (txtAuthor.Text == string.Empty)
+                        if (!Validity.StringValid(txtAuthor.Text))
                         {
                             GuiMsgs.Warning("Please Enter The Author Name");
                         }
@@ -102,7 +102,7 @@ namespace Library.GUI
                         }
                         break;
                     case ItemType.Journal:
-                        if (txtIssue.Text == string.Empty)
+                        if (!Validity.StringValid(txtIssue.Text))
                         {
                             GuiMsgs.Warning("Please Enter The Issue Number");
                         }

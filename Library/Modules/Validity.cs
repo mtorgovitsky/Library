@@ -16,5 +16,17 @@ namespace Library.Modules
             else
                 return false;
         }
+
+        public static bool StringValid(string s)
+        {
+            if (string.IsNullOrWhiteSpace(s))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }

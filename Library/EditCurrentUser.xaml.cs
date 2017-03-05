@@ -1,4 +1,5 @@
 ﻿using BL.Modules;
+using Library.Modules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace Library
             InitializeComponent();
             if (EditMode)
             {
-                InitAllFields("Edit User", "Save Changes");
+                InitAllFields("Edit User", "Save User");
             }
             else
             {
@@ -51,7 +52,7 @@ namespace Library
 
         private void btnSaveEdit_Click(object sender, RoutedEventArgs e)
         {
-            if(txtName.Text == string.Empty)
+            if(Validity.StringValid(txtName.Text))
             {
 
             }

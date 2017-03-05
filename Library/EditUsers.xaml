@@ -5,12 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Library"
         mc:Ignorable="d"
-        Title="EditUsers" Height="252.331" Width="325.424" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen">
+        Title="EditUsers" Height="217.373" Width="325.424" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen">
     <Grid>
-        <DataGrid x:Name="dataUsers" HorizontalAlignment="Left" Height="180" Margin="23,17,0,0" VerticalAlignment="Top" Width="153" Loaded="HidePass" SelectionChanged="EnableCommands"/>
+        <DataGrid x:Name="dataUsers" HorizontalAlignment="Left" Height="146" Margin="23,17,0,0" VerticalAlignment="Top" Width="153" Loaded="HidePass" SelectionChanged="EnableCommands"/>
         <Button x:Name="btnDelete" Content="Delete User" HorizontalAlignment="Left" Height="28" Margin="200,56,0,0" VerticalAlignment="Top" Width="89" Click="btnDelete_Click"/>
         <Button x:Name="btnEdit" Content="Edit User" HorizontalAlignment="Left" Height="28" Margin="200,17,0,0" VerticalAlignment="Top" Width="89" Click="btnEdit_Click"/>
         <Button x:Name="btnAdd" Content="Add User" HorizontalAlignment="Left" Height="28" Margin="200,96,0,0" VerticalAlignment="Top" Width="89" Click="btnAdd_Click"/>
+        <Button x:Name="btnExit" Content="Exit" HorizontalAlignment="Left" Height="28" Margin="200,135,0,0" VerticalAlignment="Top" Width="89" Click="btnExit_Click"/>
 
     </Grid>
 </Window>
