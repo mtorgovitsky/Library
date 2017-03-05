@@ -71,11 +71,11 @@ namespace Library
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
             EditItem.EditMode = true;
-            EditItem.Item = (AbstractItem)dataLib.SelectedItem;
-            //EditItem.Item = mainLibrary.FindAbstractItem(ai => ai.ISBN == tmp.ISBN).FirstOrDefault();
-            //EditItem.Item = tmp;
+            EditItem.CurrentItem = (AbstractItem)dataLib.SelectedItem;
             var editW = new EditItem();
             editW.ShowDialog();
+            //EditItem.Item = mainLibrary.FindAbstractItem(ai => ai.ISBN == tmp.ISBN).FirstOrDefault();
+            //EditItem.Item = tmp;
         }
 
         public int GridSelected()
@@ -102,7 +102,7 @@ namespace Library
         private void btnDetails_Click(object sender, RoutedEventArgs e)
         {
             EditItem.EditMode = false;
-            EditItem.Item = (AbstractItem)dataLib.SelectedItem;
+            EditItem.CurrentItem = (AbstractItem)dataLib.SelectedItem;
             var tmpW = new EditItem();
             tmpW.ShowDialog();
         }

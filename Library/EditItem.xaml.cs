@@ -1,4 +1,5 @@
 ﻿using BL;
+using BL.Modules;
 using BookLib;
 using Library.Modules;
 using System;
@@ -22,7 +23,7 @@ namespace Library
     /// </summary>
     public partial class EditItem : Window
     {
-        public static AbstractItem Item;
+        public static AbstractItem CurrentItem;
         public static bool EditMode { get; set; }
 
         public EditItem()
@@ -38,31 +39,6 @@ namespace Library
             this.ResizeMode = ResizeMode.NoResize;
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             lblISBN.TextAlignment = TextAlignment.Center;
-        }
-
-        public void UpdateFromItem()
-        {
-            lblISBN.Text = $"ISBN: {Item.ISBN}";
-            lblTypeOf.Text = Item.GetType().Name;
-            cmbBaseCat.ItemsSource = Enum.GetValues(typeof(Categories.eBaseCategory));
-            cmbBaseCat.SelectedItem = Item.BaseCategory;
-            txtName.Text = Item.Name;
-            dtPick.SelectedDate = Item.PrintDate;
-            switch (Item.ItemType)
-            {
-                case "Book":
-                    GuiChanges.Hide(lblIssue, txtIssue);
-                    GuiChanges.Show(lblAuthor, txtAuthor);
-                    Book tmpB = (Book)Item;
-                    txtAuthor.Text = tmpB.Author;
-                    break;
-                case "Journal":
-                    GuiChanges.Hide(lblAuthor, txtAuthor);
-                    GuiChanges.Show(lblIssue, txtIssue);
-                    Journal tmpJ = (Journal)Item;
-                    txtIssue.Text = tmpJ.IssueNumber.ToString();
-                    break;
-            }
             if (!EditMode)
             {
                 this.Title = "Item Details";
@@ -70,20 +46,87 @@ namespace Library
                 {
                     GuiChanges.Disable(item);
                 }
+                btnSaveExit.Content = "Exit";
+                GuiChanges.Enable(btnSaveExit);
+            }
+            else
+            {
+                btnSaveExit.Content = "Save Changes";
             }
         }
 
-        private void FillInner()
+        public void UpdateFromItem()
+        {
+            lblISBN.Text = $"ISBN: {CurrentItem.ISBN}";
+            lblTypeOf.Text = CurrentItem.GetType().Name;
+            cmbBaseCat.ItemsSource = Enum.GetValues(typeof(Categories.eBaseCategory));
+            cmbBaseCat.SelectedItem = CurrentItem.BaseCategory;
+            txtName.Text = CurrentItem.Name;
+            dtPick.SelectedDate = CurrentItem.PrintDate;
+            switch (CurrentItem.ItemType)
+            {
+                case "Book":
+                    GuiChanges.Hide(lblIssue, txtIssue);
+                    GuiChanges.Show(lblAuthor, txtAuthor);
+                    txtAuthor.Text = ((Book)CurrentItem).Author;
+                    break;
+                case "Journal":
+                    GuiChanges.Hide(lblAuthor, txtAuthor);
+                    GuiChanges.Show(lblIssue, txtIssue);
+                    txtIssue.Text = ((Journal)CurrentItem).IssueNumber.ToString();
+                    break;
+            }
+        }
+
+        private void FillInnerCategory()
         {
             cmbInnerCat.ItemsSource = Categories.CategoriesDictionary[(Categories.eBaseCategory)cmbBaseCat.SelectedItem];
-            cmbInnerCat.SelectedItem = Item.InnerCategory;
+            cmbInnerCat.SelectedItem = CurrentItem.InnerCategory;
             if (cmbInnerCat.SelectedIndex < 0)
                 cmbInnerCat.SelectedIndex++;
         }
 
         private void cmbBaseCat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            FillInner();
+            FillInnerCategory();
+        }
+
+        private void btnSaveExit_Click(object sender, RoutedEventArgs e)
+        {
+            if (EditMode)
+            {
+                CurrentItem.Name = txtName.Text;
+                CurrentItem.BaseCategory = (Categories.eBaseCategory)cmbBaseCat.SelectedItem;
+                CurrentItem.InnerCategory = (Categories.eInnerCategory)cmbInnerCat.SelectedItem;
+                CurrentItem.PrintDate = dtPick.SelectedDate.Value;
+                switch (CurrentItem.ItemType)
+                {
+                    case "Book":
+                        ((Book)CurrentItem).Author = txtAuthor.Text;
+                        break;
+                    case "Journal":
+                        break;
+                }
+            }
+            else
+            {
+                this.Close();
+            }
+        }
+
+        private bool FieldsValid()
+        {
+            if (!Validity.StringOK(txtName.Text))
+            {
+                GuiMsgs.Warning("The Name is Required!");
+                return false;
+            }
+            else if (dtPick.SelectedDate == null)
+            {
+                GuiMsgs.Warning("The Date is Required!");
+                return false;
+            }
+            return true;
         }
     }
 }

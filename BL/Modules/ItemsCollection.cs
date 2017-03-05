@@ -23,7 +23,6 @@ namespace BL
         {
             Items = new List<AbstractItem>();
             LibraryUsers = new UsersManager();
-            //SaveData(this);
         }
 
 
