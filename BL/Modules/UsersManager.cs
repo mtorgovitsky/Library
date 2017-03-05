@@ -12,10 +12,10 @@ namespace BL.Modules
     [Serializable]
     public class User
     {
-        public readonly int UserID;
-        public eUserType UserType { get; set; }
+        public readonly int ID;
         public string Name { get; set; }
         public string Password { get; set; }
+        public eUserType Type { get; set; }
 
         public enum eUserType
         {
@@ -25,17 +25,31 @@ namespace BL.Modules
             SuperAdmin,
             LibraryManager
         }
+
+        public User(string name, string password, eUserType type)
+        {
+            ID++;
+            Name = name;
+            Password = password;
+            Type = type;
+        }
     }
 
     public static class UsersManager
     {
         public static List<User> Users = new List<User>()
         {
-            new User { Name = "superuser", Password = "123", UserType = User.eUserType.SuperAdmin },
-            new User { Name = "employee", Password = "123", UserType = User.eUserType.Employee },
-            new User { Name = "manager", Password = "123", UserType = User.eUserType.LibraryManager },
-            new User { Name = "admin", Password = "1", UserType = User.eUserType.Admin }
+            new User( "admin", "1", User.eUserType.Admin ),
+            new User( "superuser", "123", User.eUserType.SuperAdmin ),
+            new User( "employee", "123", User.eUserType.Employee ),
+            new User( "manager", "123",  User.eUserType.LibraryManager ),
         };
+
+
+        public static User GetCurrentUser(string name, string password)
+        {
+            return Users.FirstOrDefault(u => u.Name == name && u.Password == password);
+        }
 
         public static bool CheckUser(string name, string pass)
         {

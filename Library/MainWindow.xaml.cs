@@ -1,4 +1,5 @@
 ﻿using BL;
+using BL.Modules;
 using BookLib;
 using Data;
 using Library.GUI;
@@ -27,6 +28,7 @@ namespace Library
     public partial class MainWindow : Window
     {
         public static ItemsCollection mainLibrary = new ItemsCollection();
+        public static User CurrentUser { get; set; }
 
         public MainWindow()
         {
@@ -62,15 +64,6 @@ namespace Library
         //    var tmp = mainLibrary.GetBLData();
         //    return tmp;
         //}
-
-        private void btnCheckData_Click(object sender, RoutedEventArgs e)
-        {
-            var ic = new ItemsCollection();
-            if (ic != null)
-            {
-                RefreshDataGrid();
-            }
-        }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
@@ -126,6 +119,11 @@ namespace Library
             EditItem.Item = (AbstractItem)dataLib.SelectedItem;
             var tmpW = new EditItem();
             tmpW.ShowDialog();
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

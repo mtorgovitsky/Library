@@ -25,6 +25,7 @@ namespace BL
             //SaveData(this);
         }
 
+        public User CurrentUser { get; set; }
 
 
         public void SaveData(ItemsCollection data)

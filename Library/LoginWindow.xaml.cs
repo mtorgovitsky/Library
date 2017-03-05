@@ -68,6 +68,7 @@ namespace Library
             }
             else
             {
+                MainWindow.CurrentUser = UsersManager.GetCurrentUser(txtUserName.Text, pswPassword.Password);
                 ShowMain = true;
                 this.Close();
             }
