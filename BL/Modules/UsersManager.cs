@@ -38,9 +38,7 @@ namespace BL.Modules
     {
         public List<User> Users = new List<User>()
         {
-            new User( "admin", "1", User.eUserType.Admin ),
-            new User( "client", "1", User.eUserType.Client ),
-            new User( "employee", "1", User.eUserType.Employee )
+            new User( "BigBoss", "1", User.eUserType.Admin )
         };
 
         public User CurrentUser { get; set; }

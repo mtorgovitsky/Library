@@ -103,7 +103,7 @@ namespace Library
 
         private void CanLogin()
         {
-            if (!Validity.StringValid(pswPassword.Password) || !Validity.StringValid(txtUserName.Text))
+            if (!Validity.StringOK(pswPassword.Password) || !Validity.StringOK(txtUserName.Text))
                 btnLogin.IsEnabled = false;
             else
                 btnLogin.IsEnabled = true;

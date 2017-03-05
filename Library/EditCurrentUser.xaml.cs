@@ -52,9 +52,34 @@ namespace Library
 
         private void btnSaveEdit_Click(object sender, RoutedEventArgs e)
         {
-            if(Validity.StringValid(txtName.Text))
+            if(!Validity.StringOK(txtName.Text))
             {
-
+                GuiMsgs.Warning("Please Enter User Name");
+            }
+            else if (!Validity.StringOK(txtPassword.Text))
+            {
+                GuiMsgs.Warning("Please Enter Password");
+            }
+            else if (cmbType.SelectedIndex < 0)
+            {
+                GuiMsgs.Warning("Please select the User Type");
+            }
+            else
+            {
+                switch (EditMode)
+                {
+                    case true:
+                        UserToAddOrEdit.Name = txtName.Text;
+                        UserToAddOrEdit.Password = txtPassword.Text;
+                        UserToAddOrEdit.Type = (User.eUserType)cmbType.SelectedItem;
+                        this.Close();
+                        break;
+                    case false:
+                        UserToAddOrEdit = new User(txtName.Text, txtPassword.Text, (User.eUserType)cmbType.SelectedItem);
+                        MainWindow.mainLibrary.LibraryUsers.Users.Add(UserToAddOrEdit);
+                        this.Close();
+                        break;
+                }
             }
         }
     }

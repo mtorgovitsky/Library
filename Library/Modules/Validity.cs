@@ -17,7 +17,7 @@ namespace Library.Modules
                 return false;
         }
 
-        public static bool StringValid(string s)
+        public static bool StringOK(string s)
         {
             if (string.IsNullOrWhiteSpace(s))
             {

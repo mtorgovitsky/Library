@@ -58,9 +58,9 @@ namespace Library
                 GuiMsgs.Info("Deletion or Editing of Current user is\nFORBIDDEN!");
                 return true;
             }
-            if (((User)dataUsers.SelectedItem).Name == "admin")
+            if (((User)dataUsers.SelectedItem).Name == "BigBoss")
             {
-                GuiMsgs.Info("Deletion or Editing of Administrator is\nFORBIDDEN!");
+                GuiMsgs.Info("Deletion or Editing of the 'Big Boss' is\nFORBIDDEN!\nThis is the Main User,\nSo It's Impossible to Delete him");
                 return true;
             }
             else
@@ -94,7 +94,8 @@ namespace Library
         {
             EditCurrentUser.EditMode = false;
             var addUser = new EditCurrentUser();
-            addUser.Title = "Add New User";
+            addUser.ShowDialog();
+            Refresh();
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
@@ -105,6 +106,7 @@ namespace Library
                 EditCurrentUser.UserToAddOrEdit = (User)dataUsers.SelectedItem;
                 var editUser = new EditCurrentUser();
                 editUser.ShowDialog();
+                Refresh();
             }
         }
 
