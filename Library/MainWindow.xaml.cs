@@ -74,6 +74,7 @@ namespace Library
             EditItem.CurrentItem = (AbstractItem)dataLib.SelectedItem;
             var editW = new EditItem();
             editW.ShowDialog();
+            RefreshDataGrid();
             //EditItem.Item = mainLibrary.FindAbstractItem(ai => ai.ISBN == tmp.ISBN).FirstOrDefault();
             //EditItem.Item = tmp;
         }

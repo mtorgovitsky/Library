@@ -95,17 +95,10 @@ namespace Library
         {
             if (EditMode)
             {
-                CurrentItem.Name = txtName.Text;
-                CurrentItem.BaseCategory = (Categories.eBaseCategory)cmbBaseCat.SelectedItem;
-                CurrentItem.InnerCategory = (Categories.eInnerCategory)cmbInnerCat.SelectedItem;
-                CurrentItem.PrintDate = dtPick.SelectedDate.Value;
-                switch (CurrentItem.ItemType)
+                if (FieldsValidForUpdate())
                 {
-                    case "Book":
-                        ((Book)CurrentItem).Author = txtAuthor.Text;
-                        break;
-                    case "Journal":
-                        break;
+                    UpdateCurrentItem();
+                    this.Close();
                 }
             }
             else
@@ -114,17 +107,63 @@ namespace Library
             }
         }
 
-        private bool FieldsValid()
+        private void UpdateCurrentItem()
+        {
+            CurrentItem.Name = txtName.Text;
+            CurrentItem.BaseCategory = (Categories.eBaseCategory)cmbBaseCat.SelectedItem;
+            CurrentItem.InnerCategory = (Categories.eInnerCategory)cmbInnerCat.SelectedItem;
+            CurrentItem.PrintDate = dtPick.SelectedDate.Value;
+            switch (CurrentItem.ItemType)
+            {
+                case "Book":
+                    ((Book)CurrentItem).Author = txtAuthor.Text;
+                    break;
+                case "Journal":
+                    ((Journal)CurrentItem).IssueNumber = int.Parse(txtIssue.Text);
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Check that all the fields are valid before Update the Current Item
+        /// </summary>
+        /// <returns>true if the fields are OK and false if opposite</returns>
+        private bool FieldsValidForUpdate()
         {
             if (!Validity.StringOK(txtName.Text))
             {
-                GuiMsgs.Warning("The Name is Required!");
+                GuiMsgs.Warning("Please enter the Item Name!");
                 return false;
             }
             else if (dtPick.SelectedDate == null)
             {
-                GuiMsgs.Warning("The Date is Required!");
+                GuiMsgs.Warning("Please Select the Publishing Date!");
                 return false;
+            }
+            else
+            {
+                switch (CurrentItem.ItemType)
+                {
+                    case "Book":
+                        if (!Validity.StringOK(txtAuthor.Text))
+                        {
+                            GuiMsgs.Warning("Please Enter the Author Name!");
+                            return false;
+                        }
+                        break;
+                    case "Journal":
+                        if (!Validity.StringOK(txtIssue.Text))
+                        {
+                            GuiMsgs.Warning("Please Enter The Issue Number!");
+                            return false;
+                        }
+                        else if (!Validity.PositiveInteger(txtIssue.Text))
+                        {
+                            GuiMsgs.Warning("Please Enter the valid Issue Number!");
+                            return false;
+                        }
+                        break;
+                }
             }
             return true;
         }

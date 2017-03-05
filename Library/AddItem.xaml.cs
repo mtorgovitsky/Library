@@ -93,7 +93,7 @@ namespace Library.GUI
                     case ItemType.Book:
                         if (!Validity.StringOK(txtAuthor.Text))
                         {
-                            GuiMsgs.Warning("Please Enter The Author Name");
+                            GuiMsgs.Warning("Please Enter The Author Name!");
                         }
                         else
                         {
@@ -104,11 +104,11 @@ namespace Library.GUI
                     case ItemType.Journal:
                         if (!Validity.StringOK(txtIssue.Text))
                         {
-                            GuiMsgs.Warning("Please Enter The Issue Number");
+                            GuiMsgs.Warning("Please Enter The Issue Number!");
                         }
                         else if (!Validity.PositiveInteger(txtIssue.Text))
                         {
-                            GuiMsgs.Warning("Please Enter the valid Issue Number");
+                            GuiMsgs.Warning("Please Enter the valid Issue Number!");
                         }
                         else
                         {
@@ -126,19 +126,17 @@ namespace Library.GUI
             switch (CurrentItem)
             {
                 case ItemType.Book:
-                    {
-                        MainWindow.mainLibrary.Items.Add(new Book(
-                            txtName.Text,
-                            dtPick.SelectedDate.GetValueOrDefault(),
-                            (Categories.eBaseCategory)cmbBaseCat.SelectedItem,
-                            (Categories.eInnerCategory)cmbInnerCat.SelectedItem,
-                            txtAuthor.Text));
-                        break;
-                    }
+                    MainWindow.mainLibrary.Items.Add(new Book(
+                        txtName.Text,
+                        dtPick.SelectedDate.GetValueOrDefault(),
+                        (Categories.eBaseCategory)cmbBaseCat.SelectedItem,
+                        (Categories.eInnerCategory)cmbInnerCat.SelectedItem,
+                        txtAuthor.Text));
+                    break;
                 case ItemType.Journal:
                     MainWindow.mainLibrary.Items.Add(new Journal
                         (txtName.Text,
-                        dtPick.SelectedDate.GetValueOrDefault(),
+                        dtPick.SelectedDate.Value,
                         (Categories.eBaseCategory)cmbBaseCat.SelectedItem,
                         (Categories.eInnerCategory)cmbInnerCat.SelectedItem,
                         int.Parse(txtIssue.Text)));
