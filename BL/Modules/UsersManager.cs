@@ -19,7 +19,7 @@ namespace BL.Modules
 
         public enum eUserType
         {
-            Admin,
+            Administrator,
             Employee,
             Client
         }
@@ -38,7 +38,7 @@ namespace BL.Modules
     {
         public List<User> Users = new List<User>()
         {
-            new User( "BigBoss", "1", User.eUserType.Admin )
+            new User( "BigBoss", "1", User.eUserType.Administrator )
         };
 
         public User CurrentUser { get; set; }

@@ -32,9 +32,13 @@ namespace Library
         public MainWindow()
         {
             InitializeComponent();
-            //mainLibrary = mainLibrary.GetBLData();
             var login = new LoginWindow();
             login.ShowDialog();
+            InitMainWindow();
+        }
+
+        private void InitMainWindow()
+        {
             RefreshDataGrid();
             dataLib.IsReadOnly = true;
         }
@@ -44,25 +48,6 @@ namespace Library
             mainLibrary.SaveData(mainLibrary);
             this.Close();
         }
-
-        //private static ItemsCollection CheckDataSaving()
-        //{
-        //    mainLibrary.Items.Add(new Book
-        //                        ("Book of Treasures",
-        //                        DateTime.Now.AddYears(-8),
-        //                        eBaseCategory.Cooking,
-        //                        eInnerCategory.Soups,
-        //                        "Ann Geronulasoftred"));
-        //    mainLibrary.Items.Add(new Journal
-        //                        ("Some Journal",
-        //                        DateTime.Now.AddYears(-1),
-        //                        eBaseCategory.Kids,
-        //                        eInnerCategory.Comics,
-        //                        6));
-        //    mainLibrary.SaveData(mainLibrary);
-        //    var tmp = mainLibrary.GetBLData();
-        //    return tmp;
-        //}
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
@@ -97,13 +82,13 @@ namespace Library
         {
             if (dataLib.SelectedIndex >= 0 && dataLib.SelectedIndex < mainLibrary.Items.Count)
             {
-                GuiChanges.Enable(btnEdit, btnDetails);
+                GuiChanges.Enable(btnEdit, btnDetails, btnDelete);
                 ButtonsAvailable();
                 return dataLib.SelectedIndex;
             }
             else
             {
-                GuiChanges.Disable(btnEdit, btnDetails);
+                GuiChanges.Disable(btnEdit, btnDetails, btnDelete);
                 ButtonsAvailable();
                 return dataLib.SelectedIndex;
             }
@@ -124,8 +109,11 @@ namespace Library
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            mainLibrary.Items.Remove((AbstractItem)dataLib.SelectedItem);
-            dataLib.Items.Refresh();
+            if (GuiMsgs.AreYouSure("Are You Positive that You want to delete this Item?\n(There's no way You can undo this action!)"))
+            {
+                mainLibrary.Items.Remove((AbstractItem)dataLib.SelectedItem);
+                RefreshDataGrid();
+            }
         }
 
         private void EditUsers(object sender, RoutedEventArgs e)
@@ -136,9 +124,14 @@ namespace Library
 
         private void ButtonsAvailable()
         {
-            if (mainLibrary.LibraryUsers.CurrentUser.Type == User.eUserType.Client)
+            switch (mainLibrary.LibraryUsers.CurrentUser.Type)
             {
-                GuiChanges.Disable(btnDelete, btnUsers, btnEdit, btnAdd);
+                case User.eUserType.Employee:
+                    GuiChanges.Disable(btnUsers);
+                    break;
+                case User.eUserType.Client:
+                    GuiChanges.Disable(btnDelete, btnUsers, btnEdit, btnAdd);
+                    break;
             }
         }
     }

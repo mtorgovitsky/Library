@@ -44,7 +44,7 @@ namespace Library
         {
             if (!IsCurrentUser())
             {
-                if (GuiMsgs.AreYouSure($"Are You Sure that\nYou want to delete\n This User?"))
+                if (GuiMsgs.AreYouSure($"Are You Sure that\nYou want to delete the\n'{((User)dataUsers.SelectedItem).Name}'\nUser?"))
                 {
                     MainWindow.mainLibrary.LibraryUsers.Users.Remove((User)dataUsers.SelectedItem);
                     Refresh();
@@ -72,7 +72,7 @@ namespace Library
         private bool SelectedIndexIsValid()
         {
             if (dataUsers.SelectedIndex >= 0
-                && dataUsers.SelectedIndex < Enum.GetNames(typeof(User.eUserType)).ToList().Count)
+                && dataUsers.SelectedIndex < MainWindow.mainLibrary.LibraryUsers.Users.Count)
             {
                 return true;
             }
