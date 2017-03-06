@@ -83,13 +83,13 @@ namespace Library
         {
             if (dataLib.SelectedIndex >= 0 && dataLib.SelectedIndex < mainLibrary.Items.Count)
             {
-                GuiChanges.Enable(btnEdit, btnDetails, btnDelete);
+                GuiChanges.Enable(btnEdit, btnDetails, btnDelete, btnBorrow);
                 ButtonsAvailable();
                 return dataLib.SelectedIndex;
             }
             else
             {
-                GuiChanges.Disable(btnEdit, btnDetails, btnDelete);
+                GuiChanges.Disable(btnEdit, btnDetails, btnDelete, btnBorrow);
                 ButtonsAvailable();
                 return dataLib.SelectedIndex;
             }
@@ -117,12 +117,6 @@ namespace Library
             }
         }
 
-        private void EditUsers(object sender, RoutedEventArgs e)
-        {
-            var editUsers = new EditUsers();
-            editUsers.ShowDialog();
-        }
-
         private void ButtonsAvailable()
         {
             switch (mainLibrary.LibraryUsers.CurrentUser.Type)
@@ -131,9 +125,31 @@ namespace Library
                     GuiChanges.Disable(btnUsers);
                     break;
                 case User.eUserType.Client:
-                    GuiChanges.Disable(btnDelete, btnUsers, btnEdit, btnAdd);
+                    GuiChanges.Disable(btnDelete, btnUsers, btnEdit, btnAdd, btnBorrow);
                     break;
             }
+        }
+
+        private void btnUsers_Click(object sender, RoutedEventArgs e)
+        {
+            var editUsers = new EditUsers();
+            editUsers.ShowDialog();
+        }
+
+        private void btnBorrow_Click(object sender, RoutedEventArgs e)
+        {
+            AbstractItem choosenItem = (AbstractItem)dataLib.SelectedItem;
+            if (choosenItem.IsBorrowed)
+            {
+                GuiMsgs.Info($"The {choosenItem.ItemType} " +
+                        $"called {choosenItem.Name}\n" +
+                        "is already borrowed by somebody!");
+            }
+            else
+            {
+                choosenItem.IsBorrowed = true;
+            }
+            RefreshDataGrid();
         }
     }
 }

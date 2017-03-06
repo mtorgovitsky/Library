@@ -8,17 +8,18 @@
         Title="Library by Michael Torgovitsky" Height="556.012" Width="799.684" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Closing="ClosingMainWindow">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="298*"/>
-            <ColumnDefinition Width="221*"/>
+            <ColumnDefinition Width="456*"/>
+            <ColumnDefinition Width="205*"/>
+            <ColumnDefinition Width="133*"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="btnExit" Content="Exit" HorizontalAlignment="Left" Height="36" Margin="227,472,0,0" VerticalAlignment="Top" Width="89" Click="btnExit_Click" Grid.Column="1"/>
-        <DataGrid x:Name="dataLib" HorizontalAlignment="Left" Height="503" Margin="10,10,0,0" VerticalAlignment="Top" Width="654" Grid.ColumnSpan="2" SelectionChanged="dataLib_SelectionChanged"/>
-        <Button x:Name="btnAdd" Content="Add Item" HorizontalAlignment="Left" Height="28" Margin="229,18,0,0" VerticalAlignment="Top" Width="89" Click="btnAdd_Click" Grid.Column="1"/>
-        <Button x:Name="btnEdit" Content="Edit Item" HorizontalAlignment="Left" Height="28" Margin="229,56,0,0" VerticalAlignment="Top" Width="89" Grid.Column="1" Click="btnEdit_Click"/>
-        <Button x:Name="btnDetails" Content="Item Details" HorizontalAlignment="Left" Height="28" Margin="229,96,0,0" VerticalAlignment="Top" Width="89" Grid.Column="1" Click="btnDetails_Click"/>
-        <Button x:Name="btnDelete" Content="Delete Item" HorizontalAlignment="Left" Height="28" Margin="229,136,0,0" VerticalAlignment="Top" Width="89" Grid.Column="1" Click="btnDelete_Click"/>
-        <Button x:Name="btnUsers" Content="Edit Users" HorizontalAlignment="Left" Height="28" Margin="229,260,0,0" VerticalAlignment="Top" Width="89" Grid.Column="1" Click="EditUsers"/>
-        <Button x:Name="btnBorrow" Content="Borrow Item" HorizontalAlignment="Left" Height="28" Margin="229,177,0,0" VerticalAlignment="Top" Width="89" Grid.Column="1"/>
+        <Button x:Name="btnExit" Content="Exit" HorizontalAlignment="Left" Height="36" Margin="22,472,0,0" VerticalAlignment="Top" Width="89" Click="btnExit_Click" Grid.Column="2"/>
+        <DataGrid x:Name="dataLib" HorizontalAlignment="Left" Height="503" Margin="10,10,0,0" VerticalAlignment="Top" Width="654" Grid.ColumnSpan="3" SelectionChanged="dataLib_SelectionChanged"/>
+        <Button x:Name="btnAdd" Content="Add Item" HorizontalAlignment="Left" Height="28" Margin="24,18,0,0" VerticalAlignment="Top" Width="89" Click="btnAdd_Click" Grid.Column="2"/>
+        <Button x:Name="btnEdit" Content="Edit Item" HorizontalAlignment="Left" Height="28" Margin="24,56,0,0" VerticalAlignment="Top" Width="89" Grid.Column="2" Click="btnEdit_Click"/>
+        <Button x:Name="btnDetails" Content="Item Details" HorizontalAlignment="Left" Height="28" Margin="24,96,0,0" VerticalAlignment="Top" Width="89" Grid.Column="2" Click="btnDetails_Click"/>
+        <Button x:Name="btnDelete" Content="Delete Item" HorizontalAlignment="Left" Height="28" Margin="24,136,0,0" VerticalAlignment="Top" Width="89" Grid.Column="2" Click="btnDelete_Click"/>
+        <Button x:Name="btnUsers" Content="Edit Users" HorizontalAlignment="Left" Height="28" Margin="24,260,0,0" VerticalAlignment="Top" Width="89" Grid.Column="2" Click="btnUsers_Click"/>
+        <Button x:Name="btnBorrow" Content="Borrow Item" HorizontalAlignment="Left" Height="28" Margin="24,177,0,0" VerticalAlignment="Top" Width="89" Grid.Column="2" Click="btnBorrow_Click"/>
 
     </Grid>
 </Window>

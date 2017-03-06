@@ -42,6 +42,7 @@ namespace Library
             if (!EditMode)
             {
                 this.Title = "Item Details";
+                GuiChanges.Show(chkBorrowed);
                 foreach (UIElement item in this.grdWindowGrid.Children)
                 {
                     GuiChanges.Disable(item);
@@ -52,13 +53,15 @@ namespace Library
             else
             {
                 btnSaveExit.Content = "Save Changes";
+                GuiChanges.Hide(chkBorrowed);
             }
         }
 
         public void UpdateFromItem()
         {
             lblISBN.Text = $"ISBN: {CurrentItem.ISBN}";
-            lblTypeOf.Text = CurrentItem.GetType().Name;
+            lblTypeOf.Text = CurrentItem.ItemType;
+            chkBorrowed.IsChecked = CurrentItem.IsBorrowed;
             cmbBaseCat.ItemsSource = Enum.GetValues(typeof(Categories.eBaseCategory));
             cmbBaseCat.SelectedItem = CurrentItem.BaseCategory;
             txtName.Text = CurrentItem.Name;
