@@ -85,13 +85,14 @@ namespace Library
             {
                 GuiChanges.Enable(btnEdit, btnDetails, btnDelete, btnBorrow);
                 ButtonsAvailable();
-                switch (((AbstractItem)dataLib.SelectedItem).IsBorrowed)
+                var tmpItem = (AbstractItem)dataLib.SelectedItem;
+                switch (tmpItem.IsBorrowed)
                 {
                     case true:
-                        btnBorrow.Content = $"Return {((AbstractItem)dataLib.SelectedItem).ItemType}";
+                        btnBorrow.Content = $"Return {tmpItem.ItemType}";
                         break;
                     case false:
-                        btnBorrow.Content = $"Borrow {((AbstractItem)dataLib.SelectedItem).ItemType}";
+                        btnBorrow.Content = $"Borrow {tmpItem.ItemType}";
                         break;
                 }
                 return dataLib.SelectedIndex;
@@ -119,7 +120,9 @@ namespace Library
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            if (GuiMsgs.AreYouSure("Are You Positive that You want to delete this Item?\n(There's no way You can undo this action!)"))
+            if (GuiMsgs.AreYouSure(
+                "Are You Positive that You want to delete this Item?" +
+                "\n(There's no way You can undo this action!)"))
             {
                 mainLibrary.Items.Remove((AbstractItem)dataLib.SelectedItem);
                 RefreshDataGrid();
