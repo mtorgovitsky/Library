@@ -53,12 +53,6 @@ namespace Library
             txtUserName.Focus();
         }
 
-        //private void btnExit_Click(object sender, RoutedEventArgs e)
-        //{
-        //    this.Close();
-        //    mainLibrary.SaveData(mainLibrary);
-        //}
-
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             if (!MainWindow.mainLibrary.LibraryUsers.CheckUser(txtUserName.Text, pswPassword.Password))
@@ -73,28 +67,7 @@ namespace Library
                 ShowMain = true;
                 this.Close();
             }
-            //CheckDataSaving();
-            //mainLibrary.SaveData(mainLibrary);
         }
-
-        //private static ItemsCollection CheckDataSaving()
-        //{
-        //    MainWindow.mainLibrary.Items.Add(new Book
-        //                        ("Book of Treasures",
-        //                        DateTime.Now.AddYears(-8),
-        //                        eBaseCategory.Cooking,
-        //                        eInnerCategory.Soups,
-        //                        "Ann Geronulasoftred"));
-        //    MainWindow.mainLibrary.Items.Add(new Journal
-        //                        ("Some Journal",
-        //                        DateTime.Now.AddYears(-1),
-        //                        eBaseCategory.Kids,
-        //                        eInnerCategory.Comics,
-        //                        6));
-        //    MainWindow.mainLibrary.SaveData(mainLibrary);
-        //    var tmp = MainWindow.mainLibrary.GetBLData();
-        //    return tmp;
-        //}
 
         private void txtPassword_TextChanged(object sender, TextChangedEventArgs e)
         {
