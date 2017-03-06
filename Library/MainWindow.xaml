@@ -5,21 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Library"
         mc:Ignorable="d"
-        Title="Library by Michael Torgovitsky" Height="556.012" Width="799.684" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Closing="ClosingMainWindow">
+        Title="Library by Michael Torgovitsky" Height="556.012" Width="867.684" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Closing="ClosingMainWindow">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="456*"/>
             <ColumnDefinition Width="205*"/>
             <ColumnDefinition Width="133*"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="btnExit" Content="Exit" HorizontalAlignment="Left" Height="36" Margin="22,472,0,0" VerticalAlignment="Top" Width="89" Click="btnExit_Click" Grid.Column="2"/>
+        <Button x:Name="btnExit" Content="Exit" HorizontalAlignment="Left" Height="36" Margin="5,477,0,0" VerticalAlignment="Top" Width="89" Click="btnExit_Click" Grid.Column="2"/>
         <DataGrid x:Name="dataLib" HorizontalAlignment="Left" Height="503" Margin="10,10,0,0" VerticalAlignment="Top" Width="654" Grid.ColumnSpan="3" SelectionChanged="dataLib_SelectionChanged"/>
-        <Button x:Name="btnAdd" Content="Add Item" HorizontalAlignment="Left" Height="28" Margin="24,18,0,0" VerticalAlignment="Top" Width="89" Click="btnAdd_Click" Grid.Column="2"/>
-        <Button x:Name="btnEdit" Content="Edit Item" HorizontalAlignment="Left" Height="28" Margin="24,56,0,0" VerticalAlignment="Top" Width="89" Grid.Column="2" Click="btnEdit_Click"/>
-        <Button x:Name="btnDetails" Content="Item Details" HorizontalAlignment="Left" Height="28" Margin="24,96,0,0" VerticalAlignment="Top" Width="89" Grid.Column="2" Click="btnDetails_Click"/>
-        <Button x:Name="btnDelete" Content="Delete Item" HorizontalAlignment="Left" Height="28" Margin="24,136,0,0" VerticalAlignment="Top" Width="89" Grid.Column="2" Click="btnDelete_Click"/>
-        <Button x:Name="btnUsers" Content="Edit Users" HorizontalAlignment="Left" Height="28" Margin="24,260,0,0" VerticalAlignment="Top" Width="89" Grid.Column="2" Click="btnUsers_Click"/>
-        <Button x:Name="btnBorrow" Content="Borrow Item" HorizontalAlignment="Left" Height="28" Margin="24,177,0,0" VerticalAlignment="Top" Width="89" Grid.Column="2" Click="btnBorrow_Click"/>
+        <Button x:Name="btnAdd" Content="Add Item" HorizontalAlignment="Left" Height="28" Margin="5,18,0,0" VerticalAlignment="Top" Width="89" Click="btnAdd_Click" Grid.Column="2"/>
+        <Button x:Name="btnEdit" Content="Edit Item" HorizontalAlignment="Left" Height="28" Margin="5,56,0,0" VerticalAlignment="Top" Width="89" Grid.Column="2" Click="btnEdit_Click"/>
+        <Button x:Name="btnDetails" Content="Item Details" HorizontalAlignment="Left" Height="28" Margin="5,96,0,0" VerticalAlignment="Top" Width="89" Grid.Column="2" Click="btnDetails_Click"/>
+        <Button x:Name="btnDelete" Content="Delete Item" HorizontalAlignment="Left" Height="28" Margin="5,136,0,0" VerticalAlignment="Top" Width="89" Grid.Column="2" Click="btnDelete_Click"/>
+        <Button x:Name="btnUsers" Content="Edit Users" HorizontalAlignment="Left" Height="28" Margin="5,434,0,0" VerticalAlignment="Top" Width="89" Grid.Column="2" Click="btnUsers_Click"/>
+        <Button x:Name="btnBorrow" Content="Borrow Item" HorizontalAlignment="Left" Height="28" Margin="5,177,0,0" VerticalAlignment="Top" Width="89" Grid.Column="2" Click="btnBorrow_Click"/>
+        <TextBlock x:Name="lblName" Grid.Column="2" HorizontalAlignment="Left" Height="18" Margin="5,235,0,0" TextWrapping="Wrap" Text="Item Name" VerticalAlignment="Top" Width="89" TextAlignment="Center"/>
+        <TextBox x:Name="txtName" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Left" Height="21" Margin="205,254,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" TextAlignment="Center" TextChanged="NameSearch"/>
+        <TextBlock x:Name="lblAuthor_or_Issue" Grid.Column="2" HorizontalAlignment="Left" Height="18" Margin="5,280,0,0" TextWrapping="Wrap" Text="Item Name" VerticalAlignment="Top" Width="89" TextAlignment="Center"/>
+        <TextBox x:Name="txtName_Copy" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Left" Height="21" Margin="205,299,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" TextAlignment="Center" TextChanged="NameSearch"/>
+        <TextBlock x:Name="lblName_Copy1" Grid.Column="2" HorizontalAlignment="Left" Height="18" Margin="5,324,0,0" TextWrapping="Wrap" Text="Item Name" VerticalAlignment="Top" Width="89" TextAlignment="Center"/>
+        <TextBox x:Name="txtName_Copy1" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Left" Height="21" Margin="205,343,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" TextAlignment="Center" TextChanged="NameSearch"/>
 
     </Grid>
 </Window>

@@ -161,5 +161,13 @@ namespace Library
             }
             RefreshDataGrid();
         }
+
+        private void NameSearch(object sender, TextChangedEventArgs e)
+        {
+            if (Validity.StringOK(txtName.Text))
+            {
+                dataLib.ItemsSource = mainLibrary.FindByName(txtName.Text);
+            }
+        }
     }
 }
