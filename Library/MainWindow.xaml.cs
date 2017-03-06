@@ -85,6 +85,15 @@ namespace Library
             {
                 GuiChanges.Enable(btnEdit, btnDetails, btnDelete, btnBorrow);
                 ButtonsAvailable();
+                switch (((AbstractItem)dataLib.SelectedItem).IsBorrowed)
+                {
+                    case true:
+                        btnBorrow.Content = $"Return {((AbstractItem)dataLib.SelectedItem).ItemType}";
+                        break;
+                    case false:
+                        btnBorrow.Content = $"Borrow {((AbstractItem)dataLib.SelectedItem).ItemType}";
+                        break;
+                }
                 return dataLib.SelectedIndex;
             }
             else
@@ -141,9 +150,7 @@ namespace Library
             AbstractItem choosenItem = (AbstractItem)dataLib.SelectedItem;
             if (choosenItem.IsBorrowed)
             {
-                GuiMsgs.Info($"The {choosenItem.ItemType} " +
-                        $"called {choosenItem.Name}\n" +
-                        "is already borrowed by somebody!");
+                choosenItem.IsBorrowed = false;
             }
             else
             {
