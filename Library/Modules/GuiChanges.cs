@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using static BL.Categories;
 
 namespace Library.Modules
 {
@@ -39,6 +41,16 @@ namespace Library.Modules
             {
                 item.IsEnabled = false;
             }
+        }
+
+        public static void FillBaseCategory(ComboBox baseCombo)
+        {
+            baseCombo.ItemsSource = Enum.GetValues(typeof(eBaseCategory));
+        }
+
+        public static void FillInnerCategory(ComboBox innerCombo, object baseItem)
+        {
+            innerCombo.ItemsSource = CategoriesDictionary[(eBaseCategory)baseItem];
         }
     }
 }

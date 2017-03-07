@@ -41,6 +41,7 @@ namespace Library
         private void InitMainWindow()
         {
             RefreshDataGrid();
+            ShowAndHideSearchFields();
             dataLib.IsReadOnly = true;
         }
 
@@ -82,9 +83,10 @@ namespace Library
 
         public int GridSelected()
         {
+            UIElement[] controlsForDataGrid = { btnEdit, btnDetails, btnDelete, btnBorrow };
             if (dataLib.SelectedIndex >= 0 && dataLib.SelectedIndex < mainLibrary.Items.Count)
             {
-                GuiChanges.Enable(btnEdit, btnDetails, btnDelete, btnBorrow);
+                GuiChanges.Enable(controlsForDataGrid);
                 ButtonsAvailable();
                 var tmpItem = (AbstractItem)dataLib.SelectedItem;
                 switch (tmpItem.IsBorrowed)
@@ -100,7 +102,7 @@ namespace Library
             }
             else
             {
-                GuiChanges.Disable(btnEdit, btnDetails, btnDelete, btnBorrow);
+                GuiChanges.Disable(controlsForDataGrid);
                 ButtonsAvailable();
                 return dataLib.SelectedIndex;
             }
@@ -173,14 +175,60 @@ namespace Library
 
         private void chkSearch_Checked(object sender, RoutedEventArgs e)
         {
+            ShowAndHideSearchFields();
             chkMultiSearch.IsChecked = false;
             IsMultiSearch = false;
         }
 
         private void chkMultiSearch_Checked(object sender, RoutedEventArgs e)
         {
+            ShowAndHideSearchFields();
             chkSearch.IsChecked = false;
             IsMultiSearch = true;
+        }
+
+        private void ShowAndHideSearchFields()
+        {
+            UIElement[] searchControls = { lblName, txtName, lblAuthor, txtAuthor, lblIssue, txtIssue,
+                lblBaseCategory, cmbBaseCategory, lblInnerCategory, cmbInnerCategory };
+            if (chkSearch.IsChecked == false && chkMultiSearch.IsChecked == false)
+            {
+                GuiChanges.Hide(searchControls);
+                cmbBaseCategory.ItemsSource = cmbInnerCategory.ItemsSource = null;
+            }
+            else
+            {
+                GuiChanges.Show(searchControls);
+                if (cmbBaseCategory.SelectedItem == null)
+                {
+                    GuiChanges.Hide(lblInnerCategory, cmbInnerCategory); 
+                }
+                GuiChanges.FillBaseCategory(cmbBaseCategory);
+            }
+
+        }
+
+        private void HideSearch(object sender, RoutedEventArgs e)
+        {
+            ShowAndHideSearchFields();
+        }
+
+        private void IssueSearch(object sender, TextChangedEventArgs e)
+        {
+            if (!Validity.PositiveInteger(txtIssue.Text))
+            {
+                txtIssue.Text = string.Empty;
+            }
+        }
+
+        private void FillInner(object sender, SelectionChangedEventArgs e)
+        {
+            if (cmbBaseCategory.SelectedItem != null)
+            {
+                GuiChanges.FillInnerCategory(cmbInnerCategory, cmbBaseCategory.SelectedItem);
+                GuiChanges.Show(lblInnerCategory, cmbInnerCategory);
+
+            }
         }
     }
 }
