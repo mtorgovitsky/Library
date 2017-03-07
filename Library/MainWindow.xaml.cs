@@ -28,7 +28,14 @@ namespace Library
     public partial class MainWindow : Window
     {
         public static ItemsCollection mainLibrary = new ItemsCollection();
+
         public bool IsMultiSearch { get; set; }
+
+        public enum eShowOrHide
+        {
+            Show,
+            Hide
+        }
 
         public MainWindow()
         {
@@ -41,7 +48,7 @@ namespace Library
         private void InitMainWindow()
         {
             RefreshDataGrid();
-            ShowAndHideSearchFields();
+            ShowAndHideSearchFields(eShowOrHide.Hide);
             dataLib.IsReadOnly = true;
         }
 
@@ -154,14 +161,7 @@ namespace Library
         private void btnBorrow_Click(object sender, RoutedEventArgs e)
         {
             AbstractItem choosenItem = (AbstractItem)dataLib.SelectedItem;
-            if (choosenItem.IsBorrowed)
-            {
-                choosenItem.IsBorrowed = false;
-            }
-            else
-            {
-                choosenItem.IsBorrowed = true;
-            }
+            choosenItem.IsBorrowed = !choosenItem.IsBorrowed;
             RefreshDataGrid();
         }
 
@@ -175,42 +175,49 @@ namespace Library
 
         private void chkSearch_Checked(object sender, RoutedEventArgs e)
         {
-            ShowAndHideSearchFields();
+            ShowAndHideSearchFields(eShowOrHide.Show);
             chkMultiSearch.IsChecked = false;
             IsMultiSearch = false;
         }
 
         private void chkMultiSearch_Checked(object sender, RoutedEventArgs e)
         {
-            ShowAndHideSearchFields();
+            ShowAndHideSearchFields(eShowOrHide.Show);
             chkSearch.IsChecked = false;
             IsMultiSearch = true;
         }
 
-        private void ShowAndHideSearchFields()
+        private void ShowAndHideSearchFields(eShowOrHide showHide)
         {
             UIElement[] searchControls = { lblName, txtName, lblAuthor, txtAuthor, lblIssue, txtIssue,
                 lblBaseCategory, cmbBaseCategory, lblInnerCategory, cmbInnerCategory };
-            if (chkSearch.IsChecked == false && chkMultiSearch.IsChecked == false)
+            switch (showHide)
             {
-                GuiChanges.Hide(searchControls);
-                cmbBaseCategory.ItemsSource = cmbInnerCategory.ItemsSource = null;
+                case eShowOrHide.Show:
+                    GuiChanges.Show(searchControls);
+                    GuiChanges.FillBaseCategory(cmbBaseCategory);
+                    if (cmbBaseCategory.SelectedItem == null)
+                    {
+                        GuiChanges.Hide(lblInnerCategory, cmbInnerCategory);
+                    }
+                    break;
+                case eShowOrHide.Hide:
+                    GuiChanges.Hide(searchControls);
+                    cmbBaseCategory.ItemsSource = cmbInnerCategory.ItemsSource = null;
+                    break;
+                default:
+                    break;
             }
-            else
-            {
-                GuiChanges.Show(searchControls);
-                if (cmbBaseCategory.SelectedItem == null)
-                {
-                    GuiChanges.Hide(lblInnerCategory, cmbInnerCategory); 
-                }
-                GuiChanges.FillBaseCategory(cmbBaseCategory);
-            }
-
         }
+
 
         private void HideSearch(object sender, RoutedEventArgs e)
         {
-            ShowAndHideSearchFields();
+            ShowAndHideSearchFields(eShowOrHide.Hide);
+            if(chkMultiSearch.IsChecked == true || chkSearch.IsChecked == true)
+            {
+                ShowAndHideSearchFields(eShowOrHide.Show);
+            }
         }
 
         private void IssueSearch(object sender, TextChangedEventArgs e)

@@ -34,31 +34,33 @@ namespace Library.GUI
         {
             InitializeComponent();
             GuiChanges.Hide(lblIssue, lblAuthor, txtIssue, txtAuthor);
-            cmbBaseCat.ItemsSource = Enum.GetValues(typeof(Categories.eBaseCategory));
+            GuiChanges.FillBaseCategory(cmbBaseCat);
             GuiChanges.Disable(cmbInnerCat);
         }
 
         private void FillInnerCombo(object sender, SelectionChangedEventArgs e)
         {
             GuiChanges.Enable(cmbInnerCat);
-            cmbInnerCat.ItemsSource = Categories.CategoriesDictionary[(Categories.eBaseCategory)cmbBaseCat.SelectedItem];
+            GuiChanges.FillInnerCategory(cmbInnerCat, cmbBaseCat.SelectedItem);
             cmbInnerCat.SelectedIndex = 0;
         }
 
         private void rdChecked(object sender, RoutedEventArgs e)
         {
             var rdValue = sender as RadioButton;
+            UIElement[] issue = { lblIssue, txtIssue };
+            UIElement[] author = { lblAuthor, txtAuthor };
             switch (rdValue.Name)
             {
                 case "rdBook":
                     CurrentItem = ItemType.Book;
-                    GuiChanges.Hide(lblIssue, txtIssue);
-                    GuiChanges.Show(lblAuthor, txtAuthor);
+                    GuiChanges.Hide(issue);
+                    GuiChanges.Show(author);
                     break;
                 case "rdJournal":
                     CurrentItem = ItemType.Journal;
-                    GuiChanges.Hide(lblAuthor, txtAuthor);
-                    GuiChanges.Show(lblIssue, txtIssue);
+                    GuiChanges.Hide(author);
+                    GuiChanges.Show(issue);
                     break;
 
             }

@@ -36,15 +36,22 @@ namespace Library
                 e.Cancel = true;
         }
 
-        //public static ItemsCollection mainLibrary = new ItemsCollection();
         public LoginWindow()
         {
             InitializeComponent();
-            if (File.Exists(DBData.FilePath))
-                MainWindow.mainLibrary = MainWindow.mainLibrary.GetBLData();
-            else
+            try
             {
-                GuiMsgs.FirstLogin();
+                if (File.Exists(DBData.FilePath))
+                    MainWindow.mainLibrary = MainWindow.mainLibrary.GetBLData();
+                else
+                {
+                    GuiMsgs.FirstLogin();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                GuiMsgs.Warning(ex.Message);
             }
             btnLogin.IsEnabled = false;
             txtUserName.HorizontalContentAlignment =
@@ -68,25 +75,6 @@ namespace Library
                 this.Close();
             }
         }
-
-        //private static ItemsCollection CheckDataSaving()
-        //{
-        //    MainWindow.mainLibrary.Items.Add(new Book
-        //                        ("Book of Treasures",
-        //                        DateTime.Now.AddYears(-8),
-        //                        eBaseCategory.Cooking,
-        //                        eInnerCategory.Soups,
-        //                        "Ann Geronulasoftred"));
-        //    MainWindow.mainLibrary.Items.Add(new Journal
-        //                        ("Some Journal",
-        //                        DateTime.Now.AddYears(-1),
-        //                        eBaseCategory.Kids,
-        //                        eInnerCategory.Comics,
-        //                        6));
-        //    MainWindow.mainLibrary.SaveData(mainLibrary);
-        //    var tmp = MainWindow.mainLibrary.GetBLData();
-        //    return tmp;
-        //}
 
         private void txtPassword_TextChanged(object sender, TextChangedEventArgs e)
         {

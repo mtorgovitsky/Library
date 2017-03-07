@@ -59,23 +59,25 @@ namespace Library
 
         public void UpdateFromItem()
         {
+            UIElement[] issue = { lblIssue, txtIssue };
+            UIElement[] author = { lblAuthor, txtAuthor };
             lblISBN.Text = $"ISBN: {CurrentItem.ISBN}";
             lblTypeOf.Text = CurrentItem.ItemType;
             chkBorrowed.IsChecked = CurrentItem.IsBorrowed;
-            cmbBaseCat.ItemsSource = Enum.GetValues(typeof(Categories.eBaseCategory));
+            GuiChanges.FillBaseCategory(cmbBaseCat);
             cmbBaseCat.SelectedItem = CurrentItem.BaseCategory;
             txtName.Text = CurrentItem.Name;
             dtPick.SelectedDate = CurrentItem.PrintDate;
             switch (CurrentItem.ItemType)
             {
                 case "Book":
-                    GuiChanges.Hide(lblIssue, txtIssue);
-                    GuiChanges.Show(lblAuthor, txtAuthor);
+                    GuiChanges.Hide(issue);
+                    GuiChanges.Show(author);
                     txtAuthor.Text = ((Book)CurrentItem).Author;
                     break;
                 case "Journal":
-                    GuiChanges.Hide(lblAuthor, txtAuthor);
-                    GuiChanges.Show(lblIssue, txtIssue);
+                    GuiChanges.Hide(author);
+                    GuiChanges.Show(issue);
                     txtIssue.Text = ((Journal)CurrentItem).IssueNumber.ToString();
                     break;
             }
@@ -83,7 +85,7 @@ namespace Library
 
         private void FillInnerCategory()
         {
-            cmbInnerCat.ItemsSource = Categories.CategoriesDictionary[(Categories.eBaseCategory)cmbBaseCat.SelectedItem];
+            GuiChanges.FillInnerCategory(cmbInnerCat, cmbBaseCat.SelectedItem);
             cmbInnerCat.SelectedItem = CurrentItem.InnerCategory;
             if (cmbInnerCat.SelectedIndex < 0)
                 cmbInnerCat.SelectedIndex++;
@@ -112,7 +114,6 @@ namespace Library
 
         private void UpdateCurrentItem()
         {
-            //var s = new Book(txtName.Text, DateTime.Now, Categories.eBaseCategory.Cooking, Categories.eInnerCategory.Comics, txtAuthor.Text);
             CurrentItem.Name = txtName.Text;
             CurrentItem.BaseCategory = (Categories.eBaseCategory)cmbBaseCat.SelectedItem;
             CurrentItem.InnerCategory = (Categories.eInnerCategory)cmbInnerCat.SelectedItem;
