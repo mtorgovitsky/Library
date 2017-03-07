@@ -20,12 +20,11 @@
         <Button x:Name="btnDelete" Content="Delete Item" HorizontalAlignment="Left" Height="28" Margin="5,136,0,0" VerticalAlignment="Top" Width="89" Grid.Column="2" Click="btnDelete_Click"/>
         <Button x:Name="btnUsers" Content="Edit Users" HorizontalAlignment="Left" Height="28" Margin="5,434,0,0" VerticalAlignment="Top" Width="89" Grid.Column="2" Click="btnUsers_Click"/>
         <Button x:Name="btnBorrow" Content="Borrow Item" HorizontalAlignment="Left" Height="28" Margin="5,177,0,0" VerticalAlignment="Top" Width="89" Grid.Column="2" Click="btnBorrow_Click"/>
-        <TextBlock x:Name="lblName" Grid.Column="2" HorizontalAlignment="Left" Height="18" Margin="5,235,0,0" TextWrapping="Wrap" Text="Item Name" VerticalAlignment="Top" Width="89" TextAlignment="Center"/>
-        <TextBox x:Name="txtName" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Left" Height="21" Margin="205,254,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" TextAlignment="Center" TextChanged="NameSearch"/>
-        <TextBlock x:Name="lblAuthor_or_Issue" Grid.Column="2" HorizontalAlignment="Left" Height="18" Margin="5,280,0,0" TextWrapping="Wrap" Text="Item Name" VerticalAlignment="Top" Width="89" TextAlignment="Center"/>
-        <TextBox x:Name="txtName_Copy" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Left" Height="21" Margin="205,299,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" TextAlignment="Center" TextChanged="NameSearch"/>
-        <TextBlock x:Name="lblName_Copy1" Grid.Column="2" HorizontalAlignment="Left" Height="18" Margin="5,324,0,0" TextWrapping="Wrap" Text="Item Name" VerticalAlignment="Top" Width="89" TextAlignment="Center"/>
-        <TextBox x:Name="txtName_Copy1" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Left" Height="21" Margin="205,343,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" TextAlignment="Center" TextChanged="NameSearch"/>
+        <TextBlock x:Name="lblName" Grid.Column="2" HorizontalAlignment="Left" Height="18" Margin="5,261,0,0" TextWrapping="Wrap" Text="Item Name" VerticalAlignment="Top" Width="89" TextAlignment="Center"/>
+        <TextBox x:Name="txtName" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Left" Height="21" Margin="205,280,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" TextAlignment="Center" TextChanged="NameSearch"/>
+        <CheckBox x:Name="chkSearch" Grid.ColumnSpan="2" Content="Regular" Grid.Column="1" HorizontalAlignment="Left" Height="16" Margin="205,240,0,0" VerticalAlignment="Top" Width="63" Checked="chkSearch_Checked"/>
+        <CheckBox x:Name="chkMultiSearch" Content="Multi" Grid.Column="2" HorizontalAlignment="Left" Height="16" Margin="72,240,0,0" VerticalAlignment="Top" Width="50" Checked="chkMultiSearch_Checked"/>
+        <TextBlock x:Name="lblSearchOpt" Grid.Column="2" HorizontalAlignment="Left" Height="18" Margin="5,217,0,0" TextWrapping="Wrap" Text="Search Options" VerticalAlignment="Top" Width="89" TextAlignment="Center"/>
 
     </Grid>
 </Window>

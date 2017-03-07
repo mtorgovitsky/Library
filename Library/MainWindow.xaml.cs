@@ -28,6 +28,7 @@ namespace Library
     public partial class MainWindow : Window
     {
         public static ItemsCollection mainLibrary = new ItemsCollection();
+        public bool IsMultiSearch { get; set; }
 
         public MainWindow()
         {
@@ -168,6 +169,18 @@ namespace Library
             {
                 dataLib.ItemsSource = mainLibrary.FindByName(txtName.Text);
             }
+        }
+
+        private void chkSearch_Checked(object sender, RoutedEventArgs e)
+        {
+            chkMultiSearch.IsChecked = false;
+            IsMultiSearch = false;
+        }
+
+        private void chkMultiSearch_Checked(object sender, RoutedEventArgs e)
+        {
+            chkSearch.IsChecked = false;
+            IsMultiSearch = true;
         }
     }
 }
