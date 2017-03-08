@@ -173,7 +173,7 @@ namespace BL
         }
 
         public List<AbstractItem> MultiSearch(string name,
-            eBaseCategory eBase, eInnerCategory eInner)
+            eBaseCategory? eBase, eInnerCategory? eInner)
         {
             return FindAbstractItem(
                 ai => ai.Name.ToLower().Contains(name.ToLower())

@@ -288,6 +288,10 @@ namespace Library
             {
                 dataLib.ItemsSource = mainLibrary.FindItemByName(txtName.Text);
             }
+            else
+            {
+                dataLib.ItemsSource = mainLibrary.MultiSearch(txtName.Text, cmb)
+            }
         }
 
         private void SearchBase(object sender, SelectionChangedEventArgs e)
