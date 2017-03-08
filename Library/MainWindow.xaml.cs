@@ -145,7 +145,7 @@ namespace Library
                     GuiChanges.Disable(btnUsers);
                     break;
                 case User.eUserType.Client:
-                    GuiChanges.Disable(btnDelete, btnUsers, btnEdit, btnAdd, btnBorrow);
+                    GuiChanges.Disable(btnDelete, btnUsers, btnEdit, btnAdd, btnBorrow, btnQuantity);
                     break;
             }
         }

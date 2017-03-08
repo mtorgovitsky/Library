@@ -9,6 +9,9 @@ using static BL.Categories;
 
 namespace BookLib
 {
+    /// <summary>
+    /// Main Item Class
+    /// </summary>
     [Serializable]
     public abstract class AbstractItem : IEqual
     {
@@ -18,21 +21,27 @@ namespace BookLib
             {
                 //Return the string with the name of the object
                 return this.GetType().Name;
-               
-                //string[] tmpStr = this.GetType().ToString().Split('.');
-                //return tmpStr[tmpStr.Length - 1];
             }
         }
 
+        /// <summary>
+        /// If Item was borrowed or not
+        /// </summary>
         public bool IsBorrowed { get; set; }
 
+        /// <summary>
+        /// Ctor with parameters
+        /// </summary>
+        /// <param name="name">Name</param>
+        /// <param name="printDate">Pront Date</param>
+        /// <param name="baseCategory">Base category</param>
+        /// <param name="innerCategory">Inner category</param>
         public AbstractItem
             (
                 string name,
                 DateTime printDate,
                 eBaseCategory baseCategory,
                 eInnerCategory innerCategory
-            //int copyCount = 1
             )
         {
             ISBN = Guid.NewGuid();
@@ -40,10 +49,8 @@ namespace BookLib
                 _name = name;
             if (printDate != null)
                 _printDate = printDate;
-            //if (copyCount > 1)
-            //    _copyCount = copyCount;
 
-            /////////////   CHECK THE CATEGORIES FUNCTIONALITY  //////////////
+            /////////////   CHECK THE CATEGORIES Validity  //////////////
             if (Categories.CategoriesDictionary.ContainsKey(baseCategory))
             {
                 var catList = Categories.CategoriesDictionary.FirstOrDefault(p => p.Key == baseCategory);
@@ -53,17 +60,24 @@ namespace BookLib
                     InnerCategory = innerCategory;
                 }
             }
-            /////////////   CHECK THE CATEGORIES FUNCTIONALITY  //////////////
+            /////////////   CHECK THE CATEGORIES Validity  //////////////
 
             PrintDate = printDate;
         }
 
-        private DateTime _printDate;
-        private string _name;
-        //private int _copyCount;
-        public eBaseCategory BaseCategory { get; set; }
-        public eInnerCategory _innerCategory;
 
+        private DateTime _printDate;
+
+        private string _name;
+
+        public eBaseCategory BaseCategory { get; set; }
+
+        private eInnerCategory _innerCategory;
+
+        /// <summary>
+        /// Getter and Setter From the Dictionary of Categories - 
+        /// different Inner categories for each Base category
+        /// </summary>
         public eInnerCategory InnerCategory
         {
             get
@@ -77,18 +91,9 @@ namespace BookLib
             }
         }
 
-        //public int CopyCount
-        //{
-        //    get
-        //    {
-        //        return _copyCount;
-        //    }
-        //    set
-        //    {
-        //        _copyCount = value;
-        //    }
-        //}
-
+        /// <summary>
+        /// Getter and Setter for Name
+        /// </summary>
         public string Name
         {
             get
@@ -102,6 +107,9 @@ namespace BookLib
             }
         }
 
+        /// <summary>
+        /// Getter and Setter for Print Date
+        /// </summary>
         public DateTime PrintDate
         {
             get
@@ -114,6 +122,11 @@ namespace BookLib
             }
         }
 
+        /// <summary>
+        /// Custom Equal method
+        /// </summary>
+        /// <param name="item">AbstractItem to check</param>
+        /// <returns>true or false - Equality result</returns>
         public virtual bool Equal(AbstractItem item)
         {
             if (Name == item.Name && BaseCategory == item.BaseCategory
@@ -123,6 +136,10 @@ namespace BookLib
             else
                 return false;
         }
+
+        /// <summary>
+        /// ISBN Generated in Ctor by random GUID - read only
+        /// </summary>
         public Guid ISBN { get; }
     }
 }
