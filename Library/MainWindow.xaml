@@ -25,13 +25,13 @@
         <CheckBox x:Name="chkSearch" Grid.ColumnSpan="2" Content="Regular" Grid.Column="1" HorizontalAlignment="Left" Height="16" Margin="205,240,0,0" VerticalAlignment="Top" Width="63" Checked="chkSearch_Checked" Unchecked="HideSearch"/>
         <CheckBox x:Name="chkMultiSearch" Content="Multi" Grid.Column="2" HorizontalAlignment="Left" Height="16" Margin="72,240,0,0" VerticalAlignment="Top" Width="50" Checked="chkMultiSearch_Checked" Unchecked="HideSearch"/>
         <TextBlock x:Name="lblSearchOpt" Grid.Column="2" HorizontalAlignment="Left" Height="18" Margin="5,217,0,0" TextWrapping="Wrap" Text="Search Options" VerticalAlignment="Top" Width="89" TextAlignment="Center"/>
-        <TextBlock x:Name="lblAuthor" Grid.Column="2" HorizontalAlignment="Left" Height="18" Margin="5,305,0,0" TextWrapping="Wrap" Text="Author Name" VerticalAlignment="Top" Width="89" TextAlignment="Center"/>
-        <TextBox x:Name="txtAuthor" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Left" Height="21" Margin="205,322,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" TextAlignment="Center" GotFocus="Focused"/>
-        <TextBlock x:Name="lblIssue" Grid.Column="2" HorizontalAlignment="Left" Height="18" Margin="5,349,0,0" TextWrapping="Wrap" Text="Issue Number" VerticalAlignment="Top" Width="89" TextAlignment="Center"/>
+        <TextBlock x:Name="lblAuthor" Grid.Column="1" HorizontalAlignment="Left" Height="18" Margin="205,305,0,0" TextWrapping="Wrap" Text="Book by Author Name" VerticalAlignment="Top" Width="140" TextAlignment="Center" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="txtAuthor" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Left" Height="21" Margin="205,322,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" TextAlignment="Center" GotFocus="Focused" TextChanged="AuthorSearch"/>
+        <TextBlock x:Name="lblIssue" Grid.Column="1" HorizontalAlignment="Left" Height="18" Margin="205,349,0,0" TextWrapping="Wrap" Text="Journal by Issue Number" VerticalAlignment="Top" Width="140" TextAlignment="Center" Grid.ColumnSpan="2"/>
         <TextBox x:Name="txtIssue" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Left" Height="21" Margin="205,367,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" TextAlignment="Center" TextChanged="IssueSearch" GotFocus="Focused"/>
-        <ComboBox x:Name="cmbBaseCategory" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="205,411,0,0" VerticalAlignment="Top" Width="140" SelectionChanged="FillInner"/>
+        <ComboBox x:Name="cmbBaseCategory" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="205,411,0,0" VerticalAlignment="Top" Width="140" SelectionChanged="SearchBase"/>
         <TextBlock x:Name="lblBaseCategory" Grid.Column="2" HorizontalAlignment="Left" Height="18" Margin="5,393,0,0" TextWrapping="Wrap" Text="Base Category" VerticalAlignment="Top" Width="89" TextAlignment="Center"/>
-        <ComboBox x:Name="cmbInnerCategory" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="205,457,0,0" VerticalAlignment="Top" Width="140" GotFocus="Focused"/>
+        <ComboBox x:Name="cmbInnerCategory" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="205,457,0,0" VerticalAlignment="Top" Width="140" GotFocus="Focused" SelectionChanged="SearchInnerByBase"/>
         <TextBlock x:Name="lblInnerCategory" Grid.Column="2" HorizontalAlignment="Left" Height="18" Margin="5,439,0,0" TextWrapping="Wrap" Text="Inner Category" VerticalAlignment="Top" Width="89" TextAlignment="Center"/>
 
     </Grid>

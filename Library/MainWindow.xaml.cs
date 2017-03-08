@@ -161,14 +161,8 @@ namespace Library
             AbstractItem choosenItem = (AbstractItem)dataLib.SelectedItem;
             choosenItem.IsBorrowed = !choosenItem.IsBorrowed;
             RefreshDataGrid();
-        }
-
-        private void NameSearch(object sender, TextChangedEventArgs e)
-        {
-            if (Validity.StringOK(txtName.Text))
-            {
-                dataLib.ItemsSource = mainLibrary.FindByName(txtName.Text);
-            }
+            chkMultiSearch.IsChecked = chkSearch.IsChecked = false;
+            ShowAndHideSearchFields(eShowOrHide.Hide);
         }
 
         private void chkSearch_Checked(object sender, RoutedEventArgs e)
@@ -182,6 +176,7 @@ namespace Library
         {
             ShowAndHideSearchFields(eShowOrHide.Show);
             chkSearch.IsChecked = false;
+            GuiChanges.Hide(lblAuthor, txtAuthor, lblIssue, txtIssue);
             IsMultiSearch = true;
         }
 
@@ -205,7 +200,7 @@ namespace Library
                     {
                         if (item is TextBox)
                         {
-                            ((TextBox)item).Text = string.Empty; 
+                            ((TextBox)item).Text = string.Empty;
                         }
                     }
                     cmbBaseCategory.ItemsSource = cmbInnerCategory.ItemsSource = null;
@@ -231,9 +226,17 @@ namespace Library
             {
                 txtIssue.Text = string.Empty;
             }
+            else if (!IsMultiSearch)
+            {
+                dataLib.ItemsSource = mainLibrary.FindJournal(j => j.IssueNumber == int.Parse(txtIssue.Text));
+            }
+            if (string.IsNullOrWhiteSpace(txtIssue.Text))
+            {
+                RefreshDataGrid();
+            }
         }
 
-        private void FillInner(object sender, SelectionChangedEventArgs e)
+        private void FillInner()
         {
             UIElement[] inner = { lblInnerCategory, cmbInnerCategory };
             if (cmbBaseCategory.SelectedItem != null)
@@ -258,19 +261,51 @@ namespace Library
             {
                 foreach (UIElement item in this.grdWindowGrid.Children)
                 {
-                    if (item != exceptThis)
+                    if (item != exceptThis && item is TextBox)
                     {
-                        if (item is TextBox)
-                        {
-                            ((TextBox)item).Text = string.Empty;
-                        }
-                        //else if (item is ComboBox)
-                        //{
-                        //    ((ComboBox)item).ItemsSource = null;
-                        //}
+                        ((TextBox)item).Text = string.Empty;
                     }
                 }
 
+            }
+        }
+
+        private void AuthorSearch(object sender, TextChangedEventArgs e)
+        {
+            if (!IsMultiSearch)
+            {
+                dataLib.ItemsSource = mainLibrary.FindBook(b => b.Author.ToLower().Contains(txtAuthor.Text.ToLower()));
+            }
+            if (string.IsNullOrWhiteSpace(txtAuthor.Text))
+            {
+                RefreshDataGrid();
+            }
+        }
+
+        private void NameSearch(object sender, TextChangedEventArgs e)
+        {
+            if (!IsMultiSearch)
+            {
+                dataLib.ItemsSource = mainLibrary.FindItemByName(txtName.Text);
+            }
+        }
+
+        private void SearchBase(object sender, SelectionChangedEventArgs e)
+        {
+            FillInner();
+            if (!IsMultiSearch && cmbBaseCategory.SelectedItem != null)
+            {
+                dataLib.ItemsSource = mainLibrary.FindByBaseCategory((eBaseCategory)cmbBaseCategory.SelectedItem);
+            }
+        }
+
+        private void SearchInnerByBase(object sender, SelectionChangedEventArgs e)
+        {
+            var eBase = cmbBaseCategory.SelectedItem;
+            var eInner = cmbInnerCategory.SelectedItem;
+            if (eBase != null && eInner != null && !IsMultiSearch)
+            {
+                dataLib.ItemsSource = mainLibrary.FindInnerByBaseCategory((eBaseCategory)eBase, (eInnerCategory)eInner);
             }
         }
     }

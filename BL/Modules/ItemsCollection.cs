@@ -64,22 +64,25 @@ namespace BL
         //    }
         //}
 
-        public List<AbstractItem> FindByName(string name)
+        public List<AbstractItem> FindItemByName(string name)
         {
-            name = name.ToLower();
-            return Items.Where(i => i.Name == name).ToList();
-            //return ItemsToList(p => p.Name == name).ToList();
+            return Items.Where(i => i.Name.ToLower().Contains(name.ToLower())).ToList();
         }
 
         public List<AbstractItem> FindByBaseCategory(eBaseCategory baseCategory)
         {
             return Items.Where(i => i.BaseCategory == baseCategory).ToList();
-            //return ItemsToList.
         }
 
         public List<AbstractItem> FindByInnerCategory(eInnerCategory innerCategory)
         {
             return Items.Where(i => i.InnerCategory == innerCategory).ToList();
+        }
+
+        public List<AbstractItem> FindInnerByBaseCategory(eBaseCategory baseCategory,
+                                    eInnerCategory innerCategory)
+        {
+            return Items.Where(i => i.BaseCategory == baseCategory && i.InnerCategory == innerCategory).ToList();
         }
 
         //public List<AbstractItem> FindByMinCopies(int minCopies)
@@ -101,7 +104,7 @@ namespace BL
 
             return Items
                 .OfType<Journal>()
-                .Where(i => i.Name == name)
+                .Where(i => i.Name == name.ToLower())
                 .Where(i => i.IssueNumber == issueNumber)
                 .Where(i => i.PrintDate == printDate)
                 .ToList();
@@ -116,11 +119,9 @@ namespace BL
 
         public List<Book> FindBookByAuthor(string author)
         {
-            author = author.ToLower();
-
             return Items
                  .OfType<Book>()
-                 .Where(i => i.Author == author)
+                 .Where(i => i.Author == author.ToLower())
                  .ToList();
         }
 
@@ -142,18 +143,18 @@ namespace BL
             return Items.Where(p).ToList();
         }
 
-        public bool Lending(AbstractItem item)
-        {
-            if (item.IsBorrowed)
-            {
-                return false;
-            }
-            else
-            {
-                item.IsBorrowed = !item.IsBorrowed;
-                return true;
-            }
-        }
+        //public bool Lending(AbstractItem item)
+        //{
+        //    if (item.IsBorrowed)
+        //    {
+        //        return false;
+        //    }
+        //    else
+        //    {
+        //        item.IsBorrowed = !item.IsBorrowed;
+        //        return true;
+        //    }
+        //}
 
         public int ItemQuantity(AbstractItem item)
         {
@@ -170,5 +171,15 @@ namespace BL
             }
             return result;
         }
+
+        public List<AbstractItem> MultiSearch(string name,
+            eBaseCategory eBase, eInnerCategory eInner)
+        {
+            return FindAbstractItem(
+                ai => ai.Name.ToLower().Contains(name.ToLower())
+                && ai.BaseCategory == eBase
+                && ai.InnerCategory == eInner).ToList();
+        }
+
     }
 }
