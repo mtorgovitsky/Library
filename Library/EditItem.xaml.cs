@@ -64,7 +64,7 @@ namespace Library
             lblISBN.Text = $"ISBN: {CurrentItem.ISBN}";
             lblTypeOf.Text = CurrentItem.ItemType;
             chkBorrowed.IsChecked = CurrentItem.IsBorrowed;
-            GuiChanges.FillBaseCategory(cmbBaseCat);
+            GuiChanges.FillComboWithBaseCategory(cmbBaseCat);
             cmbBaseCat.SelectedItem = CurrentItem.BaseCategory;
             txtName.Text = CurrentItem.Name;
             dtPick.SelectedDate = CurrentItem.PrintDate;
@@ -85,7 +85,7 @@ namespace Library
 
         private void FillInnerCategory()
         {
-            GuiChanges.FillInnerCategory(cmbInnerCat, cmbBaseCat.SelectedItem);
+            GuiChanges.FillComboWithInnerCategory(cmbInnerCat, cmbBaseCat.SelectedItem);
             cmbInnerCat.SelectedItem = CurrentItem.InnerCategory;
             if (cmbInnerCat.SelectedIndex < 0)
                 cmbInnerCat.SelectedIndex++;

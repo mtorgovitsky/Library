@@ -84,8 +84,6 @@ namespace Library
             var editW = new EditItem();
             editW.ShowDialog();
             RefreshDataGrid();
-            //EditItem.Item = mainLibrary.FindAbstractItem(ai => ai.ISBN == tmp.ISBN).FirstOrDefault();
-            //EditItem.Item = tmp;
         }
 
         public int GridSelected()
@@ -195,7 +193,7 @@ namespace Library
             {
                 case eShowOrHide.Show:
                     GuiChanges.Show(searchControls);
-                    GuiChanges.FillBaseCategory(cmbBaseCategory);
+                    GuiChanges.FillComboWithBaseCategory(cmbBaseCategory);
                     if (cmbBaseCategory.SelectedItem == null)
                     {
                         GuiChanges.Hide(lblInnerCategory, cmbInnerCategory);
@@ -203,6 +201,13 @@ namespace Library
                     break;
                 case eShowOrHide.Hide:
                     GuiChanges.Hide(searchControls);
+                    foreach (UIElement item in searchControls)
+                    {
+                        if (item is TextBox)
+                        {
+                            ((TextBox)item).Text = string.Empty; 
+                        }
+                    }
                     cmbBaseCategory.ItemsSource = cmbInnerCategory.ItemsSource = null;
                     break;
                 default:
@@ -214,7 +219,7 @@ namespace Library
         private void HideSearch(object sender, RoutedEventArgs e)
         {
             ShowAndHideSearchFields(eShowOrHide.Hide);
-            if(chkMultiSearch.IsChecked == true || chkSearch.IsChecked == true)
+            if (chkMultiSearch.IsChecked == true || chkSearch.IsChecked == true)
             {
                 ShowAndHideSearchFields(eShowOrHide.Show);
             }
@@ -230,10 +235,41 @@ namespace Library
 
         private void FillInner(object sender, SelectionChangedEventArgs e)
         {
+            UIElement[] inner = { lblInnerCategory, cmbInnerCategory };
             if (cmbBaseCategory.SelectedItem != null)
             {
-                GuiChanges.FillInnerCategory(cmbInnerCategory, cmbBaseCategory.SelectedItem);
-                GuiChanges.Show(lblInnerCategory, cmbInnerCategory);
+                GuiChanges.FillComboWithInnerCategory(cmbInnerCategory, cmbBaseCategory.SelectedItem);
+                GuiChanges.Show(inner);
+            }
+            else
+            {
+                GuiChanges.Hide(inner);
+            }
+        }
+
+        private void Focused(object sender, RoutedEventArgs e)
+        {
+            CleanFields(sender);
+        }
+
+        private void CleanFields(object exceptThis)
+        {
+            if (!IsMultiSearch)
+            {
+                foreach (UIElement item in this.grdWindowGrid.Children)
+                {
+                    if (item != exceptThis)
+                    {
+                        if (item is TextBox)
+                        {
+                            ((TextBox)item).Text = string.Empty;
+                        }
+                        //else if (item is ComboBox)
+                        //{
+                        //    ((ComboBox)item).ItemsSource = null;
+                        //}
+                    }
+                }
 
             }
         }

@@ -70,7 +70,8 @@ namespace Library
             }
             else
             {
-                MainWindow.mainLibrary.LibraryUsers.CurrentUser = MainWindow.mainLibrary.LibraryUsers.GetCurrentUser(txtUserName.Text, pswPassword.Password);
+                MainWindow.mainLibrary.LibraryUsers.CurrentUser = 
+                    MainWindow.mainLibrary.LibraryUsers.GetCurrentUser(txtUserName.Text, pswPassword.Password);
                 ShowMain = true;
                 this.Close();
             }

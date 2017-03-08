@@ -43,12 +43,12 @@ namespace Library.Modules
             }
         }
 
-        public static void FillBaseCategory(ComboBox baseCombo)
+        public static void FillComboWithBaseCategory(ComboBox baseCombo)
         {
             baseCombo.ItemsSource = Enum.GetValues(typeof(eBaseCategory));
         }
 
-        public static void FillInnerCategory(ComboBox innerCombo, object baseItem)
+        public static void FillComboWithInnerCategory(ComboBox innerCombo, object baseItem)
         {
             innerCombo.ItemsSource = CategoriesDictionary[(eBaseCategory)baseItem];
         }

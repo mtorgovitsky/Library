@@ -34,14 +34,14 @@ namespace Library.GUI
         {
             InitializeComponent();
             GuiChanges.Hide(lblIssue, lblAuthor, txtIssue, txtAuthor);
-            GuiChanges.FillBaseCategory(cmbBaseCat);
+            GuiChanges.FillComboWithBaseCategory(cmbBaseCat);
             GuiChanges.Disable(cmbInnerCat);
         }
 
         private void FillInnerCombo(object sender, SelectionChangedEventArgs e)
         {
             GuiChanges.Enable(cmbInnerCat);
-            GuiChanges.FillInnerCategory(cmbInnerCat, cmbBaseCat.SelectedItem);
+            GuiChanges.FillComboWithInnerCategory(cmbInnerCat, cmbBaseCat.SelectedItem);
             cmbInnerCat.SelectedIndex = 0;
         }
 
