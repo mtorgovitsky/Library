@@ -172,14 +172,15 @@ namespace BL
             return result;
         }
 
-        public List<AbstractItem> MultiSearch(string name,
-            eBaseCategory? eBase, eInnerCategory? eInner)
+        public List<AbstractItem> MultiSearch(
+            eBaseCategory? eBase, eInnerCategory? eInner, string name)
         {
-            return FindAbstractItem(
-                ai => ai.Name.ToLower().Contains(name.ToLower())
-                && ai.BaseCategory == eBase
-                && ai.InnerCategory == eInner).ToList();
+            bool baseCheck = eBase.HasValue ? true : false;
+            bool innerCheck = eInner.HasValue ? true : false;
+            return FindAbstractItem(ai =>
+                ai.Name.ToLower().Contains(name.ToLower())
+                && (baseCheck ? (ai.BaseCategory == eBase) : true)
+                && (innerCheck ? (ai.InnerCategory == eInner) : true)).ToList();
         }
-
     }
 }

@@ -290,7 +290,7 @@ namespace Library
             }
             else
             {
-                dataLib.ItemsSource = mainLibrary.MultiSearch(txtName.Text, cmb)
+                MultipleSearch();
             }
         }
 
@@ -300,6 +300,10 @@ namespace Library
             if (!IsMultiSearch && cmbBaseCategory.SelectedItem != null)
             {
                 dataLib.ItemsSource = mainLibrary.FindByBaseCategory((eBaseCategory)cmbBaseCategory.SelectedItem);
+            }
+            else if(IsMultiSearch)
+            {
+                MultipleSearch();
             }
         }
 
@@ -311,6 +315,17 @@ namespace Library
             {
                 dataLib.ItemsSource = mainLibrary.FindInnerByBaseCategory((eBaseCategory)eBase, (eInnerCategory)eInner);
             }
+            else if (IsMultiSearch)
+            {
+                MultipleSearch();
+            }
+        }
+
+        private void MultipleSearch()
+        {
+            eBaseCategory? eBase = cmbBaseCategory.SelectedValue is eBaseCategory ? (eBaseCategory?)cmbBaseCategory.SelectedValue : null;
+            eInnerCategory? eInner = cmbInnerCategory.SelectedValue is eInnerCategory ? (eInnerCategory?)cmbInnerCategory.SelectedValue : null;
+            dataLib.ItemsSource = mainLibrary.MultiSearch(eBase, eInner, txtName.Text);
         }
     }
 }
