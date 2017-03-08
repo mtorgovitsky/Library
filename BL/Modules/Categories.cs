@@ -6,8 +6,15 @@ using System.Threading.Tasks;
 
 namespace BL
 {
+    /// <summary>
+    /// Categories of Items
+    /// </summary>
     public static class Categories
     {
+        /// <summary>
+        /// Dictionary builded from Two Enums -
+        /// Different Inner categories for each Base Category
+        /// </summary>
         public static Dictionary<eBaseCategory, List<eInnerCategory>> CategoriesDictionary =
             new Dictionary<eBaseCategory, List<eInnerCategory>>
             {
@@ -47,6 +54,9 @@ namespace BL
                 }
             };
 
+        /// <summary>
+        /// Base Category Enum
+        /// </summary>
         public enum eBaseCategory
         {
             Kids,
@@ -55,6 +65,9 @@ namespace BL
             Cooking
         }
 
+        /// <summary>
+        /// Inner Category Enum
+        /// </summary>
         public enum eInnerCategory
         {
             Jewish,
