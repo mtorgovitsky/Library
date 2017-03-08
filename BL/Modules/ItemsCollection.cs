@@ -16,21 +16,40 @@ namespace BL
     [Serializable]
     public class ItemsCollection
     {
+        /// <summary>
+        /// Base Collection of the abstract Items for holding
+        /// the Items of the Library - Books and Journals
+        /// </summary>
         public List<AbstractItem> Items { get; set; }
+
+        /// <summary>
+        /// Collections of Users for the Library
+        /// </summary>
         public UsersManager LibraryUsers;
 
+        /// <summary>
+        /// Ctor  - instantiates two collections:
+        /// "Items" and "Users"
+        /// </summary>
         public ItemsCollection()
         {
             Items = new List<AbstractItem>();
             LibraryUsers = new UsersManager();
         }
 
-
+        /// <summary>
+        /// Saves entire Library to the local file by Serialization
+        /// </summary>
+        /// <param name="data">Data to save</param>
         public void SaveData(ItemsCollection data)
         {
             DBData.Serialize(data);
         }
 
+        /// <summary>
+        /// Returns the data from local file by desirialization
+        /// </summary>
+        /// <returns>Desirializated data</returns>
         public ItemsCollection GetBLData()
         {
             var data = DBData.DeSerialize<ItemsCollection>();
@@ -38,37 +57,43 @@ namespace BL
         }
 
 
-
+        /// <summary>
+        /// Checks if the Item is not Null and
+        /// adds the Item to collection
+        /// </summary>
+        /// <param name="abstItem"></param>
         public void Add(AbstractItem abstItem)
         {
             if (abstItem != null)
                 Items.Add(abstItem);
         }
 
+        /// <summary>
+        /// Predicate function - for future use
+        /// currently not referenced in the project
+        /// </summary>
+        /// <param name="p">Predicate</param>
+        /// <returns>List of the AbstractItem's</returns>
         public List<AbstractItem> ItemsToList(Func<AbstractItem, bool> p)
         {
             return Items.Where(p).ToList();
         }
 
-        //public int HowManyItems(AbstractItem item)
-        //{
-        //    if (item.GetType() == typeof(Journal))
-        //    {
-        //        var journals = _items.OfType<Journal>();
-        //        int result =
-
-        //    }
-        //    if (item.GetType() == typeof(Book))
-        //    {
-
-        //    }
-        //}
-
+        /// <summary>
+        /// Finds Item by Name
+        /// </summary>
+        /// <param name="name">Name to compare</param>
+        /// <returns>List of the AbstractItem's found</returns>
         public List<AbstractItem> FindItemByName(string name)
         {
             return Items.Where(i => i.Name.ToLower().Contains(name.ToLower())).ToList();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="baseCategory"></param>
+        /// <returns></returns>
         public List<AbstractItem> FindByBaseCategory(eBaseCategory baseCategory)
         {
             return Items.Where(i => i.BaseCategory == baseCategory).ToList();

@@ -12,6 +12,10 @@ namespace BL.Modules
     [Serializable]
     public class User
     {
+        /// <summary>
+        /// ID - static for incremention by one
+        /// for each new user
+        /// </summary>
         public static int ID;
         public string Name { get; set; }
         public string Password { get; set; }
@@ -50,21 +54,10 @@ namespace BL.Modules
 
         public bool CheckUser(string name, string pass)
         {
-            //var currUser = Users.First(u => u.Name == name && u.Password == pass);
             if (Users.Any(u => u.Name == name && u.Password == pass))
                 return true;
             else
                 return false;
         }
-
-        //public User GetUser(Func<User, bool> p)
-        //{
-        //    return Users.Where(p).FirstOrDefault();
-        //}
-
-        //public List<User> UsersList(Func<User, bool> p)
-        //{
-        //    return Users.Where(p).ToList();
-        //}
     }
 }
