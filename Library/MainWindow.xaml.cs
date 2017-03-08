@@ -265,6 +265,10 @@ namespace Library
                     {
                         ((TextBox)item).Text = string.Empty;
                     }
+                    else if(item is TextBox && item.IsFocused)
+                    {
+                        cmbBaseCategory.SelectedIndex = -1;
+                    }
                 }
 
             }
@@ -301,7 +305,7 @@ namespace Library
             {
                 dataLib.ItemsSource = mainLibrary.FindByBaseCategory((eBaseCategory)cmbBaseCategory.SelectedItem);
             }
-            else if(IsMultiSearch)
+            else if (IsMultiSearch)
             {
                 MultipleSearch();
             }
