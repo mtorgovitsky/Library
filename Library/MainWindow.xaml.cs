@@ -88,7 +88,7 @@ namespace Library
 
         public int GridSelected()
         {
-            UIElement[] controlsForDataGrid = { btnEdit, btnDetails, btnDelete, btnBorrow };
+            UIElement[] controlsForDataGrid = { btnEdit, btnDetails, btnDelete, btnBorrow, btnQuantity };
             if (dataLib.SelectedIndex >= 0 && dataLib.SelectedIndex < mainLibrary.Items.Count)
             {
                 GuiChanges.Enable(controlsForDataGrid);
@@ -326,6 +326,12 @@ namespace Library
             eBaseCategory? eBase = cmbBaseCategory.SelectedValue is eBaseCategory ? (eBaseCategory?)cmbBaseCategory.SelectedValue : null;
             eInnerCategory? eInner = cmbInnerCategory.SelectedValue is eInnerCategory ? (eInnerCategory?)cmbInnerCategory.SelectedValue : null;
             dataLib.ItemsSource = mainLibrary.MultiSearch(eBase, eInner, txtName.Text);
+        }
+
+        private void btnQuantity_Click(object sender, RoutedEventArgs e)
+        {
+            AbstractItem item = (AbstractItem)dataLib.SelectedItem;
+            GuiMsgs.Info($"The quantity of this {item.ItemType} is {mainLibrary.ItemQuantity(item)}");
         }
     }
 }
