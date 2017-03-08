@@ -214,6 +214,7 @@ namespace Library
         private void HideSearch(object sender, RoutedEventArgs e)
         {
             ShowAndHideSearchFields(eShowOrHide.Hide);
+            RefreshDataGrid();
             if (chkMultiSearch.IsChecked == true || chkSearch.IsChecked == true)
             {
                 ShowAndHideSearchFields(eShowOrHide.Show);
@@ -264,10 +265,12 @@ namespace Library
                     if (item != exceptThis && item is TextBox)
                     {
                         ((TextBox)item).Text = string.Empty;
+                        //RefreshDataGrid();
                     }
                     else if(item is TextBox && item.IsFocused)
                     {
                         cmbBaseCategory.SelectedIndex = -1;
+                        RefreshDataGrid();
                     }
                 }
 
