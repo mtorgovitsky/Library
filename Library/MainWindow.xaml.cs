@@ -182,8 +182,9 @@ namespace Library
 
         private void ShowAndHideSearchFields(eShowOrHide showHide)
         {
-            UIElement[] searchControls = { lblName, txtName, lblAuthor, txtAuthor, lblIssue, txtIssue,
-                lblBaseCategory, cmbBaseCategory, lblInnerCategory, cmbInnerCategory };
+            UIElement[] searchControls = { lblName, txtName, lblAuthor, txtAuthor,
+                lblIssue, txtIssue, lblBaseCategory, cmbBaseCategory,
+                lblInnerCategory, cmbInnerCategory };
             switch (showHide)
             {
                 case eShowOrHide.Show:
@@ -229,7 +230,8 @@ namespace Library
             }
             else if (!IsMultiSearch)
             {
-                dataLib.ItemsSource = mainLibrary.FindJournal(j => j.IssueNumber == int.Parse(txtIssue.Text));
+                dataLib.ItemsSource = 
+                    mainLibrary.FindJournal(j => j.IssueNumber == int.Parse(txtIssue.Text));
             }
             if (string.IsNullOrWhiteSpace(txtIssue.Text))
             {
@@ -242,7 +244,8 @@ namespace Library
             UIElement[] inner = { lblInnerCategory, cmbInnerCategory };
             if (cmbBaseCategory.SelectedItem != null)
             {
-                GuiChanges.FillComboWithInnerCategory(cmbInnerCategory, cmbBaseCategory.SelectedItem);
+                GuiChanges.FillComboWithInnerCategory
+                    (cmbInnerCategory, cmbBaseCategory.SelectedItem);
                 GuiChanges.Show(inner);
             }
             else
@@ -265,7 +268,6 @@ namespace Library
                     if (item != exceptThis && item is TextBox)
                     {
                         ((TextBox)item).Text = string.Empty;
-                        //RefreshDataGrid();
                     }
                     else if(item is TextBox && item.IsFocused)
                     {
@@ -281,7 +283,8 @@ namespace Library
         {
             if (!IsMultiSearch)
             {
-                dataLib.ItemsSource = mainLibrary.FindBook(b => b.Author.ToLower().Contains(txtAuthor.Text.ToLower()));
+                dataLib.ItemsSource = 
+                    mainLibrary.FindBook(b => b.Author.ToLower().Contains(txtAuthor.Text.ToLower()));
             }
             if (string.IsNullOrWhiteSpace(txtAuthor.Text))
             {
@@ -306,7 +309,8 @@ namespace Library
             FillInner();
             if (!IsMultiSearch && cmbBaseCategory.SelectedItem != null)
             {
-                dataLib.ItemsSource = mainLibrary.FindByBaseCategory((eBaseCategory)cmbBaseCategory.SelectedItem);
+                dataLib.ItemsSource = 
+                    mainLibrary.FindByBaseCategory((eBaseCategory)cmbBaseCategory.SelectedItem);
             }
             else if (IsMultiSearch)
             {
@@ -320,7 +324,8 @@ namespace Library
             var eInner = cmbInnerCategory.SelectedItem;
             if (eBase != null && eInner != null && !IsMultiSearch)
             {
-                dataLib.ItemsSource = mainLibrary.FindInnerByBaseCategory((eBaseCategory)eBase, (eInnerCategory)eInner);
+                dataLib.ItemsSource = 
+                    mainLibrary.FindInnerByBaseCategory((eBaseCategory)eBase, (eInnerCategory)eInner);
             }
             else if (IsMultiSearch)
             {
@@ -330,8 +335,14 @@ namespace Library
 
         private void MultipleSearch()
         {
-            eBaseCategory? eBase = cmbBaseCategory.SelectedValue is eBaseCategory ? (eBaseCategory?)cmbBaseCategory.SelectedValue : null;
-            eInnerCategory? eInner = cmbInnerCategory.SelectedValue is eInnerCategory ? (eInnerCategory?)cmbInnerCategory.SelectedValue : null;
+            eBaseCategory? eBase = 
+                cmbBaseCategory.SelectedValue is eBaseCategory ? 
+                (eBaseCategory?)cmbBaseCategory.SelectedValue : null;
+
+            eInnerCategory? eInner = 
+                cmbInnerCategory.SelectedValue is eInnerCategory ?
+                (eInnerCategory?)cmbInnerCategory.SelectedValue : null;
+
             dataLib.ItemsSource = mainLibrary.MultiSearch(eBase, eInner, txtName.Text);
         }
 
