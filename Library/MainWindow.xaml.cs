@@ -97,7 +97,7 @@ namespace Library
                 ButtonsAvailable();
                 var tmpItem = (AbstractItem)dataLib.SelectedItem;
                 btnDelete.Content = $"Delete this {tmpItem.ItemType}";
-                btnDetails.Content = $"Details of this{tmpItem.ItemType}";
+                btnDetails.Content = $"Details of this {tmpItem.ItemType}";
                 btnEdit.Content = $"Edit this {tmpItem.ItemType}";
                 btnQuantity.Content = $"Quantity of this {tmpItem.ItemType}";
                 switch (tmpItem.IsBorrowed)

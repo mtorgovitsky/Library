@@ -99,7 +99,7 @@ namespace Library
             }
         }
 
-        //Enable edit and delete buttons if the Selected Index is valid
+        //Enable "edit" and "delete" buttons if the Selected Index is valid
         private void EnableCommands(object sender, SelectionChangedEventArgs e)
         {
             if (SelectedIndexIsValid())
@@ -108,6 +108,7 @@ namespace Library
             }
         }
 
+        //Pop up the add new user dialog
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             EditCurrentUser.EditMode = false;
@@ -116,6 +117,7 @@ namespace Library
             Refresh();
         }
 
+        //Editing the users - using the same dialog window as for add new
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
             if (!IsCurrentUser())
@@ -128,6 +130,7 @@ namespace Library
             }
         }
 
+        //close the dialog
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
