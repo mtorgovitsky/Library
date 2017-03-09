@@ -124,7 +124,7 @@ namespace BL
         }
 
         public List<Journal> FindJournalByNameIssueDate(string name, int issueNumber, DateTime printDate)
-        {
+        { 
             name = name.ToLower();
 
             return Items
