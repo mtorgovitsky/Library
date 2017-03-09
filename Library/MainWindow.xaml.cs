@@ -63,6 +63,7 @@ namespace Library
             var addItem = new AddNewItem();
             addItem.ShowDialog();
             RefreshDataGrid();
+            UntickSearchOptions();
         }
 
         private void ClosingMainWindow(object sender, System.ComponentModel.CancelEventArgs e)
@@ -84,6 +85,7 @@ namespace Library
             var editW = new EditItem();
             editW.ShowDialog();
             RefreshDataGrid();
+            UntickSearchOptions();
         }
 
         public int GridSelected()
@@ -134,6 +136,7 @@ namespace Library
             {
                 mainLibrary.Items.Remove((AbstractItem)dataLib.SelectedItem);
                 RefreshDataGrid();
+                UntickSearchOptions();
             }
         }
 
@@ -161,7 +164,7 @@ namespace Library
             AbstractItem choosenItem = (AbstractItem)dataLib.SelectedItem;
             choosenItem.IsBorrowed = !choosenItem.IsBorrowed;
             RefreshDataGrid();
-            chkMultiSearch.IsChecked = chkSearch.IsChecked = false;
+            UntickSearchOptions();
             ShowAndHideSearchFields(eShowOrHide.Hide);
         }
 
@@ -230,7 +233,7 @@ namespace Library
             }
             else if (!IsMultiSearch)
             {
-                dataLib.ItemsSource = 
+                dataLib.ItemsSource =
                     mainLibrary.FindJournal(j => j.IssueNumber == int.Parse(txtIssue.Text));
             }
             if (string.IsNullOrWhiteSpace(txtIssue.Text))
@@ -269,7 +272,7 @@ namespace Library
                     {
                         ((TextBox)item).Text = string.Empty;
                     }
-                    else if(item is TextBox && item.IsFocused)
+                    else if (item is TextBox && item.IsFocused)
                     {
                         cmbBaseCategory.SelectedIndex = -1;
                         RefreshDataGrid();
@@ -283,7 +286,7 @@ namespace Library
         {
             if (!IsMultiSearch)
             {
-                dataLib.ItemsSource = 
+                dataLib.ItemsSource =
                     mainLibrary.FindBook(b => b.Author.ToLower().Contains(txtAuthor.Text.ToLower()));
             }
             if (string.IsNullOrWhiteSpace(txtAuthor.Text))
@@ -309,7 +312,7 @@ namespace Library
             FillInner();
             if (!IsMultiSearch && cmbBaseCategory.SelectedItem != null)
             {
-                dataLib.ItemsSource = 
+                dataLib.ItemsSource =
                     mainLibrary.FindByBaseCategory((eBaseCategory)cmbBaseCategory.SelectedItem);
             }
             else if (IsMultiSearch)
@@ -324,7 +327,7 @@ namespace Library
             var eInner = cmbInnerCategory.SelectedItem;
             if (eBase != null && eInner != null && !IsMultiSearch)
             {
-                dataLib.ItemsSource = 
+                dataLib.ItemsSource =
                     mainLibrary.FindInnerByBaseCategory((eBaseCategory)eBase, (eInnerCategory)eInner);
             }
             else if (IsMultiSearch)
@@ -335,11 +338,11 @@ namespace Library
 
         private void MultipleSearch()
         {
-            eBaseCategory? eBase = 
-                cmbBaseCategory.SelectedValue is eBaseCategory ? 
+            eBaseCategory? eBase =
+                cmbBaseCategory.SelectedValue is eBaseCategory ?
                 (eBaseCategory?)cmbBaseCategory.SelectedValue : null;
 
-            eInnerCategory? eInner = 
+            eInnerCategory? eInner =
                 cmbInnerCategory.SelectedValue is eInnerCategory ?
                 (eInnerCategory?)cmbInnerCategory.SelectedValue : null;
 
@@ -350,6 +353,11 @@ namespace Library
         {
             AbstractItem item = (AbstractItem)dataLib.SelectedItem;
             GuiMsgs.Info($"The quantity of this {item.ItemType} is {mainLibrary.ItemQuantity(item)}");
+        }
+
+        private void UntickSearchOptions()
+        {
+            chkSearch.IsChecked = chkMultiSearch.IsChecked = false;
         }
     }
 }
