@@ -21,9 +21,14 @@ namespace Library
     /// </summary>
     public partial class EditCurrentUser : Window
     {
+        //If the window was initiated for Editing existing User or
+        //to add the new one
         public static bool EditMode { get; set; }
+
+        //User instance to deal with
         public static User UserToAddOrEdit { get; set; }
 
+        //Ctor for our window
         public EditCurrentUser()
         {
             InitializeComponent();
@@ -37,12 +42,13 @@ namespace Library
             }
         }
 
+        //Init all the controls of the window
         private void InitAllFields(string title, string button)
         {
             cmbType.ItemsSource = Enum.GetValues(typeof(User.eUserType));
             Title = title;
             btnSaveEdit.Content = button;
-            if (EditMode)
+            if (EditMode) //if updating existing user
             {
                 txtName.Text = UserToAddOrEdit.Name;
                 txtPassword.Text = UserToAddOrEdit.Password;
@@ -52,7 +58,8 @@ namespace Library
 
         private void btnSaveEdit_Click(object sender, RoutedEventArgs e)
         {
-            if(!Validity.StringOK(txtName.Text))
+            /////////////////////////   VALIDATION OF THE USER INPUT   //////////////////
+            if (!Validity.StringOK(txtName.Text))
             {
                 GuiMsgs.Warning("Please Enter User Name");
             }
@@ -64,17 +71,18 @@ namespace Library
             {
                 GuiMsgs.Warning("Please select the User Type");
             }
-            else
+            /////////////////////////   VALIDATION OF THE USER INPUT   //////////////////
+            else //if all fields are OK
             {
                 switch (EditMode)
                 {
-                    case true:
+                    case true: //updating existing user
                         UserToAddOrEdit.Name = txtName.Text;
                         UserToAddOrEdit.Password = txtPassword.Text;
                         UserToAddOrEdit.Type = (User.eUserType)cmbType.SelectedItem;
                         this.Close();
                         break;
-                    case false:
+                    case false: //adding new user
                         UserToAddOrEdit = new User(txtName.Text, txtPassword.Text, (User.eUserType)cmbType.SelectedItem);
                         MainWindow.mainLibrary.LibraryUsers.Users.Add(UserToAddOrEdit);
                         this.Close();
