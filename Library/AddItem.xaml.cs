@@ -22,7 +22,14 @@ namespace Library.GUI
     /// </summary>
     public partial class AddNewItem : Window
     {
+        /// <summary>
+        /// Item to add in the library
+        /// </summary>
         public ItemType CurrentItem { get; set; }
+
+        /// <summary>
+        /// Enum for manipulating the user choice for radio buttons
+        /// </summary>
         public enum ItemType
         {
             Default,
@@ -30,14 +37,20 @@ namespace Library.GUI
             Journal
         }
 
+        //Ctor for add new Item window
         public AddNewItem()
         {
             InitializeComponent();
+            //Hide the labels and the text boxes ubtil user chooses Item Type
             GuiChanges.Hide(lblIssue, lblAuthor, txtIssue, txtAuthor);
+            //Obvously understandable by function name
             GuiChanges.FillComboWithBaseCategory(cmbBaseCat);
+            //Untill user choose the BaseCategory - disable inner
             GuiChanges.Disable(cmbInnerCat);
         }
 
+        //Fills inner category relative to base that user chooses
+        //and enables the combo for Inner
         private void FillInnerCombo(object sender, SelectionChangedEventArgs e)
         {
             GuiChanges.Enable(cmbInnerCat);
@@ -45,6 +58,7 @@ namespace Library.GUI
             cmbInnerCat.SelectedIndex = 0;
         }
 
+        //Hide and show related elements when user chooses the Item type
         private void rdChecked(object sender, RoutedEventArgs e)
         {
             var rdValue = sender as RadioButton;
@@ -65,6 +79,7 @@ namespace Library.GUI
 
             }
         }
+
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
@@ -112,7 +127,7 @@ namespace Library.GUI
                         {
                             GuiMsgs.Warning("Please Enter the valid Issue Number!");
                         }
-                        else
+                        else //If All the fields are OK - create new Item and add him into the Library
                         {
                             CreateItem();
                             this.Close();
@@ -123,6 +138,7 @@ namespace Library.GUI
             /////////////////////////   VALIDATION OF THE USER INPUT   //////////////////
         }
 
+        //Creats new Item by given parameters and adds him to the Library
         public void CreateItem()
         {
             switch (CurrentItem)
