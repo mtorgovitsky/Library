@@ -212,12 +212,13 @@ namespace BL
         }
 
         /// <summary>
-        /// Multi search
+        /// Multi search for Abstract Items that 
+        /// stands up with given search parameters
         /// </summary>
-        /// <param name="eBase"></param>
-        /// <param name="eInner"></param>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="eBase">eBaseCategory Enum - nullable</param>
+        /// <param name="eInner">eInnerCategory Enum - nullable</param>
+        /// <param name="name">Name string</param>
+        /// <returns>List of the AbstractItem's found</returns>
         public List<AbstractItem> MultiSearch(
             eBaseCategory? eBase, eInnerCategory? eInner, string name)
         {
