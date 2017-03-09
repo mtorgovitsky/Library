@@ -13,7 +13,7 @@ namespace Data
         public const string FilePath = "Library.bin";
 
         /// <summary>
-        ///  Serializes the object to "DBData.osl" File.
+        ///  Serializes the object to FilePath File.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="obj"></param>
@@ -28,7 +28,7 @@ namespace Data
 
         /// <summary>
         ///  Deserializes the specified stream into an object.
-        ///  From the "DBData.osl" File.
+        ///  From the FilePath File.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
