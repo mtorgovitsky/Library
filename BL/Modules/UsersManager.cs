@@ -21,6 +21,9 @@ namespace BL.Modules
         public string Password { get; set; }
         public eUserType Type { get; set; }
 
+        /// <summary>
+        /// User Types Enum
+        /// </summary>
         public enum eUserType
         {
             Administrator,
@@ -28,6 +31,12 @@ namespace BL.Modules
             Client
         }
 
+        /// <summary>
+        /// User Class
+        /// </summary>
+        /// <param name="name">User Name</param>
+        /// <param name="password">Password</param>
+        /// <param name="type">User Type</param>
         public User(string name, string password, eUserType type)
         {
             ID++;
@@ -37,21 +46,46 @@ namespace BL.Modules
         }
     }
 
+    /// <summary>
+    /// Managers all the Users
+    /// </summary>
     [Serializable]
     public class UsersManager
     {
+        /// <summary>
+        /// Users container
+        /// </summary>
         public List<User> Users = new List<User>()
         {
             new User( "BigBoss", "1", User.eUserType.Administrator )
         };
 
+        /// <summary>
+        /// Current User
+        /// </summary>
         public User CurrentUser { get; set; }
 
+        /// <summary>
+        /// Finds User by given parameters
+        /// </summary>
+        /// <param name="name">User Name</param>
+        /// <param name="password">Password</param>
+        /// <returns>User found</returns>
         public User GetCurrentUser(string name, string password)
         {
             return Users.FirstOrDefault(u => u.Name == name && u.Password == password);
         }
 
+        /// <summary>
+        /// Checks if given User has correct 
+        /// username and password relatively
+        /// </summary>
+        /// <param name="name">User Name</param>
+        /// <param name="pass">Password</param>
+        /// <returns>
+        /// True if username and password is same,
+        /// False if not
+        /// </returns>
         public bool CheckUser(string name, string pass)
         {
             if (Users.Any(u => u.Name == name && u.Password == pass))
