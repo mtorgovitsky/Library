@@ -30,6 +30,10 @@ namespace Library.Modules
                 MessageBoxButton.OK,
                 MessageBoxImage.Asterisk);
         }
+
+        /// <summary>
+        /// If the username or the password are incorrect
+        /// </summary>
         public static void LoginFailed()
         {
             MessageBox.Show
@@ -40,19 +44,32 @@ namespace Library.Modules
                 MessageBoxImage.Error);
         }
 
-        internal static void Warning(string message)
+        /// <summary>
+        /// Warning Message with relative Icon and Caption text
+        /// </summary>
+        /// <param name="message">Message to display</param>
+        public static void Warning(string message)
         {
             MessageBox.Show(message, "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
-        internal static void Info(string message)
+        /// <summary>
+        /// Information Message with relative Icon and Caption text
+        /// </summary>
+        /// <param name="message">Message to display</param>
+        public static void Info(string message)
         {
             MessageBox.Show(message, "Info", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-        internal static bool AreYouSure(string message)
+        /// <summary>
+        /// Yes/No Dialog message with relative Icon and Caption text
+        /// </summary>
+        /// <param name="message">Message to display</param>
+        /// <returns>TRUE If User clicks Yes, and FALSE if opposite</returns>
+        public static bool AreYouSure(string message)
         {
-            var result = MessageBox.Show(message, "Really?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var result = MessageBox.Show(message, "Are You Sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
                 return true;
