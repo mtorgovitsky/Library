@@ -14,12 +14,12 @@
         </Grid.ColumnDefinitions>
         <Button x:Name="btnExit" Content="Exit" HorizontalAlignment="Left" Height="36" Margin="5,619,0,0" VerticalAlignment="Top" Width="89" Click="btnExit_Click" Grid.Column="2"/>
         <DataGrid x:Name="dataLib" HorizontalAlignment="Left" Height="645" Margin="10,10,0,0" VerticalAlignment="Top" Width="654" Grid.ColumnSpan="2" SelectionChanged="dataLib_SelectionChanged"/>
-        <Button x:Name="btnAdd" Content="Add Item" HorizontalAlignment="Left" Height="28" Margin="5,10,0,0" VerticalAlignment="Top" Width="89" Click="btnAdd_Click" Grid.Column="2"/>
-        <Button x:Name="btnEdit" Content="Edit Item" HorizontalAlignment="Left" Height="28" Margin="5,48,0,0" VerticalAlignment="Top" Width="89" Grid.Column="2" Click="btnEdit_Click"/>
-        <Button x:Name="btnDetails" Content="Item Details" HorizontalAlignment="Left" Height="28" Margin="5,88,0,0" VerticalAlignment="Top" Width="89" Grid.Column="2" Click="btnDetails_Click"/>
-        <Button x:Name="btnDelete" Content="Delete Item" HorizontalAlignment="Left" Height="28" Margin="5,128,0,0" VerticalAlignment="Top" Width="89" Grid.Column="2" Click="btnDelete_Click"/>
+        <Button x:Name="btnAdd" Content="Add Item" HorizontalAlignment="Left" Height="28" Margin="205,10,0,0" VerticalAlignment="Top" Width="140" Click="btnAdd_Click" Grid.Column="1" Grid.ColumnSpan="2"/>
+        <Button x:Name="btnEdit" Content="Edit Item" HorizontalAlignment="Left" Height="28" Margin="205,48,0,0" VerticalAlignment="Top" Width="140" Grid.Column="1" Click="btnEdit_Click" Grid.ColumnSpan="2"/>
+        <Button x:Name="btnDetails" Content="Item Details" HorizontalAlignment="Left" Height="28" Margin="205,88,0,0" VerticalAlignment="Top" Width="140" Grid.Column="1" Click="btnDetails_Click" Grid.ColumnSpan="2"/>
+        <Button x:Name="btnDelete" Content="Delete Item" HorizontalAlignment="Left" Height="28" Margin="205,128,0,0" VerticalAlignment="Top" Width="140" Grid.Column="1" Click="btnDelete_Click" Grid.ColumnSpan="2"/>
         <Button x:Name="btnUsers" Content="Edit Users" HorizontalAlignment="Left" Height="28" Margin="5,576,0,0" VerticalAlignment="Top" Width="89" Grid.Column="2" Click="btnUsers_Click"/>
-        <Button x:Name="btnBorrow" Content="Borrow Item" HorizontalAlignment="Left" Height="28" Margin="5,169,0,0" VerticalAlignment="Top" Width="89" Grid.Column="2" Click="btnBorrow_Click"/>
+        <Button x:Name="btnBorrow" Content="Borrow Item" HorizontalAlignment="Left" Height="28" Margin="205,168,0,0" VerticalAlignment="Top" Width="140" Grid.Column="1" Click="btnBorrow_Click" Grid.ColumnSpan="2"/>
         <TextBlock x:Name="lblName" Grid.Column="2" HorizontalAlignment="Left" Height="18" Margin="5,324,0,0" TextWrapping="Wrap" Text="Item Name" VerticalAlignment="Top" Width="89" TextAlignment="Center"/>
         <TextBox x:Name="txtName" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Left" Height="21" Margin="205,341,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" TextAlignment="Center" TextChanged="NameSearch" GotFocus="Focused"/>
         <CheckBox x:Name="chkSearch" Grid.ColumnSpan="2" Content="Regular" Grid.Column="1" HorizontalAlignment="Left" Height="16" Margin="205,303,0,0" VerticalAlignment="Top" Width="63" Checked="chkSearch_Checked" Unchecked="HideSearch"/>
@@ -33,7 +33,7 @@
         <TextBlock x:Name="lblBaseCategory" Grid.Column="2" HorizontalAlignment="Left" Height="18" Margin="5,456,0,0" TextWrapping="Wrap" Text="Base Category" VerticalAlignment="Top" Width="89" TextAlignment="Center"/>
         <ComboBox x:Name="cmbInnerCategory" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="205,520,0,0" VerticalAlignment="Top" Width="140" GotFocus="Focused" SelectionChanged="SearchInnerByBase"/>
         <TextBlock x:Name="lblInnerCategory" Grid.Column="2" HorizontalAlignment="Left" Height="18" Margin="5,502,0,0" TextWrapping="Wrap" Text="Inner Category" VerticalAlignment="Top" Width="89" TextAlignment="Center"/>
-        <Button x:Name="btnQuantity" Content="Quantity" HorizontalAlignment="Left" Height="28" Margin="5,209,0,0" VerticalAlignment="Top" Width="89" Grid.Column="2" Click="btnQuantity_Click"/>
+        <Button x:Name="btnQuantity" Content="Quantity" HorizontalAlignment="Left" Height="28" Margin="205,208,0,0" VerticalAlignment="Top" Width="140" Grid.Column="1" Click="btnQuantity_Click" Grid.ColumnSpan="2"/>
 
     </Grid>
 </Window>

@@ -25,25 +25,31 @@ namespace Library
         {
             InitializeComponent();
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            dataUsers.IsReadOnly = true;
+            dataUsers.IsReadOnly = true; //blocking the DataGrid
+            //set the source for the DataGrid
             dataUsers.ItemsSource = MainWindow.mainLibrary.LibraryUsers.Users;
+            //Disable buttons because no User haven't been choosen
             GuiChanges.Disable(btnDelete, btnEdit);
         }
 
+        //Method for quick refresh action on DataGrid
         private void Refresh()
         {
             dataUsers.Items.Refresh();
         }
 
+        //Hiding the password column in the DataGrid
         private void HidePass(object sender, RoutedEventArgs e)
         {
             dataUsers.Columns[1].Visibility = Visibility.Hidden;
         }
 
+        //Deleting user
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            if (!IsCurrentUser())
+            if (!IsCurrentUser()) // So current user ca't be deleted
             {
+                //Warning dialog - last chance to regret
                 if (GuiMsgs.AreYouSure($"Are You Sure that\nYou want to delete the\n'{((User)dataUsers.SelectedItem).Name}'\nUser?"))
                 {
                     MainWindow.mainLibrary.LibraryUsers.Users.Remove((User)dataUsers.SelectedItem);
@@ -51,13 +57,20 @@ namespace Library
                 }
             }
         }
+
+        /// <summary>
+        /// Check if User from DataGrid is the current User
+        /// </summary>
+        /// <returns>If the User is current - true, opposite - false</returns>
         private bool IsCurrentUser()
         {
+            //if the user is current - prevent deletion or editing
             if (MainWindow.mainLibrary.LibraryUsers.CurrentUser.Name == ((User)dataUsers.SelectedItem).Name)
             {
                 GuiMsgs.Info("Deletion or Editing of Current user is\nFORBIDDEN!");
                 return true;
             }
+            //if the user is main user - also prevent deletion or editing
             if (((User)dataUsers.SelectedItem).Name == "BigBoss")
             {
                 GuiMsgs.Info("Deletion or Editing of the 'Big Boss' is\nFORBIDDEN!\nThis is the Main User,\nSo It's Impossible to Delete him");
@@ -69,6 +82,10 @@ namespace Library
             }
         }
 
+        /// <summary>
+        /// Prevent exception on choosing Column name or under the last row in the DataGrid
+        /// </summary>
+        /// <returns>If the index is in valid range - true or false</returns>
         private bool SelectedIndexIsValid()
         {
             if (dataUsers.SelectedIndex >= 0
@@ -82,6 +99,7 @@ namespace Library
             }
         }
 
+        //Enable edit and delete buttons if the Selected Index is valid
         private void EnableCommands(object sender, SelectionChangedEventArgs e)
         {
             if (SelectedIndexIsValid())

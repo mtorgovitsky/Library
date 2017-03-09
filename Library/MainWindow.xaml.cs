@@ -96,13 +96,17 @@ namespace Library
                 GuiChanges.Enable(controlsForDataGrid);
                 ButtonsAvailable();
                 var tmpItem = (AbstractItem)dataLib.SelectedItem;
+                btnDelete.Content = $"Delete this {tmpItem.ItemType}";
+                btnDetails.Content = $"Details of this{tmpItem.ItemType}";
+                btnEdit.Content = $"Edit this {tmpItem.ItemType}";
+                btnQuantity.Content = $"Quantity of this {tmpItem.ItemType}";
                 switch (tmpItem.IsBorrowed)
                 {
                     case true:
-                        btnBorrow.Content = $"Return {tmpItem.ItemType}";
+                        btnBorrow.Content = $"Return this {tmpItem.ItemType}";
                         break;
                     case false:
-                        btnBorrow.Content = $"Borrow {tmpItem.ItemType}";
+                        btnBorrow.Content = $"Borrow this {tmpItem.ItemType}";
                         break;
                 }
                 return dataLib.SelectedIndex;
