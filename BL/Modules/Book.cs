@@ -8,11 +8,17 @@ using BL;
 namespace BookLib
 {
     /// <summary>
+    /// Book Class
     /// Inherits from Base AbstractItem class
     /// </summary>
     [Serializable]
     public class Book : AbstractItem
     {
+        /// <summary>
+        /// Author of the book
+        /// </summary>
+        public string Author { get; set; }
+
         /// <summary>
         /// Ctor for The Book
         /// </summary>
@@ -32,17 +38,13 @@ namespace BookLib
             Author = author;
         }
 
-        /// <summary>
-        /// Author of the book
-        /// </summary>
-        public string Author { get; set; }
 
         /// <summary>
         /// Override of the base method,
         /// adds Author Comparison
         /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
+        /// <param name="item">Abstract Item</param>
+        /// <returns>Boolean true or false - found or not</returns>
         public override bool Equal(AbstractItem item)
         {
             Book tmpBook = item as Book;

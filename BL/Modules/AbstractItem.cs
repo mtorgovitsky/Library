@@ -126,7 +126,7 @@ namespace BookLib
         /// Custom Equal method
         /// </summary>
         /// <param name="item">AbstractItem to check</param>
-        /// <returns>true or false - Equality result</returns>
+        /// <returns>true or false comparison result</returns>
         public virtual bool Equal(AbstractItem item)
         {
             if (Name == item.Name && BaseCategory == item.BaseCategory
