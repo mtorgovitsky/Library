@@ -23,23 +23,30 @@ namespace Library
     /// </summary>
     public partial class EditItem : Window
     {
+        //Current Item to deal with in the current window
         public static AbstractItem CurrentItem;
+
+        //If updating existing or just showing the details
         public static bool EditMode { get; set; }
 
+        //Ctor for window
         public EditItem()
         {
             InitializeComponent();
+            //init all elements depending on current working state
             InitEditItemWindow();
+            //update the fields with Item's details
             UpdateFromItem();
         }
 
+        //init all elements depending on current working state
         private void InitEditItemWindow()
         {
             this.WindowStyle = WindowStyle.SingleBorderWindow;
             this.ResizeMode = ResizeMode.NoResize;
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             lblISBN.TextAlignment = TextAlignment.Center;
-            if (!EditMode)
+            if (!EditMode) //showing details mode
             {
                 this.Title = "Item Details";
                 GuiChanges.Show(chkBorrowed);
@@ -48,19 +55,26 @@ namespace Library
                     GuiChanges.Disable(item);
                 }
                 btnSaveExit.Content = "Exit";
+                //After all controls being disabled because of "SHow Details Mode",
+                //Enable the Exit button
                 GuiChanges.Enable(btnSaveExit);
             }
-            else
+            else //editing Item Mode
             {
                 btnSaveExit.Content = "Save Changes";
+                //Hide "Item is Borrowed" indicator CheckBox
                 GuiChanges.Hide(chkBorrowed);
             }
         }
 
+        //Update the fields from current Item
         public void UpdateFromItem()
         {
+            //creating the arrays for easy handling the controls
             UIElement[] issue = { lblIssue, txtIssue };
             UIElement[] author = { lblAuthor, txtAuthor };
+
+            //updating the fields
             lblISBN.Text = $"ISBN: {CurrentItem.ISBN}";
             lblTypeOf.Text = CurrentItem.ItemType;
             chkBorrowed.IsChecked = CurrentItem.IsBorrowed;
@@ -83,6 +97,7 @@ namespace Library
             }
         }
 
+        //Fill the Inner Category ComboBox with relative values
         private void FillInnerCategory()
         {
             GuiChanges.FillComboWithInnerCategory(cmbInnerCat, cmbBaseCat.SelectedItem);
@@ -91,18 +106,20 @@ namespace Library
                 cmbInnerCat.SelectedIndex++;
         }
 
+        //Event to handle in Base Category ComboBox
         private void cmbBaseCat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             FillInnerCategory();
         }
 
+        //Saving after editing or just Exit if Showing details
         private void btnSaveExit_Click(object sender, RoutedEventArgs e)
         {
-            if (EditMode)
+            if (EditMode) //Update current Item if we are in the Editing Mode
             {
-                if (FieldsValidForUpdate())
+                if (FieldsValidForUpdate()) //If all of the values are OK
                 {
-                    UpdateCurrentItem();
+                    UpdateCurrentItem(); //Make an Update
                     this.Close();
                 }
             }
@@ -112,6 +129,7 @@ namespace Library
             }
         }
 
+        //Updates the Current Item
         private void UpdateCurrentItem()
         {
             CurrentItem.Name = txtName.Text;
@@ -130,7 +148,8 @@ namespace Library
         }
 
         /// <summary>
-        /// Check that all the fields are valid before Update the Current Item
+        /// Validation method that checks if all the fields are valid
+        /// before Update the Current Item
         /// </summary>
         /// <returns>true if the fields are OK and false if opposite</returns>
         private bool FieldsValidForUpdate()
