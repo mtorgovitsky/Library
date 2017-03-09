@@ -10,7 +10,7 @@ using static BL.Categories;
 namespace Library.Modules
 {
     /// <summary>
-    /// Utilities static class for many GUI manipulations
+    /// Utilities static class for EASY GUI manipulations
     /// </summary>
     public static class GuiChanges
     {
