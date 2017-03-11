@@ -60,12 +60,16 @@ namespace Library
             {
                 GuiMsgs.Warning(ex.Message);
             }
+            
             //Disable the login button until the user enters some characters
             //in both fields
             GuiChanges.Disable(btnLogin);
+
             txtUserName.HorizontalContentAlignment =
                 pswPassword.HorizontalContentAlignment = HorizontalAlignment.Center;
+
             pswPassword.PasswordChar = '*';
+            
             //Focusing the keyboard into username field
             txtUserName.Focus();
         }
@@ -77,7 +81,11 @@ namespace Library
             if (!MainWindow.mainLibrary.LibraryUsers.CheckUser(txtUserName.Text, pswPassword.Password))
             {
                 GuiMsgs.LoginFailed();
+
+                //Cleaning the Input fields after for fresh input from the User
                 txtUserName.Text = pswPassword.Password = string.Empty;
+
+                //Focusing the keyboard into username field
                 txtUserName.Focus();
             }
             //if the input is correct - insert the user data
@@ -86,7 +94,9 @@ namespace Library
             {
                 MainWindow.mainLibrary.LibraryUsers.CurrentUser = 
                     MainWindow.mainLibrary.LibraryUsers.GetCurrentUser(txtUserName.Text, pswPassword.Password);
+
                 ShowMain = true;
+
                 this.Close();
             }
         }

@@ -15,6 +15,7 @@ namespace BookLib
     [Serializable]
     public abstract class AbstractItem : IEqual
     {
+        //If we want to get Item name wrapped into string
         public string ItemType
         {
             get

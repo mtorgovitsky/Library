@@ -82,6 +82,7 @@ namespace Library
                         UserToAddOrEdit.Type = (User.eUserType)cmbType.SelectedItem;
                         this.Close();
                         break;
+
                     case false: //adding new user
                         UserToAddOrEdit = new User(txtName.Text, txtPassword.Text, (User.eUserType)cmbType.SelectedItem);
                         MainWindow.mainLibrary.LibraryUsers.Users.Add(UserToAddOrEdit);

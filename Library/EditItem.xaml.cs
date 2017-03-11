@@ -33,8 +33,10 @@ namespace Library
         public EditItem()
         {
             InitializeComponent();
+            
             //init all elements depending on current working state
             InitEditItemWindow();
+            
             //update the fields with Item's details
             UpdateFromItem();
         }
@@ -43,25 +45,38 @@ namespace Library
         private void InitEditItemWindow()
         {
             this.WindowStyle = WindowStyle.SingleBorderWindow;
+
             this.ResizeMode = ResizeMode.NoResize;
+
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
             lblISBN.TextAlignment = TextAlignment.Center;
+
             if (!EditMode) //showing details mode
             {
                 this.Title = "Item Details";
+
+                //Show check button for Telling to the user if the item is borrowed or not
                 GuiChanges.Show(chkBorrowed);
+
+                //Disable all the controls because we're in "Show Details" mode
                 foreach (UIElement item in this.grdWindowGrid.Children)
                 {
                     GuiChanges.Disable(item);
                 }
+
+                //Button caption changed to "Exit"
                 btnSaveExit.Content = "Exit";
-                //After all controls being disabled because of "SHow Details Mode",
+                
+                //After all controls being disabled because of "Show Details" mode,
                 //Enable the Exit button
                 GuiChanges.Enable(btnSaveExit);
             }
             else //editing Item Mode
             {
+                //Button caption changed to "Save Changes"
                 btnSaveExit.Content = "Save Changes";
+                
                 //Hide "Item is Borrowed" indicator CheckBox
                 GuiChanges.Hide(chkBorrowed);
             }
@@ -70,18 +85,27 @@ namespace Library
         //Update the fields from current Item
         public void UpdateFromItem()
         {
-            //creating the arrays for easy handling the controls
+            //creating the arrays for easy handling the Journal controls
             UIElement[] issue = { lblIssue, txtIssue };
+
+            //creating the arrays for easy handling the Book controls
             UIElement[] author = { lblAuthor, txtAuthor };
 
-            //updating the fields
+            //-------------- Updating the fields from Current Item -------------//
             lblISBN.Text = $"ISBN: {CurrentItem.ISBN}";
+
             lblTypeOf.Text = CurrentItem.ItemType;
+
             chkBorrowed.IsChecked = CurrentItem.IsBorrowed;
+
             GuiChanges.FillComboWithBaseCategory(cmbBaseCat);
+
             cmbBaseCat.SelectedItem = CurrentItem.BaseCategory;
+
             txtName.Text = CurrentItem.Name;
+
             dtPick.SelectedDate = CurrentItem.PrintDate;
+
             switch (CurrentItem.ItemType)
             {
                 case "Book":
@@ -95,13 +119,16 @@ namespace Library
                     txtIssue.Text = ((Journal)CurrentItem).IssueNumber.ToString();
                     break;
             }
+            //-------------- Updating the fields from Current Item -------------//
         }
 
         //Fill the Inner Category ComboBox with relative values
         private void FillInnerCategory()
         {
             GuiChanges.FillComboWithInnerCategory(cmbInnerCat, cmbBaseCat.SelectedItem);
+
             cmbInnerCat.SelectedItem = CurrentItem.InnerCategory;
+
             if (cmbInnerCat.SelectedIndex < 0)
                 cmbInnerCat.SelectedIndex++;
         }
@@ -129,13 +156,17 @@ namespace Library
             }
         }
 
-        //Updates the Current Item
+        //Method updates the Current Item Data with possible user changes made
         private void UpdateCurrentItem()
         {
             CurrentItem.Name = txtName.Text;
+
             CurrentItem.BaseCategory = (Categories.eBaseCategory)cmbBaseCat.SelectedItem;
+
             CurrentItem.InnerCategory = (Categories.eInnerCategory)cmbInnerCat.SelectedItem;
+
             CurrentItem.PrintDate = dtPick.SelectedDate.Value;
+
             switch (CurrentItem.ItemType)
             {
                 case "Book":
@@ -157,11 +188,13 @@ namespace Library
             if (!Validity.StringOK(txtName.Text))
             {
                 GuiMsgs.Warning("Please enter the Item Name!");
+
                 return false;
             }
             else if (dtPick.SelectedDate == null)
             {
                 GuiMsgs.Warning("Please Select the Publishing Date!");
+
                 return false;
             }
             else
@@ -172,6 +205,7 @@ namespace Library
                         if (!Validity.StringOK(txtAuthor.Text))
                         {
                             GuiMsgs.Warning("Please Enter the Author Name!");
+
                             return false;
                         }
                         break;
@@ -179,11 +213,13 @@ namespace Library
                         if (!Validity.StringOK(txtIssue.Text))
                         {
                             GuiMsgs.Warning("Please Enter The Issue Number!");
+
                             return false;
                         }
                         else if (!Validity.PositiveInteger(txtIssue.Text))
                         {
                             GuiMsgs.Warning("Please Enter the valid Issue Number!");
+
                             return false;
                         }
                         break;

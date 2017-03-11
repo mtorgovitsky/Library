@@ -24,10 +24,15 @@ namespace Library
         public EditUsers()
         {
             InitializeComponent();
+
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            dataUsers.IsReadOnly = true; //blocking the DataGrid
+
+            //Preventing the DataGrid from inplace editing
+            dataUsers.IsReadOnly = true;
+            
             //set the source for the DataGrid
             dataUsers.ItemsSource = MainWindow.mainLibrary.LibraryUsers.Users;
+            
             //Disable buttons because no User haven't been choosen
             GuiChanges.Disable(btnDelete, btnEdit);
         }
@@ -49,10 +54,14 @@ namespace Library
         {
             if (!IsCurrentUser()) // So current user ca't be deleted
             {
-                //Warning dialog - last chance to regret
+                //Warning dialog - last chance to regret and if user approves -
+                //deleting the Item form the Library
                 if (GuiMsgs.AreYouSure($"Are You Sure that\nYou want to delete the\n'{((User)dataUsers.SelectedItem).Name}'\nUser?"))
                 {
+                    //Deletion
                     MainWindow.mainLibrary.LibraryUsers.Users.Remove((User)dataUsers.SelectedItem);
+
+                    //Refresh the Grid after the change was made to the Item collection
                     Refresh();
                 }
             }
@@ -70,12 +79,14 @@ namespace Library
                 GuiMsgs.Info("Deletion or Editing of Current user is\nFORBIDDEN!");
                 return true;
             }
+            
             //if the user is main user - also prevent deletion or editing
             if (((User)dataUsers.SelectedItem).Name == "BigBoss")
             {
                 GuiMsgs.Info("Deletion or Editing of the 'Big Boss' is\nFORBIDDEN!\nThis is the Main User,\nSo It's Impossible to Delete him");
                 return true;
             }
+
             else
             {
                 return false;
@@ -112,8 +123,11 @@ namespace Library
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             EditCurrentUser.EditMode = false;
+
             var addUser = new EditCurrentUser();
             addUser.ShowDialog();
+
+            //Refresh after possible changes from user
             Refresh();
         }
 
@@ -123,9 +137,12 @@ namespace Library
             if (!IsCurrentUser())
             {
                 EditCurrentUser.EditMode = true;
+
                 EditCurrentUser.UserToAddOrEdit = (User)dataUsers.SelectedItem;
+
                 var editUser = new EditCurrentUser();
                 editUser.ShowDialog();
+
                 Refresh();
             }
         }

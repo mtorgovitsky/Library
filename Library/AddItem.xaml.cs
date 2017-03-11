@@ -41,10 +41,13 @@ namespace Library.GUI
         public AddNewItem()
         {
             InitializeComponent();
+            
             //Hide the labels and the text boxes ubtil user chooses Item Type
             GuiChanges.Hide(lblIssue, lblAuthor, txtIssue, txtAuthor);
+            
             //Obvously understandable by function name
             GuiChanges.FillComboWithBaseCategory(cmbBaseCat);
+            
             //Untill user choose the BaseCategory - disable inner
             GuiChanges.Disable(cmbInnerCat);
         }
@@ -62,7 +65,11 @@ namespace Library.GUI
         private void rdChecked(object sender, RoutedEventArgs e)
         {
             var rdValue = sender as RadioButton;
+
+            //Creating array of the GUI elements for easy manipulation with the Journal
             UIElement[] issue = { lblIssue, txtIssue };
+
+            //Creating array of the GUI elements for easy manipulation with the Book
             UIElement[] author = { lblAuthor, txtAuthor };
             switch (rdValue.Name)
             {
@@ -71,6 +78,7 @@ namespace Library.GUI
                     GuiChanges.Hide(issue);
                     GuiChanges.Show(author);
                     break;
+
                 case "rdJournal":
                     CurrentItem = ItemType.Journal;
                     GuiChanges.Hide(author);
@@ -151,6 +159,7 @@ namespace Library.GUI
                         (Categories.eInnerCategory)cmbInnerCat.SelectedItem,
                         txtAuthor.Text));
                     break;
+
                 case ItemType.Journal:
                     MainWindow.mainLibrary.Items.Add(new Journal
                         (txtName.Text,
