@@ -207,16 +207,21 @@ namespace Library
             tmpW.ShowDialog();
         }
 
-        //Delete Button Clicked Event
+        //Delete Button Clicked Event-
+        //Ask the User for approval and if granted,
+        //delete the current item from the Library
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
+            //Temporary variable for the Selected Item
+            var currentItem = (AbstractItem)dataLib.SelectedItem;
+
             //Last chance to regret before deleting the choosed Item
             if (GuiMsgs.AreYouSure(
-                "Are You Positive that You want to delete this Item?" +
+                $"Are You Positive that You want to delete this {currentItem.ItemType}?" +
                 "\n(There's no way You can undo this action!)"))
             {
                 //If Uses Approves the deletion - remove the Item from the Library
-                mainLibrary.Items.Remove((AbstractItem)dataLib.SelectedItem);
+                mainLibrary.Items.Remove(currentItem);
 
                 //Refresh DataGrid because changes was made
                 RefreshDataGrid();
