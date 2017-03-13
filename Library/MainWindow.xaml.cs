@@ -368,6 +368,7 @@ namespace Library
             }
         }
 
+        //Search for the Journal by It's Issue number
         private void IssueSearch(object sender, TextChangedEventArgs e)
         {
             if (!Validity.PositiveInteger(txtIssue.Text))
