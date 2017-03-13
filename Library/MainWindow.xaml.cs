@@ -593,7 +593,9 @@ namespace Library
             GuiMsgs.Info($"The quantity of this {item.ItemType} is {mainLibrary.ItemQuantity(item)}");
         }
 
-        //Utility method which unticks the 
+        //Utility method which Unchecks both of the
+        //CheckBoxes which Choosing the Search Mode
+        //and by doing so cancels the search
         private void UntickSearchOptions()
         {
             chkSearch.IsChecked = chkMultiSearch.IsChecked = false;
