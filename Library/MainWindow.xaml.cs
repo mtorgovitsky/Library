@@ -368,57 +368,93 @@ namespace Library
             }
         }
 
+        //Event for Issue Search TextBox,
         //Search for the Journal by It's Issue number
         private void IssueSearch(object sender, TextChangedEventArgs e)
         {
+            //if the the User inputs is not Positive integer - 
+            //don't search, instead clear the TextBox contents
             if (!Validity.PositiveInteger(txtIssue.Text))
             {
                 txtIssue.Text = string.Empty;
             }
+            //If we in the regular search mode (not multiply)
             else if (!IsMultiSearch)
             {
                 dataLib.ItemsSource =
                     mainLibrary.FindJournal(j => j.IssueNumber == int.Parse(txtIssue.Text));
             }
+            //if the user deletes the text from issue search box,
+            //Show all the item in the library
             if (string.IsNullOrWhiteSpace(txtIssue.Text))
             {
                 RefreshDataGrid();
             }
         }
 
+
+        //Fills the Inner Category ComboBox or hides it - 
+        //depending on user input
         private void FillInner()
         {
+            //Creating an array for easy hiding and showing
+            //the Inner Category controls
             UIElement[] inner = { lblInnerCategory, cmbInnerCategory };
+
+            //If there's any choice from the User on the Base Category ComboBox
             if (cmbBaseCategory.SelectedItem != null)
             {
+                //Then fill the Inner Category ComboBox
                 GuiChanges.FillComboWithInnerCategory
                     (cmbInnerCategory, cmbBaseCategory.SelectedItem);
+
+                //And show the Inner ComboBox to the user
                 GuiChanges.Show(inner);
             }
+            //If there's no choice from the User on Base Category ComboBox
             else
             {
+                //if so - hide the Inner Category ComboBox
                 GuiChanges.Hide(inner);
             }
         }
 
+        //Event, which comming from all the search controls
         private void Focused(object sender, RoutedEventArgs e)
         {
+            //Send to CleanFields method refernce
+            //to the object, which triggers the event
             CleanFields(sender);
         }
 
+        //Receives the reference to the UIElement control,
+        //who's triggered the event, and cleans all the search
+        //fields EXCEPT the field which has triggered the event,
+        //if we are currently in Regular Search Mode
         private void CleanFields(object exceptThis)
         {
+            //if we are in Regular Search Mode
             if (!IsMultiSearch)
             {
+                //For all the elements in the window
                 foreach (UIElement item in this.grdWindowGrid.Children)
                 {
+                    //if the element is NOT the element which triggered the event
+                    //and the element is of Type TextBox
                     if (item != exceptThis && item is TextBox)
                     {
+                        //Clean the contents of the control
                         ((TextBox)item).Text = string.Empty;
                     }
+                    //If the element is TextBox and it is In Focus
                     else if (item is TextBox && item.IsFocused)
                     {
+                        //Set the Base Category Search selection to -1
+                        //because the user allowed to search only
+                        //by ONE CRITERIA while we in Regular search mode
                         cmbBaseCategory.SelectedIndex = -1;
+
+                        //Refresh DataGrid to nullify search by Base Category
                         RefreshDataGrid();
                     }
                 }
@@ -426,79 +462,138 @@ namespace Library
             }
         }
 
+        //Search the Library for the Books by Author Name
+        //and display the results in the DataGrid
         private void AuthorSearch(object sender, TextChangedEventArgs e)
         {
+            //If we are in Regular Search Mode
             if (!IsMultiSearch)
             {
+                //Search for the books by Author Name
+                //and display the results in the DataGrid
                 dataLib.ItemsSource =
                     mainLibrary.FindBook(b => b.Author.ToLower().Contains(txtAuthor.Text.ToLower()));
             }
+            //If User inputs white spaces in the Search by Author TextBox -
+            //Show all the Items in the Library
             if (string.IsNullOrWhiteSpace(txtAuthor.Text))
             {
                 RefreshDataGrid();
             }
         }
 
+
+        //Search the Library for Books and Journals by Item Name
+        //and display the results in the DataGrid
         private void NameSearch(object sender, TextChangedEventArgs e)
         {
+            //If we are in Regular Search Mode
             if (!IsMultiSearch)
             {
+                //Search for the books by Item Name
+                //and display the results in the DataGrid
                 dataLib.ItemsSource = mainLibrary.FindItemByName(txtName.Text);
             }
+            //If we are in the Miltiply Serarch Mode
             else
             {
+                //Make Multiply Search by numerous parameters
+                //including search by Item Name
                 MultipleSearch();
             }
         }
 
+        //Event Triggered by Base Category ComboBox on "SelectionChange"
+        //Search the Library by Base Category
+        //and display the results in the DataGrid
         private void SearchBase(object sender, SelectionChangedEventArgs e)
         {
+            //Fill the Inner Category Control
+            //By Selected Base Category
             FillInner();
+
+            //If we are in Regular Search mode and user
+            //chooses one of the Base Category options
             if (!IsMultiSearch && cmbBaseCategory.SelectedItem != null)
             {
+                //Search the Library by Base Category
+                //and display the results in the DataGrid
                 dataLib.ItemsSource =
                     mainLibrary.FindByBaseCategory((eBaseCategory)cmbBaseCategory.SelectedItem);
             }
             else if (IsMultiSearch)
             {
+                //Make Multiply Search by numerous parameters
+                //including search by Base Category
                 MultipleSearch();
             }
         }
 
+        //Event Triggered by Inner Category ComboBox on "SelectionChange"
+        //REFINES the Base Category Search by Inner Category,
+        //in othe words searches For the Items form base Category by Inner Category
         private void SearchInnerByBase(object sender, SelectionChangedEventArgs e)
         {
+            //Base Category choosed by the User
             var eBase = cmbBaseCategory.SelectedItem;
+
+            //Inner Category Choosed by the User
             var eInner = cmbInnerCategory.SelectedItem;
+
+            //If we are in the Regular Search Mode
+            //and there's valid data in the Base and Inner 
+            //Categories ComboBoxes
             if (eBase != null && eInner != null && !IsMultiSearch)
             {
+                //Refine the search from Base Category by Inner Category
+                //and display the results in the DataGrid
                 dataLib.ItemsSource =
                     mainLibrary.FindInnerByBaseCategory((eBaseCategory)eBase, (eInnerCategory)eInner);
             }
             else if (IsMultiSearch)
             {
+                //Make Multiply Search by numerous parameters
+                //including search form Base Category,
+                //which was refined by Inner Category
                 MultipleSearch();
             }
         }
 
+        //Searches the Librari for Items by numerous parameters
+        //and display the results in the DataGrid
         private void MultipleSearch()
         {
+            //Base Category parameter (nullable)
+            //the default value is true for using it in predicate
+            //if User haven't choose the Base Category
             eBaseCategory? eBase =
                 cmbBaseCategory.SelectedValue is eBaseCategory ?
                 (eBaseCategory?)cmbBaseCategory.SelectedValue : null;
 
+            //Inner Category parameter (nullable)
+            //the default value is true for using it in predicate
+            //if User haven't choose the Inner Category
             eInnerCategory? eInner =
                 cmbInnerCategory.SelectedValue is eInnerCategory ?
                 (eInnerCategory?)cmbInnerCategory.SelectedValue : null;
 
+            //Make Multiply Search by numerous parameters
+            //and display the results in the DataGrid
             dataLib.ItemsSource = mainLibrary.MultiSearch(eBase, eInner, txtName.Text);
         }
 
+        //Search for Copies of the Item by relevant parameters
+        //Excluding the ISBN, which is unique for each Item
         private void btnQuantity_Click(object sender, RoutedEventArgs e)
         {
+            //Get the Item to search for from the DataGrid
             AbstractItem item = (AbstractItem)dataLib.SelectedItem;
+
+            //Show the result of the Message Box
             GuiMsgs.Info($"The quantity of this {item.ItemType} is {mainLibrary.ItemQuantity(item)}");
         }
 
+        //Utility method which unticks the 
         private void UntickSearchOptions()
         {
             chkSearch.IsChecked = chkMultiSearch.IsChecked = false;
